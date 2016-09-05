@@ -133,6 +133,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011731451382, guid: a04d18f1a7b33824d97d339efcbc811b, type: 2}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a04d18f1a7b33824d97d339efcbc811b, type: 2}
   m_IsPrefabParent: 0
@@ -264,13 +268,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114000010635745732, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
         type: 2}
-      propertyPath: horizontalSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010635745732, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
-        type: 2}
       propertyPath: horizontalAccel
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
