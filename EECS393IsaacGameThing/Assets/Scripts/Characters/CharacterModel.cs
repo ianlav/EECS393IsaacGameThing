@@ -6,6 +6,9 @@ public class CharacterModel {
 
     public void takeDamage(int dam)
     {
-        hp -= dam;
+        if (dam < hp)
+            hp -= dam;
+        else
+            hp = 0;
     }
 }

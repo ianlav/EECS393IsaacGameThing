@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Tests/Level Generation/Level Generation Test Scene.unity
+- path: Assets/Scenes/Ian Testing.unity
   isLoaded: 1
   isActive: 1
