@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public float horizontalSpeed;
     public float horizontalAccel;
     public float jumpSpeed;
+    public Weapon[] weapons;
 
     private Rigidbody2D rigid;
     private bool isJumping = true;
@@ -18,8 +19,15 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (Input.GetButton("Fire"))
+        {
+            Debug.Log("sup");
+            foreach (Weapon wep in weapons)
+            {
+                wep.fire();
+            }
+        }
+    }
    
     // Fixed Update is called every fixed amount of time
     void FixedUpdate()
@@ -35,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //just adds a vertical velocity
-        if(Input.GetButton("Jump") && !isJumping)
+        if (Input.GetButton("Jump") && !isJumping)
         {
             isJumping = true;
             rigid.velocity += new Vector2(0, jumpSpeed);
