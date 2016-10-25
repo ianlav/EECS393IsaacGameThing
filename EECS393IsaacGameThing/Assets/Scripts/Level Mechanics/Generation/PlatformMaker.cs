@@ -16,6 +16,7 @@ public class PlatformMaker : MonoBehaviour {
 
     void Start()
     {
+		
         playerRigid = player.GetComponent<Rigidbody2D>();
 
         model = new PlatformMakerModel(playerRigid.gravityScale * 9.81f, player.horizontalSpeed, player.jumpSpeed);
