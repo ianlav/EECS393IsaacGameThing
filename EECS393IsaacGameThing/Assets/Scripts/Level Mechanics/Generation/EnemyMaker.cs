@@ -4,6 +4,8 @@ using AssemblyCSharp;
 using System;
 using System.Linq;
 
+namespace AssemblyCSharp{
+
 public class EnemyMaker : Maker {
 
 	public int maxEnemyCost = 10; //Total number of monster "points" available. Threat correlates to cost
@@ -19,7 +21,7 @@ public class EnemyMaker : Maker {
 		spawningPlatforms = FindObjectOfType<PlatformMaker> ().platformOptions;
 
 		//Sloppily instantiates one of each Enemy inheritor to act as a reference object b/c how2reflectlol
-		Type[] enemyTypes = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+		/*Type[] enemyTypes = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
 			from assemblyType in domainAssembly.GetTypes()
 			where typeof(Enemy).IsAssignableFrom(assemblyType) && !typeof(Enemy).IsAbstract
 			select assemblyType).ToArray();
@@ -27,7 +29,8 @@ public class EnemyMaker : Maker {
 		for(int i = 0; i < enemyTypes.Length; i++) {
 			enemyTemplates[i]= (Enemy)Activator.CreateInstance(enemyTypes[i]);
 		}
-		print("Fight me "+enemyTypes.Length);
+		print("Fight me "+enemyTypes.Length);*/
+		enemyTemplates[0] = new CrabEnemy ();
 	}
 
 	override public bool makeInRange()
@@ -48,17 +51,27 @@ public class EnemyMaker : Maker {
 		
 	public bool makeSpecificInRange(Type enemyType){
 		Enemy monster = (Enemy)Activator.CreateInstance (enemyType);
-		Platform location = spawningPlatforms[(int)UnityEngine.Random.Range(0, spawningPlatforms.Length)];
-		newestEnemy = Instantiate(monster, 
-			(Vector2)location.leftSide.position + (Vector2)location.transform.position //the set position, offset by the distance between the left side and center. Because localPosition wont give me that
-			, Quaternion.identity) as Enemy;
-		return true;
+		if (currentEnemyCost + monster.cost <= maxEnemyCost && spawningPlatforms.Length>0) {
+			Platform location = spawningPlatforms [(int)UnityEngine.Random.Range (0, spawningPlatforms.Length)];
+			newestEnemy = Instantiate (monster, 
+				(Vector2)location.leftSide.position + (Vector2)location.transform.position //the set position, offset by the distance between the left side and center. Because localPosition wont give me that
+				, Quaternion.identity) as Enemy;
+			return true;
+		} else
+			return false;
 	}
 
 	public void setCurrentCost(int newCost){
 		currentEnemyCost = newCost;
 	}
+	public void setMaxCost(int newCost){
+		maxEnemyCost = newCost;
+	}
 	public int getCurrentCost(){
 		return currentEnemyCost;
 	}
+	public Enemy[] getEnemyTemplates(){
+		return enemyTemplates;
+	}
+}
 }
