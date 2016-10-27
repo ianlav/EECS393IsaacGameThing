@@ -10,7 +10,6 @@ public class Platform : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         maker = FindObjectOfType<PlatformMaker>();
-		enemyMaker = FindObjectOfType<EnemyMaker>();
 	}
 	
 	// Update is called once per frame
@@ -24,7 +23,6 @@ public class Platform : MonoBehaviour {
         if(col.CompareTag("LevelTrigger"))
         {
             maker.makeRandomPlatformInRange();
-			enemyMaker.makeInRange();
             Destroy(gameObject, 3);
         }
     }
