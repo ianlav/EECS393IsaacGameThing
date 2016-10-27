@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using NUnit.Framework;
-using AssemblyCSharp;
 
 public class EnemyMakerTest {
 
@@ -11,8 +10,8 @@ public class EnemyMakerTest {
 	//Test ability to correctly account for enemy types. Will require change when reflection is implemented.
 	public void EnemyTypeCountTest(){
 		int numberOfEnemyTypes = 1;
-		maker.start();
-		Assert.AreEqual (numberOfEnemyTypes, maker.getEnemyTemplates.Length);
+		maker.Start();
+		Assert.AreEqual (numberOfEnemyTypes, maker.getEnemyTemplates().Length);
 	}
 
 	[Test]
@@ -21,7 +20,7 @@ public class EnemyMakerTest {
 		maker.setCurrentCost (0);
 		maker.setMaxCost (10);
 		//Need to force a platform to exist
-		Assert.IsTrue(maker.makeSpecificInRange(CrabEnemy));
+		Assert.IsTrue(maker.makeSpecificInRange(typeof(CrabEnemy)));
 	}
 
 	[Test]
@@ -36,6 +35,6 @@ public class EnemyMakerTest {
 		//Need to force a platform to exist
 		maker.setCurrentCost (10);
 		maker.setMaxCost (5);
-		Assert.IsTrue(maker.makeSpecificInRange(CrabEnemy));
+		Assert.IsTrue(maker.makeSpecificInRange(typeof(CrabEnemy)));
 	}
 }

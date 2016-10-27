@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using AssemblyCSharp;
+//using AssemblyCSharp;
 using System;
-using System.Linq;
-
-namespace AssemblyCSharp{
+//using System.Linq;
 
 public class EnemyMaker : Maker {
 
@@ -73,5 +71,4 @@ public class EnemyMaker : Maker {
 	public Enemy[] getEnemyTemplates(){
 		return enemyTemplates;
 	}
-}
 }
