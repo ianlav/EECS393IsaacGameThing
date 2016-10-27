@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour {
 		}
 	}
 
-	void FixedUpdate(){
+	void UpgradeMonster(){
 		maxVelocity = maxVelocity + 1;
 		acceleration=acceleration+0.25f;
 		defense=defense+1;

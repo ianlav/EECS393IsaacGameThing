@@ -10,7 +10,7 @@ public abstract class Maker : MonoBehaviour {
 
 	public abstract bool makeInRange();
 
-	public virtual void Start()
+	void Start()
 	{
 
 	}
