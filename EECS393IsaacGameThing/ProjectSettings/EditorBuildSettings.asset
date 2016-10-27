@@ -10,6 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
   - enabled: 1
-    path: Assets/Scenes/High Scores.unity
-  - enabled: 1
     path: Assets/Scenes/About.unity
+  - enabled: 1
+    path: Assets/Scenes/High Scores.unity
