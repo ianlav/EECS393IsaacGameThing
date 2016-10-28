@@ -1,34 +1,25 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using NUnit.Framework;
+using System.Collections;
 //using AssemblyCSharp;
 
 public class EnemyMakerTest {
 
 	EnemyMaker maker = new EnemyMaker();
+	CrabEnemy enemy = new CrabEnemy ();
 
-	[Test]
-	//Test ability to correctly account for enemy types. Will require change when reflection is implemented.
-	public void EnemyTypeCountTest(){
-		int numberOfEnemyTypes = 1;
-		maker.Start();
-		Assert.AreEqual (numberOfEnemyTypes, maker.getEnemyTemplates().Length);
-	}
+	//Removed Test: count enemy types. Now handled by Unity.
 
 	[Test]
 	//Test ability to spawn an enemy when enough points are present
 	public void EnemySpawnTest(){
 		maker.setCurrentCost (0);
 		maker.setMaxCost (10);
-		//Need to force a platform to exist
-		//Assert.IsTrue(maker.makeSpecificInRange(typeof(CrabEnemy)));
+		Assert.IsTrue(maker.testIfEnemyMakeable(enemy));
 	}
 
-	[Test]
-	//Test for correct behavior (no spawn) when no platforms are present
-	public void EnemySpawnNoPlatformsTest(){
-		//Need to force no platforms to exist
-	}
+	//Removed test: enemies spawning sans platforms. Reason: enemies can no longer spawn without platforms.
 
 	[Test]
 	//Test for correct behavior (no spawn) when there are not enough points to spawn an enemy.
@@ -36,6 +27,6 @@ public class EnemyMakerTest {
 		//Need to force a platform to exist
 		maker.setCurrentCost (10);
 		maker.setMaxCost (5);
-		//Assert.IsTrue(maker.makeSpecificInRange(typeof(CrabEnemy)));
+		Assert.IsFalse(maker.testIfEnemyMakeable(enemy));
 	}
 }
