@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - LevelTrigger
+  - Monster
   layers:
   - Default
   - TransparentFX

@@ -14,11 +14,17 @@ public abstract class Enemy : MonoBehaviour {
 
 	void Update () {}
 
+	void OnBecameInvisible () {
+		print ("Enemy now invisible, should be destroyed!");
+		maker.setCurrentCost (maker.getCurrentCost() - cost); //recycle monster's cost
+		Destroy(gameObject);
+	}
+
 	void OnTriggerExit2D(Collider2D col)
 	{
 		if(col.CompareTag("LevelTrigger")){
 			maker.setCurrentCost (maker.getCurrentCost() - cost); //recycle monster's cost
-			Destroy(gameObject, 3);	
+			Destroy(gameObject);	
 		}
 	}
 

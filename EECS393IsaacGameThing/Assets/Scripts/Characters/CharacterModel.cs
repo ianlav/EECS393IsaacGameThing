@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 public class CharacterModel {
 
@@ -6,9 +7,15 @@ public class CharacterModel {
 
     public void takeDamage(int dam)
     {
-        if (dam < hp)
-            hp -= dam;
-        else
-            hp = 0;
+		if (dam < hp)
+			hp -= dam;
+		else {
+			hp = 0;
+		}
     }
+
+	public int getHp(){
+		return hp;
+	}
+		
 }

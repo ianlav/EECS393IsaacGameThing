@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private Rigidbody2D rigid;
     private bool isJumping = true;
+	private CharacterModel character;
 
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody2D>();
+		character = GetComponent<CharacterModel>();
 	}
 	
 	// Update is called once per frame
@@ -54,9 +56,24 @@ public class PlayerMovement : MonoBehaviour {
     //is run whenever this object enters a collision with another 2D object. Self explanatory but yeah
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Floor")) //this checks the objects tag (directly below its name in the inspector panel). Just a quick way to check what something is
-        {
-            isJumping = false;
-        }
+		if (col.gameObject.CompareTag ("Floor")) { //this checks the objects tag (directly below its name in the inspector panel). Just a quick way to check what something is
+			isJumping = false;
+		} else {
+			print ("ENEMY COLLISION!");
+			Destroy (gameObject);
+			if (col.gameObject.GetComponent<Enemy> ()) {
+				character.takeDamage (10);
+			}
+			if (character.getHp() == 0) {
+				Destroy (gameObject);
+			}
+		}	
     }
+
+	void OnTriggerExit2D(Collider2D col)
+	{
+		if (col.gameObject.CompareTag("Monster")){
+				Destroy (gameObject);
+			}
+	}
 }
