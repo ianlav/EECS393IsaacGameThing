@@ -1,12 +1,10 @@
+This game is for Unity 5.4.1
+
 # Todo List
 
-**bolded** what needs to be done for Friday demo
-
 ## UI
-- **main menu/start screen**
-  - logo
-- about screen
 - high score display
+  - file save/recall for high scores
 - in game displays
   - score
   - items
@@ -14,7 +12,6 @@
   - buffs/debuffs/status condition
 
 ## Enemies
-- **spawning**
 - **some AI**
   - melee AI
   - ranged AI
@@ -30,6 +27,3 @@
 ## Platforms
 - **fix platform tests**
 - multiple sizes?
-
-## Misc
-- file saving/recall for high scores
