@@ -7,8 +7,8 @@ public class CrabEnemy : Enemy{
 	new public static double maxSpeed = 0;
 	new public static double baseDamage = 5;
 
-	void Start () {
-		
+	new void Start () {
+        base.Start();
 	}
 
 	void Update () {

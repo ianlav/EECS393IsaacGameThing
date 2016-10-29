@@ -17,14 +17,14 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody2D>();
-		character = GetComponent<CharacterModel>();
+        character = new CharacterModel();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButton("Fire"))
         {
-            Debug.Log("sup");
+            //if the player has multiple weapons, fire them all
             foreach (Weapon wep in weapons)
             {
                 wep.fire();
@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //just adds a vertical velocity
+        // TO-DO make this a variable height jump, ie a tap is a short jump than a hold
         if (Input.GetButton("Jump") && !isJumping)
         {
             isJumping = true;
@@ -53,27 +54,17 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    //is run whenever this object enters a collision with another 2D object. Self explanatory but yeah
     void OnCollisionEnter2D(Collision2D col)
     {
-		if (col.gameObject.CompareTag ("Floor")) { //this checks the objects tag (directly below its name in the inspector panel). Just a quick way to check what something is
+        //when the player touches a platform, it can jump again
+		if (col.gameObject.CompareTag ("Floor")) { 
 			isJumping = false;
-		} else {
+
+		}
+        //if it runs into a monster, destroy it
+        if (col.gameObject.CompareTag("Monster")) {
 			print ("ENEMY COLLISION!");
 			Destroy (gameObject);
-			if (col.gameObject.GetComponent<Enemy> ()) {
-				character.takeDamage (10);
-			}
-			if (character.getHp() == 0) {
-				Destroy (gameObject);
-			}
 		}	
     }
-
-	void OnTriggerExit2D(Collider2D col)
-	{
-		if (col.gameObject.CompareTag("Monster")){
-				Destroy (gameObject);
-			}
-	}
 }

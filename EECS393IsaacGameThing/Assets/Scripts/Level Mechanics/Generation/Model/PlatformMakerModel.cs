@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//holds the data and calculations for the platform maker
 public class PlatformMakerModel {
 
+    //these are the player's velocities for use in the kinematic algorithms
     private float gravity, horizSpeed, vertSpeed;
 
     public PlatformMakerModel(float grav, float horizontalSpeed, float vertSpeed)
@@ -12,6 +14,7 @@ public class PlatformMakerModel {
         this.vertSpeed = vertSpeed;
     }
 
+    //returns a coordinate that is within the player's jump range and between the given values
     public Vector2 getPositionInRange(float maxX, float minX, float maxY, float minY)
     {
         float x = Random.Range(minX, maxX);

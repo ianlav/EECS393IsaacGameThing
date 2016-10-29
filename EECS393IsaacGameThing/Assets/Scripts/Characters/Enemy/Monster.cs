@@ -29,4 +29,10 @@ public class Monster : MonoBehaviour {
 		acceleration=acceleration+0.25f;
 		defense=defense+1;
 	}
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.CompareTag("Player"))
+            Destroy(col.gameObject);
+    }
 }

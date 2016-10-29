@@ -22,9 +22,10 @@ GameObject:
   - 50: {fileID: 50000011562712432}
   - 114: {fileID: 114000011087422152}
   - 212: {fileID: 212000011860793660}
+  - 61: {fileID: 61000010910476304}
   m_Layer: 0
   m_Name: BasicBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1000011232728628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.96, y: -0.45, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,6 +60,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61000010910476304
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011232728628}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.31999996, y: 0.31999996}
 --- !u!114 &114000011087422152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   speed: 20
-  direction: {x: 5.0110173, y: 2.6550932}
+  direction: {x: 4.078415, y: -1.3506757}
   timeToExist: 1
 --- !u!212 &212000011860793660
 SpriteRenderer:

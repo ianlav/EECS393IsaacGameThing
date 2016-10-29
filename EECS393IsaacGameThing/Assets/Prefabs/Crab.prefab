@@ -25,7 +25,7 @@ GameObject:
   - 50: {fileID: 50000010677923798}
   m_Layer: 0
   m_Name: Crab
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,6 +88,7 @@ MonoBehaviour:
   cost: 1
   maxSpeed: 0
   baseDamage: 0
+  maker: {fileID: 0}
 --- !u!212 &212000012187723292
 SpriteRenderer:
   m_ObjectHideFlags: 1

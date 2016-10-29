@@ -7,8 +7,8 @@ public class HoverEnemy : Enemy{
 	new public static double maxSpeed = 2;
 	new public static double baseDamage = 15;
 
-	void Start () {
-
+	new void Start () {
+        base.Start();
 	}
 
 	void Update () {

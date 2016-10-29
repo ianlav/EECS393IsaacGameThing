@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//a platform to be placed in the scene
 public class Platform : MonoBehaviour {
 
     public PlatformMaker maker;
@@ -17,7 +18,7 @@ public class Platform : MonoBehaviour {
 	
 	}
 
-    //when the platform leaves the trigger, we destroy it and make a new one
+    //when the platform leaves the player's trigger, we destroy it and make a new one
     void OnTriggerExit2D(Collider2D col)
     {
         if(col.CompareTag("LevelTrigger"))

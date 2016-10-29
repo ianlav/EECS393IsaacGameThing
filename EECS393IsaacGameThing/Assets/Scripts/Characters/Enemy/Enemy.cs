@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//abstract parent class for all placeable enemies
 public abstract class Enemy : MonoBehaviour {
 
 	public int cost; //How much it "costs" to spawn the enemy. Higher for larger/dangerous enemies. Affects score.
@@ -8,24 +9,31 @@ public abstract class Enemy : MonoBehaviour {
 	public int baseDamage; //Damage dealt by bullet/on contact without any modifiers
 	public EnemyMaker maker;
 
-	void Start() {
-		maker = FindObjectOfType<EnemyMaker>();
-	}
-
-	void Update () {}
-
-	void OnBecameInvisible () {
-		print ("Enemy now invisible, should be destroyed!");
-		maker.setCurrentCost (maker.getCurrentCost() - cost); //recycle monster's cost
-		Destroy(gameObject);
+	protected void Start() {
+		maker = FindObjectOfType<EnemyMaker>(); //finds and holds the enemy maker
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
+        //if the enemy leaves the player's range, despawn the enemy
 		if(col.CompareTag("LevelTrigger")){
-			maker.setCurrentCost (maker.getCurrentCost() - cost); //recycle monster's cost
 			Destroy(gameObject);	
 		}
 	}
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        //if the enemy is hit by a bullet, despawn it
+        if (col.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    //called when the enemy is destroyed
+    void OnDestroy()
+    {
+        maker.setCurrentCost(maker.getCurrentCost() - cost); //recycle monster's cost
+    }
 
 }

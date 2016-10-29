@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 public class BasePlayerTest {
 
+    //simple test to check if the player can lose hp properly
 	[Test]
 	public void EditorTest()
 	{

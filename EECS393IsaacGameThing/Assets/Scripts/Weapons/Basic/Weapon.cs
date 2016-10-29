@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//an abstract parent class for all weapons
 public abstract class Weapon : MonoBehaviour {
 
     public int damage;

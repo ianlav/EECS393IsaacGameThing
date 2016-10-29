@@ -24,7 +24,7 @@ GameObject:
   - 114: {fileID: 114000011373213716}
   m_Layer: 0
   m_Name: Hoverer
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,6 +73,7 @@ MonoBehaviour:
   cost: 6
   maxSpeed: 2
   baseDamage: 15
+  maker: {fileID: 0}
 --- !u!212 &212000013013858936
 SpriteRenderer:
   m_ObjectHideFlags: 1

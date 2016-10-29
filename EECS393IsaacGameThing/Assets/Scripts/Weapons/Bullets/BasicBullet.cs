@@ -4,8 +4,8 @@ using System;
 
 public class BasicBullet : Bullet {
     //default hit function. Just subtracts damage
-    public override void hit(Rigidbody2D other)
+    public override void hit(Enemy other)
     {
-        //other.hp -= damage;
+        other.hp -= damage;
     }
 }

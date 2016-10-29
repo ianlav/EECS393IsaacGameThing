@@ -9,8 +9,6 @@ public class EnemyMakerTest {
 	EnemyMaker maker = new EnemyMaker();
 	CrabEnemy enemy = new CrabEnemy ();
 
-	//Removed Test: count enemy types. Now handled by Unity.
-
 	[Test]
 	//Test ability to spawn an enemy when enough points are present
 	public void EnemySpawnTest(){
@@ -18,8 +16,6 @@ public class EnemyMakerTest {
 		maker.setMaxCost (10);
 		Assert.IsTrue(maker.testIfEnemyMakeable(enemy));
 	}
-
-	//Removed test: enemies spawning sans platforms. Reason: enemies can no longer spawn without platforms.
 
 	[Test]
 	//Test for correct behavior (no spawn) when there are not enough points to spawn an enemy.
