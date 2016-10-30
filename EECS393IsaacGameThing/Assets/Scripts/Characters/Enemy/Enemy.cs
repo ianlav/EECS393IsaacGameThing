@@ -2,7 +2,7 @@
 using System.Collections;
 
 //abstract parent class for all placeable enemies
-public abstract class Enemy : MonoBehaviour {
+public abstract class Enemy : CharacterModel {
 
 	public int cost; //How much it "costs" to spawn the enemy. Higher for larger/dangerous enemies. Affects score.
 	public double maxSpeed; //Max distance moved per update.

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CharacterModel {
+public class CharacterModel : MonoBehaviour {
 
     public int hp = 100;
 
