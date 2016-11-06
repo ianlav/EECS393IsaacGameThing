@@ -17,5 +17,4 @@ public class CharacterModel : MonoBehaviour {
 	public int getHp(){
 		return hp;
 	}
-		
 }

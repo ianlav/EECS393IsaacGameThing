@@ -21,10 +21,4 @@ public class StartGun : Weapon {
             Instantiate(bullet, bulletOrigin.transform.position, player.transform.rotation);
         }
     }
-
-    void Update()
-    {
-        //increments the fire rate counter
-        timeSinceFired += Time.deltaTime;
-    }
 }

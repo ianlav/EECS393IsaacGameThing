@@ -65,6 +65,6 @@ public class PlayerMovement : MonoBehaviour {
         if (col.gameObject.CompareTag("Monster")) {
 			print ("ENEMY COLLISION!");
 			Destroy (gameObject);
-		}	
+		}
     }
 }

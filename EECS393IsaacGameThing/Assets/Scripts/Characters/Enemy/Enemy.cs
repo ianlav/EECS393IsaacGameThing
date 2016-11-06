@@ -13,6 +13,15 @@ public abstract class Enemy : CharacterModel {
 		maker = FindObjectOfType<EnemyMaker>(); //finds and holds the enemy maker
 	}
 
+    protected void Update()
+    {
+        if (hp <= 0)
+        {
+            EnemyMaker.currentEnemyCost -= cost;
+            Destroy(gameObject);
+        }
+    }
+
 	void OnTriggerExit2D(Collider2D col)
 	{
         //if the enemy leaves the player's range, despawn the enemy
@@ -23,11 +32,6 @@ public abstract class Enemy : CharacterModel {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        //if the enemy is hit by a bullet, despawn it
-        if (col.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(gameObject);
-        }
     }
 
     //called when the enemy is destroyed

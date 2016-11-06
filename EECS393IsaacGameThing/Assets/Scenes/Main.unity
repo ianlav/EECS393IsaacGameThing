@@ -90,6 +90,17 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &99031378 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010105231926, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+    type: 2}
+  m_PrefabInternal: {fileID: 220859330}
+  m_Script: {fileID: 11500000, guid: 0befcfc4c0be6c1469564c443d5ecaad, type: 3}
+--- !u!4 &99031382 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000010705983742, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+    type: 2}
+  m_PrefabInternal: {fileID: 220859330}
 --- !u!1001 &220859330
 Prefab:
   m_ObjectHideFlags: 0
@@ -138,6 +149,21 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012064237644, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
+      propertyPath: m_Name
+      value: StartGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010105231926, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1085350405}
+    - target: {fileID: 114000010783572890, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 114000011087422152, guid: ce776312a35a9854a9ed0196dcec9ce2,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
   m_IsPrefabParent: 0
@@ -189,6 +215,55 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a04d18f1a7b33824d97d339efcbc811b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1085350404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1085350406}
+  - 114: {fileID: 1085350405}
+  m_Layer: 0
+  m_Name: SpreadGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1085350405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1085350404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7617a3758cdb7554bba24aca5101291d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  timeBetweenShots: 0
+  numProjectiles: 5
+  bulletOrigin: {fileID: 1085350406}
+  bullets:
+  - {fileID: 114000011087422152, guid: ce776312a35a9854a9ed0196dcec9ce2, type: 2}
+  - {fileID: 114000011214695378, guid: 05e0826fe3d06124cb6910d7a7139d98, type: 2}
+  - {fileID: 114000013033139652, guid: ddf04ff47cbd016429f11234d30dc17c, type: 2}
+  player: {fileID: 99031378}
+--- !u!4 &1085350406
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1085350404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 99031382}
+  m_RootOrder: 3
 --- !u!1001 &1395641179
 Prefab:
   m_ObjectHideFlags: 0
@@ -307,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a9d09f07b744fc5abfd796696ac7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 4
+  maxVelocity: 0
   acceleration: 0.5
   defense: 5
 --- !u!50 &1871470734

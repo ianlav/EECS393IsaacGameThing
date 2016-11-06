@@ -19,4 +19,10 @@ public abstract class Weapon : MonoBehaviour {
         Vector2 aimPos = Camera.main.ScreenToWorldPoint(mousePos);
         return aimPos - origin;
     }
+
+    protected virtual void Update()
+    {
+        //increments the fire rate counter
+        timeSinceFired += Time.deltaTime;
+    }
 }
