@@ -2,18 +2,15 @@
 using System.Collections;
 
 public class SpreadGun : Weapon {
-
-    public Transform bulletOrigin;
+    
     public Bullet[] bullets;
-    public PlayerMovement player;
-    //protected int numBullets;
     protected float spreadAngleDegrees, spreadAngleIncrement;
     protected float[] bulletRotations;
 
-    void Start()
+    new void Start()
     {
+        base.Start(); 
         spreadAngleDegrees = 60;
-        //numBullets = 3;
         numProjectiles = bullets.Length;
         timeBetweenShots = 1;
         bulletRotations = new float[numProjectiles];
@@ -42,7 +39,7 @@ public class SpreadGun : Weapon {
             //create all bullets and rotate to appropriate spread angles
             for(int i=0; i < bullets.Length; i++)
             {
-                bullets[i].direction = getAimVector(bulletOrigin.position).Rotate(bulletRotations[i]);
+                bullets[i].direction = aimVector.Rotate(bulletRotations[i]);
                 bullets[i].damage = damage;
                 Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
             }

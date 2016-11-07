@@ -17,4 +17,21 @@ public static class Extensions
         }
         return v;
     }
+
+    public static float Angle(this Vector2 v)
+    {
+        return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+    }
+
+    /*public static float AngleTo(this Vector2 src, Vector2 dest)
+    {
+        float angle = 0;
+        var srcN = src.normalized;
+        var destN = dest.normalized;
+        if (!srcN.Equals(destN))
+        {
+            angle = Mathf.Acos(Vector2.Dot(srcN, destN)) * Mathf.Rad2Deg;
+        }
+        return angle;
+    } */
 }

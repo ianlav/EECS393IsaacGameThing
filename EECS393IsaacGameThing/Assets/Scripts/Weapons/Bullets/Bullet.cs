@@ -29,7 +29,7 @@ public abstract class Bullet : MonoBehaviour {
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
         //bullets destroy themselves on collision with anything else
-        if (!col.gameObject.CompareTag(gameObject.tag))
+        if (!col.gameObject.CompareTag(gameObject.tag) && !col.gameObject.CompareTag("Weapon"))
             Destroy(gameObject);
         if (col.gameObject.CompareTag("Monster"))
         {
@@ -43,7 +43,7 @@ public abstract class Bullet : MonoBehaviour {
         {
             Platform p = (Platform)col.gameObject.GetComponent(typeof(Platform));
             if (p != null)
-                hit(p);
+                hit(p); 
         }
     }
 
