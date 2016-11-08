@@ -4,6 +4,9 @@ using System.Collections;
 //an abstract parent class for all weapons
 public abstract class Weapon : MonoBehaviour {
 
+    public Transform bulletOrigin;
+    public PlayerMovement player;
+    public Vector2 aimVector;
     public int damage;
     public float timeBetweenShots;
     public int numProjectiles;
@@ -17,12 +20,24 @@ public abstract class Weapon : MonoBehaviour {
     {
         Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 aimPos = Camera.main.ScreenToWorldPoint(mousePos);
-        return aimPos - origin;
+        return aimPos - origin; 
     }
 
+    protected virtual void Start()
+    {
+        tag = "Weapon";
+    }
+    
     protected virtual void Update()
     {
         //increments the fire rate counter
         timeSinceFired += Time.deltaTime;
+        aimVector = getAimVector(bulletOrigin.position);
+        //rotate weapon to point at mouse
+        float angle = aimVector.Angle();
+        if (angle > 90 || angle < -90) //aiming backwards
+            transform.rotation = Quaternion.Euler(0, 180, 180 - aimVector.Angle());
+        else
+            transform.rotation = Quaternion.Euler(0, 0, aimVector.Angle());
     }
 }

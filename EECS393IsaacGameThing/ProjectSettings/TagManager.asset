@@ -8,6 +8,7 @@ TagManager:
   - LevelTrigger
   - Monster
   - Bullet
+  - Weapon
   layers:
   - Default
   - TransparentFX
