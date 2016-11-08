@@ -3,12 +3,15 @@ using System.Collections;
 
 public class MachineGun : Weapon {
 
-	//initialization
-	new void Start () {
+    int burstSize; //num of projectiles per burst
+
+    //initialization
+    new void Start ()
+    {
         base.Start();
         damage = 5;
         timeBetweenShots = 0.3f;
-	}
+    }
 
     public override void fire()
     {

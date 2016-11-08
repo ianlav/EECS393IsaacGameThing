@@ -29,7 +29,7 @@ public abstract class Bullet : MonoBehaviour {
     protected virtual void OnCollisionEnter2D(Collision2D col)
     {
         //bullets destroy themselves on collision with anything else
-        if (!col.gameObject.CompareTag(gameObject.tag) && !col.gameObject.CompareTag("Weapon"))
+        if (!col.gameObject.CompareTag(gameObject.tag) && !col.gameObject.CompareTag("Weapon") && !col.gameObject.CompareTag("Player"))
             Destroy(gameObject);
         if (col.gameObject.CompareTag("Monster"))
         {
