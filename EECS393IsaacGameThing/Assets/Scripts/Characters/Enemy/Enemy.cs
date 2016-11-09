@@ -11,7 +11,9 @@ public abstract class Enemy : CharacterModel {
 
 	protected void Start() {
 		maker = FindObjectOfType<EnemyMaker>(); //finds and holds the enemy maker
-	}
+        gameObject.tag = "Enemy";
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
+    }
 
     protected void Update()
     {

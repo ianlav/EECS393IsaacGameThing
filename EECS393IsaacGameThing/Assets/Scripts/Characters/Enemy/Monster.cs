@@ -11,7 +11,9 @@ public class Monster : MonoBehaviour {
 
 	void Start () {
 		rigidMonster = GetComponent<Rigidbody2D>();
-	}
+        gameObject.tag = "Monster";
+        gameObject.layer = LayerMask.NameToLayer("Monster");
+    }
 
 	public void takeDamage(int damage){
 		maxVelocity -= damage/defense; //slow the monster when hit by projectile
