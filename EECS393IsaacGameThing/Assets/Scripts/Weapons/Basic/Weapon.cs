@@ -25,7 +25,8 @@ public abstract class Weapon : MonoBehaviour {
 
     protected virtual void Start()
     {
-        tag = "Weapon";
+        gameObject.tag = "Weapon";
+        gameObject.layer = LayerMask.NameToLayer("Weapon");
     }
     
     protected virtual void Update()

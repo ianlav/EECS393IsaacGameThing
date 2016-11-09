@@ -11,15 +11,17 @@ public abstract class Bullet : MonoBehaviour {
 
     private Rigidbody2D rigid;
 
-    protected void Start()
+    protected virtual void Start()
     {
+        gameObject.tag = "Bullet";
+        gameObject.layer = LayerMask.NameToLayer("Bullet");
         timeToExist = 2;
         rigid = GetComponent<Rigidbody2D>();
         Destroy(gameObject, timeToExist); //we want to destroy the bullet x seconds after we even fire it
     }
 
     //Keep the bullet going towards its destination. Direction can be updated to curve the bullet
-    protected void Update()
+    protected virtual void Update()
     {
         //normalize the direction vector, then move the bullet in that direction. called every frame
         direction.Normalize();
@@ -31,7 +33,7 @@ public abstract class Bullet : MonoBehaviour {
         //bullets destroy themselves on collision with anything else
         if (!col.gameObject.CompareTag(gameObject.tag) && !col.gameObject.CompareTag("Weapon") && !col.gameObject.CompareTag("Player"))
             Destroy(gameObject);
-        if (col.gameObject.CompareTag("Monster"))
+        if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
             //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
@@ -39,7 +41,7 @@ public abstract class Bullet : MonoBehaviour {
             if(e != null)
                 hit(e);
         }
-        if (col.gameObject.CompareTag("Floor"))
+        if (col.gameObject.CompareTag("Platform"))
         {
             Platform p = (Platform)col.gameObject.GetComponent(typeof(Platform));
             if (p != null)

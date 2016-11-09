@@ -11,7 +11,9 @@ public class Platform : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         maker = FindObjectOfType<PlatformMaker>();
-	}
+        gameObject.tag = "Platform";
+        gameObject.layer = LayerMask.NameToLayer("Platform");
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -16,9 +16,11 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        gameObject.tag = "Player";
+        gameObject.layer = LayerMask.NameToLayer("Player");
         rigid = GetComponent<Rigidbody2D>();
         character = new CharacterModel();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,14 +59,20 @@ public class PlayerMovement : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         //when the player touches a platform, it can jump again
-		if (col.gameObject.CompareTag ("Floor")) { 
+		if (col.gameObject.CompareTag ("Platform")) { 
 			isJumping = false;
 
 		}
-        //if it runs into a monster, destroy it
+        //if it runs into the monster, destroy it
         if (col.gameObject.CompareTag("Monster")) {
-			print ("ENEMY COLLISION!");
+			print ("MONSTER COLLISION!");
 			Destroy (gameObject);
 		}
+        //if it runs into an enemy, destroy it
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            print("ENEMY COLLISION!");
+            Destroy(gameObject);
+        }
     }
 }
