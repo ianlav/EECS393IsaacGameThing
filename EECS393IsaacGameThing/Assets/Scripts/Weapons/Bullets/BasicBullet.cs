@@ -4,10 +4,12 @@
 
 public class BasicBullet : Bullet {
 
-    new void Start()
+    new public void Start()
     {
         base.Start();
-        damage = 20;
-        speed = 20;
+        if (damage == 0)
+            damage = 10;
+        if (speed == 0)
+            speed = 20;
     }
 }

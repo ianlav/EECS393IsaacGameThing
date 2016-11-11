@@ -13,22 +13,42 @@ public class WeaponTests {
         merge.Start();
         Weapon[] listIn, listOut;
 
-        //test 1->1 merging
+        //test for 1->1 merging
         Assert.IsTrue(merge.addMergeRule(new[]{ typeof(StartGun) }, typeof(SpreadGun)));
         listIn = new Weapon[]{ gameObject.AddComponent<StartGun>() };
         listOut = merge.mergeIfPossible(listIn);
         Assert.AreEqual(listOut[0].GetType(), typeof(SpreadGun));
 
-        //test 2->1 merging
+        //test for 2->1 merging
         merge.clearMergeRules();
         Assert.IsTrue(merge.addMergeRule(new[]{ typeof(StartGun), typeof(SpreadGun) }, typeof(LaserGun)));
         listIn = new Weapon[]{ gameObject.AddComponent<StartGun>(), gameObject.AddComponent<SpreadGun>() };
         listOut = merge.mergeIfPossible(listIn);
         Assert.AreEqual(listOut[0].GetType(), typeof(LaserGun));
 
+        //test for repeated & unordered 5->1 merging
+        merge.clearMergeRules();
+        Assert.IsTrue(merge.addMergeRule(new[] { typeof(StartGun), typeof(StartGun), typeof(SpreadGun), typeof(StartGun), typeof(SpreadGun) }, typeof(LaserGun)));
+        listIn = new Weapon[] { gameObject.AddComponent<SpreadGun>(), gameObject.AddComponent<SpreadGun>(), gameObject.AddComponent<StartGun>(), gameObject.AddComponent<StartGun>(), gameObject.AddComponent<StartGun>(), };
+        listOut = merge.mergeIfPossible(listIn);
+        Assert.AreEqual(listOut[0].GetType(), typeof(LaserGun));
+
+        //test for repeated & unordered 5->1 merging (where 1 repeated value is missing)
+        merge.clearMergeRules();
+        Assert.IsTrue(merge.addMergeRule(new[] { typeof(StartGun), typeof(StartGun), typeof(SpreadGun), typeof(StartGun), typeof(SpreadGun) }, typeof(LaserGun)));
+        listIn = new Weapon[] { gameObject.AddComponent<SpreadGun>(), gameObject.AddComponent<SpreadGun>(), gameObject.AddComponent<StartGun>(), gameObject.AddComponent<StartGun>(), };
+        listOut = merge.mergeIfPossible(listIn);
+        Assert.AreNotEqual(listOut[0].GetType(), typeof(LaserGun));
+
         //test invalid merge options
         merge.clearMergeRules();
         Assert.IsFalse(merge.addMergeRule(new[]{ typeof(StartGun), typeof(int) }, typeof(LaserGun)));
         Assert.IsFalse(merge.addMergeRule(new[]{ typeof(StartGun), typeof(LaserGun) }, typeof(long)));
+    }
+
+    [Test]
+    public void WeaponsFireTest()
+    {
+        //somehow test that each weapon correctly fires
     }
 }

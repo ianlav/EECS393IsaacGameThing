@@ -11,21 +11,37 @@ public abstract class Bullet : MonoBehaviour {
 
     private Rigidbody2D rigid;
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         gameObject.tag = "Bullet";
         gameObject.layer = LayerMask.NameToLayer("Bullet");
-        timeToExist = 2;
+        if (timeToExist == 0)
+            timeToExist = 1;
         rigid = GetComponent<Rigidbody2D>();
         Destroy(gameObject, timeToExist); //we want to destroy the bullet x seconds after we even fire it
     }
 
     //Keep the bullet going towards its destination. Direction can be updated to curve the bullet
-    protected virtual void Update()
+    public virtual void Update()
     {
         //normalize the direction vector, then move the bullet in that direction. called every frame
         direction.Normalize();
         rigid.velocity = direction * speed;
+    }
+
+    public void setDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
+    public void setSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
+    public void setDirection(Vector2 direction)
+    {
+        this.direction = direction;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D col)

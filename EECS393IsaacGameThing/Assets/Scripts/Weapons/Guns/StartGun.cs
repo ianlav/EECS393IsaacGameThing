@@ -10,11 +10,12 @@ public class StartGun : Weapon {
         if (timeSinceFired > timeBetweenShots) //controls the fire rate
         {
             timeSinceFired = 0;
-        
-            //makes a bullet in the direction of the mouse, at the specified speed
-            bullets[0].direction = aimVector;
-            bullets[0].damage = damage;
-            Instantiate(bullets[0], bulletOrigin.transform.position, player.transform.rotation);
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                bullets[i].direction = aimVector;
+                bullets[i].damage = damage;
+                Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
+            }
         }
     }
 }

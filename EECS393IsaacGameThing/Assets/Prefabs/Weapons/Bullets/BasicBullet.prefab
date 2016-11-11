@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  speed: 20
-  direction: {x: 3.8759966, y: 5.7450175}
+  speed: 0
+  direction: {x: 6.207062, y: 7.9342666}
   timeToExist: 1
 --- !u!212 &212000011860793660
 SpriteRenderer:

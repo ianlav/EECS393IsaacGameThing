@@ -72,14 +72,17 @@ public class Merge : MonoBehaviour {
     public Weapon[] mergeIfPossible(Weapon[] weapons)
     {
         var enumerator = table.GetEnumerator();
+        List<Weapon> listIn = new List<Weapon>(weapons);
         List<Weapon> listOut = new List<Weapon>(weapons);
         List<Weapon> matches = new List<Weapon>();
+        //this is really inefficient, O(table<> * tablekey[] * weapons[]) with N storage as well...
         while (enumerator.MoveNext()) {
-            Type[] ingredientTypes = enumerator.Current.Key;
+            Type[] ingredientTypes = (Type[])enumerator.Current.Key.Clone();
             for (int i=0; i < ingredientTypes.Length; i++) {
-                for (int w=0; w < weapons.Length; w++) {
-                    if (weapons[w].GetType() == ingredientTypes[i]) {
-                        matches.Add(weapons[w]);
+                for (int w=0; w < listIn.Count; w++) {
+                    if (listIn[w] != null && listIn[w].GetType() == ingredientTypes[i]) {
+                        matches.Add(listIn[w]);
+                        listIn[w] = null; //don't double-spend
                         break;
                     }
                 }
