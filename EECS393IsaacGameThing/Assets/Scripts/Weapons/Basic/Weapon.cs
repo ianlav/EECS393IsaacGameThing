@@ -8,10 +8,13 @@ public abstract class Weapon : MonoBehaviour {
     public PlayerMovement player;
     public Vector2 aimVector;
     public int damage;
-    public float timeBetweenShots;
     public int numProjectiles;
+    public Bullet[] bullets;
 
     protected float timeSinceFired;
+    protected float timeBetweenShots;
+    protected float timeSinceBulletPattenUpdate;
+    protected float timeBetweenBulletPatternUpdates;
 
     public abstract void fire();
 
@@ -31,8 +34,10 @@ public abstract class Weapon : MonoBehaviour {
     
     protected virtual void Update()
     {
-        //increments the fire rate counter
+        //increments the fire rate counter(s)
         timeSinceFired += Time.deltaTime;
+        timeSinceBulletPattenUpdate += Time.deltaTime;
+        //grab aim vector so bullets know where to go
         aimVector = getAimVector(bulletOrigin.position);
         //rotate weapon to point at mouse
         float angle = aimVector.Angle();
@@ -40,5 +45,16 @@ public abstract class Weapon : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 180, 180 - aimVector.Angle());
         else
             transform.rotation = Quaternion.Euler(0, 0, aimVector.Angle());
+        //update bullet pattern
+        if (timeSinceBulletPattenUpdate > timeBetweenBulletPatternUpdates)
+        {
+            updateBulletPattern();
+            timeSinceBulletPattenUpdate = 0;
+        }
+    }
+
+    protected virtual void updateBulletPattern()
+    {
+        //no pattern to shots by default
     }
 }

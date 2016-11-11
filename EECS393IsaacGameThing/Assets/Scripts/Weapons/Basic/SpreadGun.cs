@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class SpreadGun : Weapon {
-    
-    public Bullet[] bullets;
+
     protected float spreadAngleDegrees, spreadAngleIncrement;
     protected float[] bulletRotations;
 

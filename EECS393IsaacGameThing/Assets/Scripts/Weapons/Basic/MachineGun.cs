@@ -3,19 +3,26 @@ using System.Collections;
 
 public class MachineGun : Weapon {
 
-    int burstSize; //num of projectiles per burst
-
     //initialization
     new void Start ()
     {
         base.Start();
         damage = 5;
-        timeBetweenShots = 0.3f;
+        timeBetweenShots = 0.4f;
+        numProjectiles = bullets.Length;
     }
 
     public override void fire()
     {
-        //not implemented
-        //should fire in bursts of 3-5 (maybe 3 then upgrade to 5?)
+        if (timeSinceFired > timeBetweenShots) //controls the fire rate
+        {
+            timeSinceFired = 0;
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                bullets[i].direction = aimVector;
+                bullets[i].damage = damage;
+                Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
+            }
+        }
     }
 }
