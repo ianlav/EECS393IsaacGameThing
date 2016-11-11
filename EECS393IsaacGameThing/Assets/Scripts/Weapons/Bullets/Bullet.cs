@@ -28,11 +28,8 @@ public abstract class Bullet : MonoBehaviour {
         rigid.velocity = direction * speed;
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D col)
+    protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        //bullets destroy themselves on collision with anything else
-        if (!col.gameObject.CompareTag(gameObject.tag) && !col.gameObject.CompareTag("Weapon") && !col.gameObject.CompareTag("Player"))
-            Destroy(gameObject);
         if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
@@ -41,7 +38,7 @@ public abstract class Bullet : MonoBehaviour {
             if(e != null)
                 hit(e);
         }
-        if (col.gameObject.CompareTag("Platform"))
+        else if (col.gameObject.CompareTag("Platform"))
         {
             Platform p = (Platform)col.gameObject.GetComponent(typeof(Platform));
             if (p != null)
