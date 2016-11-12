@@ -13,7 +13,6 @@ public class CrabEnemy : Enemy{
 
 	new void Update () {
         base.Update();
-		//Eventually we'll have *moving* monsters.
 	}
 
 

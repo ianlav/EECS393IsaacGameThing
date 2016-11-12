@@ -10,9 +10,9 @@ public class PersistentBullet : Bullet {
         speed = 20;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D col)
+    protected override void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Monster"))
+        if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
             //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
@@ -31,6 +31,7 @@ public class PersistentBullet : Bullet {
     //default enemy hit: damage enemy
     public override void hit(Enemy enemy)
     {
+        print("here");
         enemy.takeDamage(damage);
     }
 

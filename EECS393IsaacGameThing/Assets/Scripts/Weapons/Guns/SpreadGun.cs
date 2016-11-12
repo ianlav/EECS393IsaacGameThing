@@ -11,7 +11,7 @@ public class SpreadGun : Weapon {
         base.Start(); 
         spreadAngleDegrees = 60;
         numProjectiles = bullets.Length;
-        timeBetweenShots = 1;
+        timeBetweenShots = 0.5f;
         bulletRotations = new float[numProjectiles];
         //bulletOrigin = transform.Find("SpreadGun");
         //player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));

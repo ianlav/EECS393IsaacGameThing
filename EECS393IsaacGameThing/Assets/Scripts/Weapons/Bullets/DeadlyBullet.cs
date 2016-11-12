@@ -12,6 +12,7 @@ public class DeadlyBullet : Bullet {
 
     public override void hit(Enemy enemy)
     {
+        enemy.takeDamage(100);
         Destroy(enemy.gameObject);
         Destroy(gameObject);
     }

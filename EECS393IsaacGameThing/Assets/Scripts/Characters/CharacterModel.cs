@@ -5,6 +5,13 @@ public class CharacterModel : MonoBehaviour {
 
     public int hp = 100;
 
+    private UIController ui;
+
+    protected void Start()
+    {
+        ui = FindObjectOfType<UIController>();
+    }
+
     public void takeDamage(int dam)
     {
 		if (dam < hp)
@@ -12,6 +19,8 @@ public class CharacterModel : MonoBehaviour {
 		else {
 			hp = 0;
 		}
+        print("sup");
+        ui.thingTookDamage(transform.position, dam);
     }
 
 	public int getHp(){
