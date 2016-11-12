@@ -10,7 +10,10 @@ public class Merge : MonoBehaviour {
     {
         table = new Dictionary<Type[], Type>();
         //populate with merge rules
-        //addMergeRule(new[]{ typeof(StartGun) }, typeof(SpreadGun)); //<- example
+        addMergeRule(new[] { typeof(SpreadGun), typeof(MachineGun) }, typeof(MachineSpreadGun));
+        addMergeRule(new[] { typeof(SpreadGun), typeof(BurstGun) }, typeof(BurstSpreadGun));
+        addMergeRule(new[] { typeof(SpreadGun), typeof(SpreadGun) }, typeof(SequentialSpreadGun));
+
     }
 
     public bool addMergeRule(Type[] ingredientTypes, Type mergedType)

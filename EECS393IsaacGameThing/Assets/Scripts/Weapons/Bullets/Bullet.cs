@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-//using System.Collections;
 
 //abstract implementation of bullets
 [RequireComponent(typeof(Rigidbody2D))]
@@ -35,8 +34,6 @@ public abstract class Bullet : MonoBehaviour {
         if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
-            //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
-            //e.takeDamage(damage); //alternative 2
             if(e != null)
                 hit(e);
         }
