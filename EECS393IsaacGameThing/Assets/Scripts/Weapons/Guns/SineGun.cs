@@ -62,7 +62,7 @@ public class SineGun : Weapon {
         {
             //rotate the original direction vector as a function of time in a sine pattern
             if (bulletRefs[i] != null)
-                bulletRefs[i].setDirection(directionRefs[i].Rotate(Mathf.Sin(2*timeSinceFired/timeBetweenShots * 2*Mathf.PI) * Mathf.Rad2Deg));
+                bulletRefs[i].direction = directionRefs[i].Rotate(Mathf.Sin(2*timeSinceFired/timeBetweenShots * 2*Mathf.PI) * Mathf.Rad2Deg);
         }
     }
 }

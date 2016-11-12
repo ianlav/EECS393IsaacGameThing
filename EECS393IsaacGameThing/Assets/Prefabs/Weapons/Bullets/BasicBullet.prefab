@@ -86,13 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-<<<<<<< HEAD:EECS393IsaacGameThing/Assets/Prefabs/Weapons/Bullets/BasicBullet.prefab
   speed: 0
   direction: {x: 6.207062, y: 7.9342666}
-=======
-  speed: 20
-  direction: {x: 6.0085983, y: 5.497354}
->>>>>>> master:EECS393IsaacGameThing/Assets/Prefabs/BasicBullet.prefab
   timeToExist: 1
 --- !u!212 &212000011860793660
 SpriteRenderer:

@@ -29,26 +29,8 @@ public abstract class Bullet : MonoBehaviour {
         rigid.velocity = direction * speed;
     }
 
-<<<<<<< HEAD
-    public void setDamage(int damage)
-    {
-        this.damage = damage;
-    }
-
-    public void setSpeed(float speed)
-    {
-        this.speed = speed;
-    }
-
-    public void setDirection(Vector2 direction)
-    {
-        this.direction = direction;
-    }
-
-    protected virtual void OnCollisionEnter2D(Collision2D col)
-=======
+    //protected virtual void OnCollisionEnter2D(Collision2D col)
     protected virtual void OnTriggerEnter2D(Collider2D col)
->>>>>>> master
     {
         if (col.gameObject.CompareTag("Enemy"))
         {
