@@ -85,10 +85,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feb98c10fc49466c8bf5509c5bdc1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
   cost: 1
   maxSpeed: 0
-  baseDamage: 0
+  baseDamage: 10
   maker: {fileID: 0}
+  moveRandomSpeed: 0
+  randomVelocityX: 0
+  randomVelocityY: 0
+  moveTowardsPlayerSpeed: 0
+  movePatrolSpeed: 0
+  patrolDirectionIsLeft: 0
+  flying: 0
+  movementDetectsEdges: 0
 --- !u!212 &212000012187723292
 SpriteRenderer:
   m_ObjectHideFlags: 1

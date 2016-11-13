@@ -19,7 +19,6 @@ public class CharacterModel : MonoBehaviour {
 		else {
 			hp = 0;
 		}
-        print("sup");
         ui.thingTookDamage(transform.position, dam);
     }
 
