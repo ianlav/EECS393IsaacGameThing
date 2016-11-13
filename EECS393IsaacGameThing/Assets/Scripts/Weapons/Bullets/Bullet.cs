@@ -8,6 +8,7 @@ public abstract class Bullet : MonoBehaviour {
     public float speed;
     public Vector2 direction;
     public float timeToExist;
+    public bool enemyBullet;
 
     private Rigidbody2D rigid;
 
@@ -32,13 +33,21 @@ public abstract class Bullet : MonoBehaviour {
     //protected virtual void OnCollisionEnter2D(Collision2D col)
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
-        {
-            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
-            //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
-            //e.takeDamage(damage); //alternative 2
-            if(e != null)
-                hit(e);
+        if (enemyMode) {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                PlayerMovement player = (PlayerMovement)col.gameObject.GetComponent(typeof(PlayerMovement));
+                if(player != null)
+                    hit(player);
+            }
+        }
+        else {
+            if (col.gameObject.CompareTag("Enemy"))
+            {
+                Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+                if(e != null)
+                    hit(e);
+            }
         }
         else if (col.gameObject.CompareTag("Platform"))
         {
@@ -46,6 +55,12 @@ public abstract class Bullet : MonoBehaviour {
             if (p != null)
                 hit(p); 
         }
+    }
+
+    public virtual void hit(PlayerMovement player)
+    {
+        player.takeDamage(damage);
+        Destroy(gameObject); //destroy bullet
     }
 
     //default enemy hit: damage enemy
