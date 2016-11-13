@@ -5,16 +5,17 @@ using System.Collections;
 public abstract class Enemy : CharacterModel {
 
 	public int cost; //How much it "costs" to spawn the enemy. Higher for larger/dangerous enemies. Affects score.
-	public double maxSpeed; //Max distance moved per update.
+	public float maxSpeed; //Max distance moved per update.
 	public int baseDamage; //Damage dealt by bullet/on contact without any modifiers
 	public EnemyMaker maker;
 	//Movement AI builder
-	public float moveRandomSpeed;
+	public int perceptionRange;
+	public float moveRandomAccel;
 		public float randomVelocityX;
 		public float randomVelocityY;
-	public float moveTowardsPlayerSpeed;
-	public float movePatrolSpeed;
-		public bool patrolDirectionIsLeft;
+	public float moveTowardsPlayerAccel;
+	public float movePatrolAccel;
+	public bool patrolDirectionIsLeft;
 	public bool flying;
 	public bool movementDetectsEdges; //NYI
 	Rigidbody2D rigidEnemy;
@@ -36,46 +37,55 @@ public abstract class Enemy : CharacterModel {
             Destroy(gameObject);
         }
 
-		//Figure out how to trigger this less often to save precious flops?
-		if (moveTowardsPlayerSpeed + moveRandomSpeed + movePatrolSpeed > 0) {
+		//Figure out how to trigger this less often to save precmoveTowardsPlayerAccelTowmoveRandomAccel + moveRandomAccel + movePatrolAccel > 0) {
 			Vector2 movementVector = rigidEnemy.velocity;
 			Vector2 enemyPos = this.transform.position;
 			Vector2 playerPos = GameObject.Find ("Player").transform.position;
 
-			if (movementVector.SqrMagnitude()<maxSpeed*maxSpeed && Vector2.Distance (enemyPos, playerPos) < 5) {
-				if (moveTowardsPlayerSpeed > 0) {
-					if (playerPos.x > enemyPos.x) {
-						movementVector.x += moveTowardsPlayerSpeed;
+			if (Vector2.Distance(enemyPos, playerPos) < perceptionRange) {
+			if (moveTowardsPlayerAccel > 0f) {
+				if (enemyPos.x < playerPos.x) {
+					movementVector.x += moveTowardsPlayerAccel;
+				} else {
+					movementVector.x -= moveTowardsPlayerAccel;
+				}
+				if (flying) {
+					if (enemyPos.y < playerPos.y) {
+						movementVector.y += moveTowardsPlayerAccel;
 					} else {
-						movementVector.x -= moveTowardsPlayerSpeed;
-					}
-					if (flying) {
-						if (playerPos.y > enemyPos.y) {
-							movementVector.y += moveTowardsPlayerSpeed;
-						} else {
-							movementVector.y -= moveTowardsPlayerSpeed;
-						}
-					}
+						movementVector.y += moveTowardsPlayerAccel;
+					}	
 				}
-				if (moveRandomSpeed > 0f) {
-					randomVelocityX += Random.Range(-1,1) * moveRandomSpeed;
-					movementVector.x += randomVelocityX;
-					if (flying) {
-						randomVelocityY += Random.value * moveRandomSpeed;
-						movementVector.y += randomVelocityY;
-					}
+			}
+			if (moveRandomAccel > 0f) {
+				movementVector.x += Random.Range(-1,1) * moveRandomAccel;
+				if(flying) {
+					movementVector.y += Random.value * moveRandomAccel;
 				}
-				if (movePatrolSpeed > 0f) {
-					if (patrolDirectionIsLeft) {
-						movementVector.x -= movePatrolSpeed;
-					} else {
-						movementVector.x += movePatrolSpeed;
-					}
+			}
+			if (movePatrolAccel > 0f) {
+				if (patrolDirectionIsLeft) {
+					movementVector.x -= movePatrolAccel;
+				} else {
+					movementVector.x += movePatrolAccel;
 				}
+			}
+
+			if(movementVector.x > maxSpeed){
+				movementVector.x = maxSpeed;
+			}
+			if (movementVector.x < -maxSpeed) {
+				movementVector.x = -maxSpeed;
+			}
+			if(movementVector.y > maxSpeed){
+				movementVector.y = maxSpeed;
+			}
+			if (movementVector.y < -maxSpeed) {
+				movementVector.y = -maxSpeed;
+			}
 				rigidEnemy.velocity = movementVector;
 			}
 		}
-    }
 
 	void OnTriggerExit2D(Collider2D col)
 	{
