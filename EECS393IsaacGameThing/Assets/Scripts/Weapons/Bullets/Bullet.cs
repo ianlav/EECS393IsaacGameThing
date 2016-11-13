@@ -8,6 +8,8 @@ public abstract class Bullet : MonoBehaviour {
     public float speed;
     public Vector2 direction;
     public float timeToExist;
+    public bool enemyBullet;
+    public bool enemyMode;
 
     private Rigidbody2D rigid;
 
@@ -29,18 +31,25 @@ public abstract class Bullet : MonoBehaviour {
         rigid.velocity = direction * speed;
     }
 
-    //protected virtual void OnCollisionEnter2D(Collision2D col)
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
-        {
-            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
-            //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
-            //e.takeDamage(damage); //alternative 2
-            if(e != null)
-                hit(e);
+        if (enemyMode) {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                PlayerMovement player = (PlayerMovement)col.gameObject.GetComponent(typeof(PlayerMovement));
+                if(player != null)
+                    hit(player);
+            }
         }
-        else if (col.gameObject.CompareTag("Platform"))
+        else {
+            if (col.gameObject.CompareTag("Enemy"))
+            {
+                Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+                if(e != null)
+                    hit(e);
+            }
+        }
+        if (col.gameObject.CompareTag("Platform"))
         {
             Platform p = (Platform)col.gameObject.GetComponent(typeof(Platform));
             if (p != null)
@@ -48,8 +57,14 @@ public abstract class Bullet : MonoBehaviour {
         }
     }
 
+    public virtual void hit(PlayerMovement player)
+    {
+        player.takeDamage(damage);
+        Destroy(gameObject); //destroy bullet
+    }
+
     //default enemy hit: damage enemy
-    public virtual void hit(Enemy enemy)
+    public virtual void hit(CharacterModel enemy)
     {
         enemy.takeDamage(damage);
         Destroy(gameObject); //destroy bullet

@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : CharacterModel {
 
     //any public values can be modified easily in the inspector
     public float horizontalSpeed;
@@ -16,10 +16,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        base.Start();
         gameObject.tag = "Player";
         gameObject.layer = LayerMask.NameToLayer("Player");
         rigid = GetComponent<Rigidbody2D>();
-        character = new CharacterModel();
     }
 	
 	// Update is called once per frame
@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour {
             {
                 wep.fire();
             }
+        }
+
+        if(getHp() <= 0)
+        {
+            Destroy(gameObject);
         }
     }
    
@@ -66,13 +71,15 @@ public class PlayerMovement : MonoBehaviour {
         //if it runs into the monster, destroy it
         if (col.gameObject.CompareTag("Monster")) {
 			print ("MONSTER COLLISION!");
-			Destroy (gameObject);
-		}
+            Destroy(gameObject);
+        }
         //if it runs into an enemy, destroy it
         if (col.gameObject.CompareTag("Enemy"))
         {
             print("ENEMY COLLISION!");
-            Destroy(gameObject);
+            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+            if (e != null)
+                takeDamage(e.baseDamage);
         }
     }
 }

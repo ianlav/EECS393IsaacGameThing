@@ -29,7 +29,7 @@ public class PersistentBullet : Bullet {
     }
 
     //default enemy hit: damage enemy
-    public override void hit(Enemy enemy)
+    public override void hit(CharacterModel enemy)
     {
         print("here");
         enemy.takeDamage(damage);
