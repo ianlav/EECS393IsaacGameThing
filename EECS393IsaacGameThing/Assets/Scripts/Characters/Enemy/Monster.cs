@@ -4,9 +4,11 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Monster : MonoBehaviour {
 
-	public int maxVelocity = 10; //Highest possible speed of monster. Increases as game progresses.
-	public float acceleration = 2.0f; //Ability for monster to return to speed when hit. Increases.
-	public int defense = 5; //Modifier for the amount that damage slows down monster. Increases.
+	public int updatesToUpgrade;
+	private int updateClock;
+	public float maxVelocity; //Highest possible speed of monster. Increases as game progresses.
+	public float acceleration; //Ability for monster to return to speed when hit. Increases.
+	public float defense; //Modifier for the amount that damage slows down monster. Increases.
 	private Rigidbody2D rigidMonster;
 
 	void Start () {
@@ -24,17 +26,25 @@ public class Monster : MonoBehaviour {
 			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, 0);
 			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity,0);}
 		}
+		if (updateClock == updatesToUpgrade) {
+			updateClock = 0;
+			UpgradeMonster ();
+		} else {
+			updateClock++;
+		}
 	}
 
 	void UpgradeMonster(){
-		maxVelocity = maxVelocity + 1;
-		acceleration=acceleration+0.25f;
-		defense=defense+1;
+		maxVelocity += 0.25f;
+		acceleration += 0.1f;
+		defense += 1f;
 	}
 
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.CompareTag("Player"))
             Destroy(col.gameObject);
+		if (col.CompareTag ("Bullet"))
+			rigidMonster.velocity = new Vector2 (rigidMonster.velocity.x - 10 / (1 + defense), 0);
     }
 }
