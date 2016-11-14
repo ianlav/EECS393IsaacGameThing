@@ -13,7 +13,8 @@ public class ScoringTest {
 	{
         GameObject go = new GameObject();
         Scoring scoring = go.AddComponent<Scoring>();
-
+        scoring.Start();
+        scoring.clearRecords();
         ReadOnlyCollection<Scoring.ScoreRecord> scores;
         Scoring.ScoreRecord r1 = new Scoring.ScoreRecord("test 1", "9/21/2112", 1111.111);
         Scoring.ScoreRecord r2 = new Scoring.ScoreRecord("test 2", "9/22/2112", 2222.222);
@@ -22,16 +23,17 @@ public class ScoringTest {
         //check if local variables are equal
         scores = scoring.GetScores();
         Assert.AreEqual(scores.Count, 3);
-        Assert.AreEqual(scores[0], r1);
-        Assert.AreEqual(scores[1], r2);
-        Assert.AreEqual(scores[2], r3);
+        Assert.IsTrue(scores[0].Equals(r1));
+        Assert.IsTrue(scores[1].Equals(r2));
+        Assert.IsTrue(scores[2].Equals(r3));
         Assert.IsTrue(scoring.WriteScores()); //write r1..r3 to file
+        scoring.clearRecords(); //clear local variables
         Assert.IsTrue(scoring.ReadScores()); //read records from file
         //check if local variables are equal
         scores = scoring.GetScores(); 
         Assert.AreEqual(scores.Count, 3);
-        Assert.AreEqual(scores[0], r1);
-        Assert.AreEqual(scores[1], r2);
-        Assert.AreEqual(scores[2], r3);
-	}
+        Assert.IsTrue(scores[0].Equals(r1));
+        Assert.IsTrue(scores[1].Equals(r2));
+        Assert.IsTrue(scores[2].Equals(r3));
+    }
 }
