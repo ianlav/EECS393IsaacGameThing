@@ -49,8 +49,6 @@ public class PlayerMovement : CharacterModel {
             rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, -horizontalSpeed, horizontalAccel), rigid.velocity.y);
         } else if (Input.GetButton("MoveRight")) {
             rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, horizontalSpeed, horizontalAccel), rigid.velocity.y);
-        } else {
-            rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, 0, horizontalAccel), rigid.velocity.y);
         }
 
         //just adds a vertical velocity
@@ -59,6 +57,11 @@ public class PlayerMovement : CharacterModel {
         {
             isJumping = true;
             rigid.velocity += new Vector2(0, jumpSpeed);
+        }
+
+        if(Input.GetButtonUp("Jump") && rigid.velocity.y > 0)
+        {
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
         }
     }
 
