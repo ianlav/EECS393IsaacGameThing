@@ -24,7 +24,7 @@ GameObject:
   - 61: {fileID: 61000012945873992}
   - 50: {fileID: 50000010677923798}
   m_Layer: 0
-  m_Name: Crab
+  m_Name: Squirrel 1
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,11 +90,12 @@ MonoBehaviour:
   maxSpeed: 0
   baseDamage: 10
   maker: {fileID: 0}
-  moveRandomSpeed: 0
+  perceptionRange: 0
+  moveRandomAccel: 0
   randomVelocityX: 0
   randomVelocityY: 0
-  moveTowardsPlayerSpeed: 0
-  movePatrolSpeed: 0
+  moveTowardsPlayerAccel: 0
+  movePatrolAccel: 0
   patrolDirectionIsLeft: 0
   flying: 0
   movementDetectsEdges: 0

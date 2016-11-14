@@ -950,40 +950,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013378665444, guid: 46f035c556e6d7f46869791153e014d9, type: 2}
       propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010912266498, guid: 46f035c556e6d7f46869791153e014d9, type: 2}
-      propertyPath: m_Name
-      value: SpreadGun
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 99031378}
-    - target: {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9,
+    - target: {fileID: 212000013035505836, guid: 46f035c556e6d7f46869791153e014d9,
         type: 2}
-      propertyPath: bulletOrigin
-      value: 
-      objectReference: {fileID: 939768088}
-    - target: {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9,
-        type: 2}
-      propertyPath: bullets.Array.data[0]
-      value: 
-      objectReference: {fileID: 114000011087422152, guid: ce776312a35a9854a9ed0196dcec9ce2,
-        type: 2}
-    - target: {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9,
-        type: 2}
-      propertyPath: bullets.Array.data[2]
-      value: 
-      objectReference: {fileID: 114000013033139652, guid: ddf04ff47cbd016429f11234d30dc17c,
-        type: 2}
-    - target: {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9,
-        type: 2}
-      propertyPath: bullets.Array.data[1]
-      value: 
-      objectReference: {fileID: 114000011087422152, guid: ce776312a35a9854a9ed0196dcec9ce2,
-        type: 2}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46f035c556e6d7f46869791153e014d9, type: 2}
   m_IsPrefabParent: 0

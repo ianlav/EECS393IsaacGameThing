@@ -30,6 +30,7 @@ public abstract class Weapon : MonoBehaviour {
     {
         gameObject.tag = "Weapon";
         gameObject.layer = LayerMask.NameToLayer("Weapon");
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1; //should keep gun above player
     }
     
     protected virtual void Update()

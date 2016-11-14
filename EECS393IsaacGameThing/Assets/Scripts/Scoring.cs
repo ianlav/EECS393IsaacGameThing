@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
 
-public class Scoring : MonoBehaviour {
+public static class Scoring {
 
-    string FILEPATH = "scores.sav"; //can be modified in constructor to write to appdata directory if needed
+    static string FILEPATH = "scores.sav"; //can be modified in constructor to write to appdata directory if needed
     const string DELIMITER = " -=- ";
+    static List<ScoreRecord> scoreList = new List<ScoreRecord>();
 
     public class ScoreRecord {
         public string name;
@@ -34,33 +35,25 @@ public class Scoring : MonoBehaviour {
         }
     }
 
-    List<ScoreRecord> scoreList = new List<ScoreRecord>();
-
-	// Use this for initialization
-	public void Start () {
-        //FILEPATH = Application.persistentDataPath + "scores.sav"; //might need this for permissions, writes to appdata directory
-        ReadScores(); //loads saved scores from file if available
-	}
-
-    public void clearRecords() {
+    public static void clearRecords() {
         scoreList.Clear();
     }
 
-    public void AddRecord(ScoreRecord record){
+    public static void AddRecord(ScoreRecord record){
         scoreList.Add(record);
     }
 
-    public void AddRecord(string name, string date, double score){
+    public static void AddRecord(string name, string date, double score){
         ScoreRecord r = new ScoreRecord(name, date, score);
         scoreList.Add(r);
     }
 
-    public void AddRecords(params ScoreRecord[] records){
-        foreach (ScoreRecord s in records)
-            scoreList.Add(s);
+    public static void AddRecords(params ScoreRecord[] records){
+        for(int i=0; i < records.Length; i++)
+            scoreList.Add(records[i]);
     }
 
-    public bool ReadScores(){
+    public static bool ReadScores(){
         try{
             if (File.Exists(FILEPATH)){
                 scoreList.Clear();
@@ -83,7 +76,7 @@ public class Scoring : MonoBehaviour {
         return false;
     }
 
-    public bool WriteScores(){
+    public static bool WriteScores(){
         try{
             //if (!File.Exists(FILEPATH))
             //    File.Create(FILEPATH);
@@ -101,12 +94,7 @@ public class Scoring : MonoBehaviour {
         return false;
     }
 
-    public  ReadOnlyCollection<ScoreRecord> GetScores(){
+    public static ReadOnlyCollection<ScoreRecord> GetScores(){
         return scoreList.AsReadOnly();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
