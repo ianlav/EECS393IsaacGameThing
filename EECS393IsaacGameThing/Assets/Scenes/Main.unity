@@ -795,6 +795,8 @@ MonoBehaviour:
   newestPlatform: {fileID: 385386085}
   platformOptions:
   - {fileID: 114000010146496276, guid: a04d18f1a7b33824d97d339efcbc811b, type: 2}
+  - {fileID: 114000010146496276, guid: 4ab9af234b87df14aa4ae74f890e0c0d, type: 2}
+  - {fileID: 114000010146496276, guid: 1cd1e8c473a7fea46b81517acd7125ca, type: 2}
   player: {fileID: 99031378}
   playerRigid: {fileID: 997965212}
   minDistX: 0
