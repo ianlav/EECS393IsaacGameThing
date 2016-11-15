@@ -46,7 +46,7 @@ public class EnemyMaker : MonoBehaviour {
 		
 	public void makeSpecificEnemy(Enemy chosenEnemy, Platform plat, Vector2 pos){
 			newestEnemy = Instantiate (chosenEnemy, 
-				pos - (Vector2)plat.leftSide.position + (Vector2)plat.transform.position //the set position, offset by the distance between the left side and center. Because localPosition wont give me that
+				pos - (Vector2)plat.leftSide.position + (Vector2)plat.transform.position + new Vector2(0, 1)//the set position, offset by the distance between the left side and center. Because localPosition wont give me that. Also offset up one unit so we dont spawn them in the platform
 				, Quaternion.identity) as Enemy;
 	}
 

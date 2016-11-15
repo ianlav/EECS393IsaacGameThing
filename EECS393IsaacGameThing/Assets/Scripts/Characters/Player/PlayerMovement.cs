@@ -34,7 +34,19 @@ public class PlayerMovement : CharacterModel {
             }
         }
 
-        if(getHp() <= 0)
+        //just adds a vertical velocity
+        if (Input.GetButton("Jump") && !isJumping)
+        {
+            isJumping = true;
+            rigid.velocity += new Vector2(0, jumpSpeed);
+        }
+
+        if (Input.GetButtonUp("Jump") && rigid.velocity.y > 0)
+        {
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+        }
+
+        if (getHp() <= 0)
         {
             Destroy(gameObject);
         }
@@ -49,19 +61,6 @@ public class PlayerMovement : CharacterModel {
             rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, -horizontalSpeed, horizontalAccel), rigid.velocity.y);
         } else if (Input.GetButton("MoveRight")) {
             rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, horizontalSpeed, horizontalAccel), rigid.velocity.y);
-        }
-
-        //just adds a vertical velocity
-        // TO-DO make this a variable height jump, ie a tap is a short jump than a hold
-        if (Input.GetButton("Jump") && !isJumping)
-        {
-            isJumping = true;
-            rigid.velocity += new Vector2(0, jumpSpeed);
-        }
-
-        if(Input.GetButtonUp("Jump") && rigid.velocity.y > 0)
-        {
-            rigid.velocity = new Vector2(rigid.velocity.x, 0);
         }
     }
 
