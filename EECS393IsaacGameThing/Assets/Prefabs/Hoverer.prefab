@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1000014109156188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.026392, y: 1.2829812, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,10 +70,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590eea7005fda4530b8e3e0a9908fd77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
   cost: 6
   maxSpeed: 2
   baseDamage: 15
   maker: {fileID: 0}
+  perceptionRange: 10
+  moveRandomAccel: 0
+  randomVelocityX: 0
+  randomVelocityY: 0
+  moveTowardsPlayerAccel: 0.5
+  movePatrolAccel: 0
+  patrolDirectionIsLeft: 0
+  flying: 1
+  movementDetectsEdges: 0
+  bullets: []
+  shootsTowardsPlayer: 0
+  bulletAngle: 12
+  bulletVelocity: 30
+  bulletAngleVariation: 2
+  damage: 10
+  timeBetweenBullets: 1
 --- !u!212 &212000013013858936
 SpriteRenderer:
   m_ObjectHideFlags: 1

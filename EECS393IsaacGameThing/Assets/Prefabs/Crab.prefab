@@ -87,17 +87,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   cost: 1
-  maxSpeed: 0
+  maxSpeed: 2
   baseDamage: 10
   maker: {fileID: 0}
-  moveRandomSpeed: 0
+  perceptionRange: 5
+  moveRandomAccel: 0
   randomVelocityX: 0
   randomVelocityY: 0
-  moveTowardsPlayerSpeed: 0
-  movePatrolSpeed: 0
+  moveTowardsPlayerAccel: 0.5
+  movePatrolAccel: 0
   patrolDirectionIsLeft: 0
   flying: 0
   movementDetectsEdges: 0
+  bullets:
+  - {fileID: 114000011087422152, guid: ce776312a35a9854a9ed0196dcec9ce2, type: 2}
+  shootsTowardsPlayer: 0
+  bulletAngle: 30
+  bulletVelocity: 2
+  bulletAngleVariation: 2
+  damage: 10
+  timeBetweenBullets: 50
 --- !u!212 &212000012187723292
 SpriteRenderer:
   m_ObjectHideFlags: 1
