@@ -79,6 +79,9 @@ public class PlayerMovement : CharacterModel {
         //if it runs into an enemy, destroy it
         if (col.gameObject.CompareTag("Enemy"))
         {
+            print(col.collider.bounds.max.y + " " + col.contacts[0].point.y);
+            if((col.collider.bounds.max.y - 0.1f) < col.contacts[0].point.y)
+                isJumping = false;
             print("ENEMY COLLISION!");
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
             if (e != null)
