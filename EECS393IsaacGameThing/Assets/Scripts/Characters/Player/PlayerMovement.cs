@@ -10,10 +10,12 @@ public class PlayerMovement : CharacterModel {
     public float horizontalAccel;
     public float jumpSpeed;
     public Weapon[] weapons;
+    public float contactDamageRate;
 
     private Rigidbody2D rigid;
     private bool isJumping = true;
 	private CharacterModel character;
+    private float contactDamageCounter = 0;
 
 	// Use this for initialization
 	new void Start () {
@@ -84,9 +86,28 @@ public class PlayerMovement : CharacterModel {
                 isJumping = false;
             print("ENEMY COLLISION!");
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
-            if (e != null)
-                takeDamage(e.baseDamage);
+            contactDamageCounter = 100000;
+            takeContactDamage(e);
         }
+    }
+
+    void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+            takeContactDamage(e);
+        }
+    }
+
+    void takeContactDamage(Enemy e)
+    {
+        if (e != null && contactDamageCounter > contactDamageRate)
+        {
+            contactDamageCounter = 0;
+            takeDamage(e.baseDamage);
+        }
+        contactDamageCounter += Time.deltaTime;
     }
 
     void OnDestroy()

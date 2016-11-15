@@ -108,6 +108,7 @@ MonoBehaviour:
   jumpSpeed: 7
   weapons:
   - {fileID: 939768087}
+  contactDamageRate: 0.1
 --- !u!4 &99031382
 Transform:
   m_ObjectHideFlags: 0
