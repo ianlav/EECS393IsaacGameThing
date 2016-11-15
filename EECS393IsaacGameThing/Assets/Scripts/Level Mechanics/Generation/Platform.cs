@@ -26,7 +26,7 @@ public class Platform : MonoBehaviour {
         if(col.CompareTag("LevelTrigger"))
         {
             maker.makeRandomPlatformInRange();
-            Destroy(gameObject, 3);
+            //Destroy(gameObject, 3);
         }
     }
 }

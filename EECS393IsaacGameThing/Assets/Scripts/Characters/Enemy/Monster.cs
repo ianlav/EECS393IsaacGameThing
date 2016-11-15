@@ -42,7 +42,7 @@ public class Monster : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Player"))
+        if(col.CompareTag("Player") || col.CompareTag("Floor"))
             Destroy(col.gameObject);
 		if (col.CompareTag ("Bullet"))
 			rigidMonster.velocity = new Vector2 (rigidMonster.velocity.x - 10 / (1 + defense), 0);
