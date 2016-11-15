@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : CharacterModel {
@@ -15,7 +16,7 @@ public class PlayerMovement : CharacterModel {
 	private CharacterModel character;
 
 	// Use this for initialization
-	void Start () {
+	new void Start () {
         base.Start();
         gameObject.tag = "Player";
         gameObject.layer = LayerMask.NameToLayer("Player");
@@ -84,5 +85,10 @@ public class PlayerMovement : CharacterModel {
             if (e != null)
                 takeDamage(e.baseDamage);
         }
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.LoadScene("Game Over", LoadSceneMode.Single);
     }
 }

@@ -6,20 +6,11 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour {
 
     public Text text;
-	int currentScore = 0;
 	
     public void ChangeScene (string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
-
-	public void setCurrentScore(int newScore){
-		this.currentScore = newScore;
-	}
-
-	public int getCurrentScore(){
-		return currentScore;
-	}
 
     public void thingTookDamage(Vector3 enemy, float dam)
     {
