@@ -19,6 +19,7 @@ public abstract class Enemy : CharacterModel {
 	public bool patrolDirectionIsLeft;
 	public bool flying;
 	public bool movementDetectsEdges; //NYI
+	public bool isCoward;
 	//Ranged Weapon "AI" builder
 	//Could be expanded for plural bullet headings per enemy by using iteration over arrays...
 	public Bullet[] bullets;
@@ -32,7 +33,7 @@ public abstract class Enemy : CharacterModel {
 	private int timeSinceLastBullet;
 
 
-	protected void Start() {
+	public virtual void Start() {
         base.Start();
 		rigidEnemy = GetComponent<Rigidbody2D>();
 		maker = FindObjectOfType<EnemyMaker>(); //finds and holds the enemy maker
@@ -58,17 +59,20 @@ public abstract class Enemy : CharacterModel {
 		Vector2 playerPos = GameObject.Find ("Player").transform.position;
 
 		if (Vector2.Distance (enemyPos, playerPos) < perceptionRange) {
+			//modifier is used to do wholesale effects on enemy motion, like slowing or freezing enemies.
+			float modifier = 1;
+			if(isCoward){modifier*=-1;}
 			if (moveTowardsPlayerAccel > 0f) {
 				if (enemyPos.x < playerPos.x) {
-					movementVector.x += moveTowardsPlayerAccel;
+					movementVector.x += modifier*moveTowardsPlayerAccel;
 				} else {
-					movementVector.x -= moveTowardsPlayerAccel;
+					movementVector.x -= modifier*moveTowardsPlayerAccel;
 				}
 				if (flying) {
 					if (enemyPos.y < playerPos.y) {
-						movementVector.y += moveTowardsPlayerAccel;
+						movementVector.y += modifier*moveTowardsPlayerAccel;
 					} else {
-						movementVector.y -= moveTowardsPlayerAccel;
+						movementVector.y -= modifier*moveTowardsPlayerAccel;
 					}	
 				}
 			}
@@ -98,7 +102,7 @@ public abstract class Enemy : CharacterModel {
 			if (movementVector.y < -maxSpeed) {
 				movementVector.y = -maxSpeed;
 			}
-			rigidEnemy.velocity = movementVector;
+				rigidEnemy.velocity = movementVector;
 		}
 		FireBullet ();
 	}
@@ -121,9 +125,17 @@ public abstract class Enemy : CharacterModel {
         maker.setCurrentCost(maker.getCurrentCost() - cost); //recycle monster's cost
     }
 
+	public void applyEffect(string effect){
+		print("Is a coward: "+isCoward);
+		if(effect.Equals("Fear")){
+			this.isCoward=true;
+		}
+	}
+
 	private void MoveEnemy(){
 		
 	}
+		
 
 	private void FireBullet(){
 		//Just straight up stealing the procedure from Weapon

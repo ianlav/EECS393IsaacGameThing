@@ -8,6 +8,7 @@ public class PersistentBullet : Bullet {
         base.Start();
         damage = 10;
         speed = 20;
+		effect = "Fear";
     }
 
     protected override void OnTriggerEnter2D(Collider2D col)
@@ -15,6 +16,7 @@ public class PersistentBullet : Bullet {
         if (col.gameObject.CompareTag("Enemy"))
         {
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+			e.applyEffect(effect);
             //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
             //e.takeDamage(damage); //alternative 2
             if (e != null)
