@@ -10,6 +10,32 @@ public class EnemyMakerTest {
 	CrabEnemy enemy = new CrabEnemy ();
 
 	[Test]
+	//Test for "seeker" enemies moving towards player 
+	public void EnemyTowardsPlayerTest(){
+		//Need to force a platform to exist
+		enemy.moveTowardsPlayerAccel = 2;
+		enemy.maxSpeed = 6;
+		enemy.isCoward = false;
+		Vector2 enemyPos = new Vector2 (0f, 0f);
+		Vector2 playerPos = new Vector2 (10f, 0f);
+		Vector2 newEnemyPos = enemy.MoveEnemy(enemyPos, enemyPos, playerPos);
+		Assert.IsTrue(enemyPos.x<newEnemyPos.x);
+	}
+
+	[Test]
+	//Test for "seeker" enemies hit with the fear effect moving away from player 
+	public void AfraidEnemyFromPlayerTest(){
+		//Need to force a platform to exist
+		enemy.moveTowardsPlayerAccel = 2;
+		enemy.maxSpeed = 6;
+		enemy.isCoward=true;
+		Vector2 enemyPos = new Vector2 (0f, 0f);
+		Vector2 playerPos = new Vector2 (10f, 0f);
+		Vector2 newEnemyPos = (enemy.MoveEnemy(enemyPos, enemyPos, playerPos));
+		Assert.IsTrue(enemyPos.x>newEnemyPos.x);
+	}
+
+	[Test]
 	//Test ability to spawn an enemy when enough points are present
 	public void EnemySpawnTest(){
 		maker.setCurrentCost (0);

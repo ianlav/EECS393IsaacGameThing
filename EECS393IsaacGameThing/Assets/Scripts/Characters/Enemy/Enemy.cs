@@ -12,8 +12,8 @@ public abstract class Enemy : CharacterModel {
 	//Movement AI builder
 	public int perceptionRange;
 	public float moveRandomAccel;
-		public float randomVelocityX;
-		public float randomVelocityY;
+	public float randomVelocityX;
+	public float randomVelocityY;
 	public float moveTowardsPlayerAccel;
 	public float movePatrolAccel;
 	public bool patrolDirectionIsLeft;
@@ -34,95 +34,52 @@ public abstract class Enemy : CharacterModel {
 
 
 	public virtual void Start() {
-        base.Start();
+		base.Start();
 		rigidEnemy = GetComponent<Rigidbody2D>();
 		maker = FindObjectOfType<EnemyMaker>(); //finds and holds the enemy maker
-        gameObject.tag = "Enemy";
+		gameObject.tag = "Enemy";
 		if(!shootsTowardsPlayer && bulletVelocity != 0){
 			bulletVector = new Vector2 (Mathf.Cos (bulletAngle * Mathf.PI/180f)/6.28f*bulletVelocity, 
 				(float)Mathf.Sin (bulletAngle * Mathf.PI/180f)/6.28f*bulletVelocity);
 		}
-    }
+	}
 
-    protected void Update()
-    {
-        if (hp <= 0)
-        {
-            EnemyMaker.currentEnemyCost -= cost;
-            Destroy(gameObject);
-        }
-			
+	protected void Update()
+	{
+		if (hp <= 0)
+		{
+			EnemyMaker.currentEnemyCost -= cost;
+			Destroy(gameObject);
+		}
+
 		//Figure out how to trigger this less often to save precmoveTowardsPlayerAccelTowmoveRandomAccel + moveRandomAccel + movePatrolAccel > 0) {
 		Vector2 movementVector = rigidEnemy.velocity;
 		Vector2 enemyPos = this.transform.position;
 		Vector2 playerPos = GameObject.Find ("Player").transform.position;
 
 		if (Vector2.Distance (enemyPos, playerPos) < perceptionRange) {
-			//modifier is used to do wholesale effects on enemy motion, like slowing or freezing enemies.
-			float modifier = 1;
-			if(isCoward){modifier*=-1;}
-			if (moveTowardsPlayerAccel > 0f) {
-				if (enemyPos.x < playerPos.x) {
-					movementVector.x += modifier*moveTowardsPlayerAccel;
-				} else {
-					movementVector.x -= modifier*moveTowardsPlayerAccel;
-				}
-				if (flying) {
-					if (enemyPos.y < playerPos.y) {
-						movementVector.y += modifier*moveTowardsPlayerAccel;
-					} else {
-						movementVector.y -= modifier*moveTowardsPlayerAccel;
-					}	
-				}
-			}
-			if (moveRandomAccel > 0f) {
-				movementVector.x += Random.Range (-1, 1) * moveRandomAccel;
-				if (flying) {
-					movementVector.y += Random.value * moveRandomAccel;
-				}
-			}
-			if (movePatrolAccel > 0f) {
-				if (patrolDirectionIsLeft) {
-					movementVector.x -= movePatrolAccel;
-				} else {
-					movementVector.x += movePatrolAccel;
-				}
-			}
-
-			if (movementVector.x > maxSpeed) {
-				movementVector.x = maxSpeed;
-			}
-			if (movementVector.x < -maxSpeed) {
-				movementVector.x = -maxSpeed;
-			}
-			if (movementVector.y > maxSpeed) {
-				movementVector.y = maxSpeed;
-			}
-			if (movementVector.y < -maxSpeed) {
-				movementVector.y = -maxSpeed;
-			}
-				rigidEnemy.velocity = movementVector;
+			rigidEnemy.velocity = MoveEnemy (movementVector, enemyPos, playerPos);
 		}
 		FireBullet ();
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-        //if the enemy leaves the player's range, despawn the enemy
+		//if the enemy leaves the player's range, despawn the enemy
 		if(col.CompareTag("LevelTrigger")){
-			Destroy(gameObject);	
+			Destroy(gameObject);    
 		}
 	}
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-    }
+	void OnCollisionEnter2D(Collision2D col)
+	{
+	}
 
-    //called when the enemy is destroyed
-    void OnDestroy()
-    {
-        maker.setCurrentCost(maker.getCurrentCost() - cost); //recycle monster's cost
-    }
+	//called when the enemy is destroyed
+	void OnDestroy()
+	{
+		maker.setCurrentCost(maker.getCurrentCost() - cost); //recycle monster's cost
+	}
 
 	public void applyEffect(string effect){
 		print("Is a coward: "+isCoward);
@@ -131,10 +88,53 @@ public abstract class Enemy : CharacterModel {
 		}
 	}
 
-	private void MoveEnemy(){
-		
+	public Vector2 MoveEnemy(Vector2 movementVector, Vector2 enemyPos, Vector2 playerPos){
+		//modifier is used to do wholesale effects on enemy motion, like slowing or freezing enemies.
+		float modifier = 1;
+		if(isCoward){modifier*=-1;}
+		if (moveTowardsPlayerAccel > 0f) {
+			if (enemyPos.x < playerPos.x) {
+				movementVector.x += modifier*moveTowardsPlayerAccel;
+			} else {
+				movementVector.x -= modifier*moveTowardsPlayerAccel;
+			}
+			if (flying) {
+				if (enemyPos.y < playerPos.y) {
+					movementVector.y += modifier*moveTowardsPlayerAccel;
+				} else {
+					movementVector.y -= modifier*moveTowardsPlayerAccel;
+				}    
+			}
+		}
+		if (moveRandomAccel > 0f) {
+			movementVector.x += Random.Range (-1, 1) * moveRandomAccel;
+			if (flying) {
+				movementVector.y += Random.value * moveRandomAccel;
+			}
+		}
+		if (movePatrolAccel > 0f) {
+			if (patrolDirectionIsLeft) {
+				movementVector.x -= movePatrolAccel;
+			} else {
+				movementVector.x += movePatrolAccel;
+			}
+		}
+
+		if (movementVector.x > maxSpeed) {
+			movementVector.x = maxSpeed;
+		}
+		if (movementVector.x < -maxSpeed) {
+			movementVector.x = -maxSpeed;
+		}
+		if (movementVector.y > maxSpeed) {
+			movementVector.y = maxSpeed;
+		}
+		if (movementVector.y < -maxSpeed) {
+			movementVector.y = -maxSpeed;
+		}
+		return movementVector;
 	}
-		
+
 
 	private void FireBullet(){
 		//Just straight up stealing the procedure from Weapon
@@ -142,15 +142,15 @@ public abstract class Enemy : CharacterModel {
 			if (timeSinceLastBullet >= timeBetweenBullets) {
 				timeSinceLastBullet = 0;
 				Bullet bul = Instantiate (bullets[0], transform.position, rigidEnemy.transform.rotation) as Bullet;
-                bul.speed = 10;
-                bul.direction = bulletVector;
-                bul.damage = damage;
-                bul.enemyMode = true;
-            } else {
+				bul.speed = 10;
+				bul.direction = bulletVector;
+				bul.damage = damage;
+				bul.enemyMode = true;
+			} else {
 				timeSinceLastBullet++;
 			}
 		}
-			
+
 	}
 
-}
+} 
