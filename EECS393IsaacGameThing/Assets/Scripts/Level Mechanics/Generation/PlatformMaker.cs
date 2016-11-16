@@ -14,12 +14,14 @@ public class PlatformMaker : MonoBehaviour {
 
     private PlatformMakerModel model;
 	private EnemyMaker enemyMaker;
+    private ItemMaker itemMaker;
 
     void Start()
     {
 		
         playerRigid = player.GetComponent<Rigidbody2D>();
 		enemyMaker = FindObjectOfType<EnemyMaker>();
+        itemMaker = FindObjectOfType<ItemMaker>();
         model = new PlatformMakerModel(playerRigid.gravityScale * 9.81f, player.horizontalSpeed, player.jumpSpeed);
 
         //we'll start with the initial platform, and make 4 more
@@ -45,9 +47,11 @@ public class PlatformMaker : MonoBehaviour {
 
     void makePlatform(Platform plat, Vector2 pos)
     {
+        Vector2 offsetPos = pos - (Vector2)plat.leftSide.position + (Vector2)plat.transform.position;//the set position, offset by the distance between the left side and center. Because localPosition wont give me that. Also offset up one unit so we dont spawn them in the platform
         newestPlatform = Instantiate(plat, 
-            pos - (Vector2)plat.leftSide.position + (Vector2)plat.transform.position //the set position, offset by the distance between the left side and center. Because localPosition wont give me that
+            offsetPos
             , Quaternion.identity) as Platform;
 		enemyMaker.makeRandomEnemy (plat, pos);
+        itemMaker.maybeSpawnItem(offsetPos + new Vector2(0,1));
     }
 }

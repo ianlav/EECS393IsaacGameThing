@@ -10,7 +10,14 @@ public class DeadlyBullet : Bullet {
         speed = 25;
     }
 
-    public override void hit(CharacterModel enemy)
+    public override void hit(Enemy enemy)
+    {
+        enemy.takeDamage(100);
+        Destroy(enemy.gameObject);
+        Destroy(gameObject);
+    }
+
+    public override void hit(PlayerMovement enemy)
     {
         enemy.takeDamage(100);
         Destroy(enemy.gameObject);

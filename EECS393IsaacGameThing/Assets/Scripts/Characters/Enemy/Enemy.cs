@@ -38,7 +38,6 @@ public abstract class Enemy : CharacterModel {
 		rigidEnemy = GetComponent<Rigidbody2D>();
 		maker = FindObjectOfType<EnemyMaker>(); //finds and holds the enemy maker
         gameObject.tag = "Enemy";
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
 		if(!shootsTowardsPlayer && bulletVelocity != 0){
 			bulletVector = new Vector2 (Mathf.Cos (bulletAngle * Mathf.PI/180f)/6.28f*bulletVelocity, 
 				(float)Mathf.Sin (bulletAngle * Mathf.PI/180f)/6.28f*bulletVelocity);
@@ -142,11 +141,12 @@ public abstract class Enemy : CharacterModel {
 		if (bulletVelocity != 0) {
 			if (timeSinceLastBullet >= timeBetweenBullets) {
 				timeSinceLastBullet = 0;
-				bullets[0].direction = bulletVector;
-				bullets[0].damage = damage;
-				bullets [0].enemyMode = true;
-				Instantiate (bullets[0], rigidEnemy.transform.position, rigidEnemy.transform.rotation);
-			} else {
+				Bullet bul = Instantiate (bullets[0], transform.position, rigidEnemy.transform.rotation) as Bullet;
+                bul.speed = 10;
+                bul.direction = bulletVector;
+                bul.damage = damage;
+                bul.enemyMode = true;
+            } else {
 				timeSinceLastBullet++;
 			}
 		}

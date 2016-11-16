@@ -25,7 +25,7 @@ GameObject:
   - 50: {fileID: 50000010677923798}
   m_Layer: 0
   m_Name: Crab
-  m_TagString: Monster
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013651858404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.85, y: -0.7, z: 0}
+  m_LocalPosition: {x: 11.460599, y: -4.5468893, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -59,7 +59,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61000012945873992
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feb98c10fc49466c8bf5509c5bdc1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 20
   cost: 1
   maxSpeed: 2
   baseDamage: 10
@@ -99,10 +99,11 @@ MonoBehaviour:
   patrolDirectionIsLeft: 0
   flying: 0
   movementDetectsEdges: 0
+  isCoward: 0
   bullets:
-  - {fileID: 114000011087422152, guid: ce776312a35a9854a9ed0196dcec9ce2, type: 2}
+  - {fileID: 114000011087422152, guid: e9872a289a89d674a8c1c47a95525216, type: 2}
   shootsTowardsPlayer: 0
-  bulletAngle: 30
+  bulletAngle: 1
   bulletVelocity: 2
   bulletAngleVariation: 2
   damage: 10

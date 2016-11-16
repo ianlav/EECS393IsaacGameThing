@@ -8,34 +8,22 @@ public class PersistentBullet : Bullet {
         base.Start();
         damage = 10;
         speed = 20;
-		effect = "Fear";
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Enemy"))
-        {
-            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
-			e.applyEffect(effect);
-            //col.gameObject.SendMessage("takeDamage", damage); //alternative 1
-            //e.takeDamage(damage); //alternative 2
-            if (e != null)
-                hit(e);
-        }
-        if (col.gameObject.CompareTag("Floor"))
-        {
-            Platform p = (Platform)col.gameObject.GetComponent(typeof(Platform));
-            if (p != null)
-                hit(p);
-        }
+        effect = "Fear";
     }
 
     //default enemy hit: damage enemy
-    public override void hit(CharacterModel enemy)
+    public override void hit(Enemy enemy)
     {
         print("here");
+        enemy.applyEffect(effect);
         enemy.takeDamage(damage);
     }
+
+    public override void hit(PlayerMovement player)
+    {
+        base.hit(player);
+    }
+
 
     //default platform hit: just destroy bullet
     public override void hit(Platform platform)

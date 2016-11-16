@@ -21,7 +21,6 @@ public class PlayerMovement : CharacterModel {
 	new void Start () {
         base.Start();
         gameObject.tag = "Player";
-        gameObject.layer = LayerMask.NameToLayer("Player");
         rigid = GetComponent<Rigidbody2D>();
     }
 	
@@ -112,6 +111,7 @@ public class PlayerMovement : CharacterModel {
 
     void OnDestroy()
     {
+        ScoreController.setCurrentScore((int)transform.position.x);
         SceneManager.LoadScene("Game Over", LoadSceneMode.Single);
     }
 }

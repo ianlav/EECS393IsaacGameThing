@@ -10,13 +10,13 @@ public abstract class Bullet : MonoBehaviour {
     public float timeToExist;
     public bool enemyBullet;
     public bool enemyMode;
+    public string effect;
 
     private Rigidbody2D rigid;
 
     public virtual void Start()
     {
         gameObject.tag = "Bullet";
-        gameObject.layer = LayerMask.NameToLayer("Bullet");
         if (timeToExist == 0)
             timeToExist = 1;
         rigid = GetComponent<Rigidbody2D>();
@@ -34,7 +34,7 @@ public abstract class Bullet : MonoBehaviour {
     protected virtual void OnTriggerEnter2D(Collider2D col)
     {
         if (enemyMode) {
-            if (col.gameObject.CompareTag("Player"))
+            if (col.CompareTag("Player"))
             {
                 PlayerMovement player = (PlayerMovement)col.gameObject.GetComponent(typeof(PlayerMovement));
                 if(player != null)
@@ -64,7 +64,7 @@ public abstract class Bullet : MonoBehaviour {
     }
 
     //default enemy hit: damage enemy
-    public virtual void hit(CharacterModel enemy)
+    public virtual void hit(Enemy enemy)
     {
         enemy.takeDamage(damage);
         Destroy(gameObject); //destroy bullet
@@ -73,7 +73,7 @@ public abstract class Bullet : MonoBehaviour {
     //default platform hit: just destroy bullet
     public virtual void hit(Platform platform)
     {
-        Destroy(gameObject); //destroy bullet
+       Destroy(gameObject); //destroy bullet
     }
 }
 
