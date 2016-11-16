@@ -23,8 +23,9 @@ public class Monster : MonoBehaviour {
 
 	void Update () {
 		if(rigidMonster.velocity.x<maxVelocity){
-			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, 0);
-			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity,0);}
+			Vector2 playerPos = GameObject.Find ("Player").transform.position;
+			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, playerPos.y);
+			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity, playerPos.y);}
 		}
 		if (updateClock == updatesToUpgrade) {
 			updateClock = 0;
