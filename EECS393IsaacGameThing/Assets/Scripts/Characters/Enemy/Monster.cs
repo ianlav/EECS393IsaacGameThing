@@ -4,8 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Monster : MonoBehaviour {
 
-	public int updatesToUpgrade;
-	private int updateClock;
+	public float updatesToUpgrade;
+	private float updateClock;
 	public float maxVelocity; //Highest possible speed of monster. Increases as game progresses.
 	public float acceleration; //Ability for monster to return to speed when hit. Increases.
 	public float defense; //Modifier for the amount that damage slows down monster. Increases.
@@ -23,20 +23,19 @@ public class Monster : MonoBehaviour {
 
 	void Update () {
 		if(rigidMonster.velocity.x<maxVelocity){
-			Vector2 playerPos = GameObject.Find ("Player").transform.position;
-			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, playerPos.y);
-			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity, playerPos.y);}
+			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, 0);
+			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity,0);}
 		}
-		if (updateClock == updatesToUpgrade) {
+		if (updateClock >= updatesToUpgrade) {
 			updateClock = 0;
 			UpgradeMonster ();
 		} else {
-			updateClock++;
+			updateClock += Time.deltaTime;
 		}
 	}
 
 	void UpgradeMonster(){
-		maxVelocity += 0.25f;
+        maxVelocity += 0.5f;
 		acceleration += 0.1f;
 		defense += 1f;
 	}

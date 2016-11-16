@@ -22,6 +22,7 @@ public class PlayerMovement : CharacterModel {
         base.Start();
         gameObject.tag = "Player";
         rigid = GetComponent<Rigidbody2D>();
+        ScoreController.setCurrentScore(0);
     }
 	
 	// Update is called once per frame
@@ -62,6 +63,13 @@ public class PlayerMovement : CharacterModel {
             rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, -horizontalSpeed, horizontalAccel), rigid.velocity.y);
         } else if (Input.GetButton("MoveRight")) {
             rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, horizontalSpeed, horizontalAccel), rigid.velocity.y);
+        }
+
+        ScoreController.setCurrentScore(Mathf.Max((int)transform.position.x, ScoreController.getCurrentScore()));
+
+        if(transform.position.y < -50)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -111,7 +119,6 @@ public class PlayerMovement : CharacterModel {
 
     void OnDestroy()
     {
-        ScoreController.setCurrentScore((int)transform.position.x);
         SceneManager.LoadScene("Game Over", LoadSceneMode.Single);
     }
 }
