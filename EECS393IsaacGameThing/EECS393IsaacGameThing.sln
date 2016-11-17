@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EECS393IsaacGameThing.CSharp", "EECS393IsaacGameThing.CSharp.csproj", "{9D55924F-DF3A-5331-0374-468DDA27C1F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EECS393IsaacGameThing.CSharp.Editor", "EECS393IsaacGameThing.CSharp.Editor.csproj", "{42EAF7DC-E393-2BC0-A337-3BAF8FB5C931}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D55924F-DF3A-5331-0374-468DDA27C1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D55924F-DF3A-5331-0374-468DDA27C1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D55924F-DF3A-5331-0374-468DDA27C1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D55924F-DF3A-5331-0374-468DDA27C1F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EAF7DC-E393-2BC0-A337-3BAF8FB5C931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EAF7DC-E393-2BC0-A337-3BAF8FB5C931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EAF7DC-E393-2BC0-A337-3BAF8FB5C931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EAF7DC-E393-2BC0-A337-3BAF8FB5C931}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
