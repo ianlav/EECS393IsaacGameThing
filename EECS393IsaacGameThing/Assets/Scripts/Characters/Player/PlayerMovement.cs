@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : CharacterModel {
@@ -9,7 +10,7 @@ public class PlayerMovement : CharacterModel {
     public float horizontalSpeed;
     public float horizontalAccel;
     public float jumpSpeed;
-    public Weapon[] weapons;
+    public List<Weapon> weapons;
     public float contactDamageRate;
 
     private Rigidbody2D rigid;

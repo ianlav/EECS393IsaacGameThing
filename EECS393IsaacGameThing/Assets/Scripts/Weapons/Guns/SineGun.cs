@@ -14,6 +14,7 @@ public class SineGun : Weapon {
     //initialization
     new void Start () {
         base.Start();
+        desc = "Wave Gun";
         damage = 5;
         bulletSpeed = 12;
         timeBetweenShots = 0.7f;

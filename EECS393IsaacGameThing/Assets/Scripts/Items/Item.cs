@@ -3,7 +3,8 @@ using System.Collections;
 
 public abstract class Item : MonoBehaviour {
 
-    private UIController ui;
+    protected UIController ui;
+    protected string popupText;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -20,7 +21,7 @@ public abstract class Item : MonoBehaviour {
     {
         if(col.CompareTag("Player"))
         {
-            ui.displayPopUpText("This is temporary place holder text", transform.position);
+           // ui.displayPopUpText(popupText, transform.position);
         }
     }
 }

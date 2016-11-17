@@ -5,11 +5,12 @@ using System.Collections;
 public abstract class Weapon : MonoBehaviour {
 
     public Transform bulletOrigin;
-    public PlayerMovement player;
+    protected PlayerMovement player;
     public Vector2 aimVector;
     public int damage;
     public int numProjectiles;
     public Bullet[] bullets;
+    protected string desc;
 
     protected float timeSinceFired;
     protected float timeBetweenShots;
@@ -31,8 +32,14 @@ public abstract class Weapon : MonoBehaviour {
         gameObject.tag = "Weapon";
         gameObject.layer = LayerMask.NameToLayer("Weapon");
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1; //should keep gun above player
+        player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
     }
-    
+
+    public string getName()
+    {
+        return desc;
+    }
+
     protected virtual void Update()
     {
         //increments the fire rate counter(s)

@@ -4,6 +4,13 @@ using System;
 
 public class StartGun : Weapon {
 
+    new void Start()
+    {
+        base.Start();
+        numProjectiles = bullets.Length;
+        timeBetweenShots = 0.4f;
+    }
+
     //basic implementation. fires a straight line bullet towards the mouse
     public override void fire()
     {

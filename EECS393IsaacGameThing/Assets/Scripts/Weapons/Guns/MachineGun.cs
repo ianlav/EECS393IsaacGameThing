@@ -7,8 +7,9 @@ public class MachineGun : Weapon {
     new void Start ()
     {
         base.Start();
+        desc = "Machine Gun";
         damage = 5;
-        timeBetweenShots = 0.4f;
+        timeBetweenShots = 0.05f;
         numProjectiles = bullets.Length;
     }
 

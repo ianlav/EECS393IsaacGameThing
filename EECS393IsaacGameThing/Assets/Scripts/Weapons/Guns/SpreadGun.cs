@@ -8,14 +8,14 @@ public class SpreadGun : Weapon {
 
     new void Start()
     {
-        base.Start(); 
+        base.Start();
+        desc = "Spread Gun";
         spreadAngleDegrees = 60;
         numProjectiles = bullets.Length;
         timeBetweenShots = 0.2f;
         bulletRotations = new float[numProjectiles];
-        //bulletOrigin = transform.Find("SpreadGun");
-        //player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
         calculateSpread();
+        timeSinceFired = 0;
     }
 
     //caching for spread angles, no reason to recalculate all the time
@@ -28,15 +28,21 @@ public class SpreadGun : Weapon {
         }
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     //fires a grouping of bullets towards the enemy in a specified spread pattern
     public override void fire()
     {
         if (timeSinceFired > timeBetweenShots) //controls the fire rate
         {
             timeSinceFired = 0;
-            
+            print("hi");
+
             //create all bullets and rotate to appropriate spread angles
-            for(int i=0; i < bullets.Length; i++)
+            for (int i=0; i < bullets.Length; i++)
             {
                 bullets[i].direction = aimVector.Rotate(bulletRotations[i]);
                 bullets[i].damage = damage;
