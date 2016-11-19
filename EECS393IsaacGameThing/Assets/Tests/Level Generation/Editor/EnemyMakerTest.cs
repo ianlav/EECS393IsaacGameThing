@@ -6,12 +6,14 @@ using System.Collections;
 
 public class EnemyMakerTest {
 
-	EnemyMaker maker = new EnemyMaker();
-	CrabEnemy enemy = new CrabEnemy ();
+
 
 	[Test]
 	//Test for "seeker" enemies moving towards player 
 	public void EnemyTowardsPlayerTest(){
+		var gameObject = new GameObject();
+		CrabEnemy enemy = gameObject.AddComponent<CrabEnemy>();
+		enemy.Start();
 		//Need to force a platform to exist
 		enemy.moveTowardsPlayerAccel = 2;
 		enemy.maxSpeed = 6;
@@ -26,6 +28,9 @@ public class EnemyMakerTest {
 	//Test for "seeker" enemies hit with the fear effect moving away from player 
 	public void AfraidEnemyFromPlayerTest(){
 		//Need to force a platform to exist
+		var gameObject = new GameObject();
+		CrabEnemy enemy = gameObject.AddComponent<CrabEnemy>();
+		enemy.Start();
 		enemy.moveTowardsPlayerAccel = 2;
 		enemy.maxSpeed = 6;
 		enemy.isCoward=true;
@@ -38,6 +43,11 @@ public class EnemyMakerTest {
 	[Test]
 	//Test ability to spawn an enemy when enough points are present
 	public void EnemySpawnTest(){
+		var gameObject = new GameObject();
+		EnemyMaker maker = gameObject.AddComponent<EnemyMaker>();
+		CrabEnemy enemy = gameObject.AddComponent<CrabEnemy>();
+		maker.Start();
+		enemy.Start();
 		maker.setCurrentCost (0);
 		maker.setMaxCost (10);
 		Assert.IsTrue(maker.testIfEnemyMakeable(enemy));
@@ -46,6 +56,11 @@ public class EnemyMakerTest {
 	[Test]
 	//Test for correct behavior (no spawn) when there are not enough points to spawn an enemy.
 	public void EnemySpawnNoRoomTest(){
+		var gameObject = new GameObject();
+		EnemyMaker maker = gameObject.AddComponent<EnemyMaker>();
+		CrabEnemy enemy = gameObject.AddComponent<CrabEnemy>();
+		maker.Start();
+		enemy.Start();
 		//Need to force a platform to exist
 		maker.setCurrentCost (10);
 		maker.setMaxCost (5);
