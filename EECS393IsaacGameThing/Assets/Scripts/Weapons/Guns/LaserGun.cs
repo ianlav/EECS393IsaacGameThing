@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class LaserGun : Weapon {
 
@@ -14,5 +15,10 @@ public class LaserGun : Weapon {
     {
         //not implemented
         //should fire 1 long bullet that pierces
+    }
+
+    public override string getName()
+    {
+        return "Laser Gun";
     }
 }

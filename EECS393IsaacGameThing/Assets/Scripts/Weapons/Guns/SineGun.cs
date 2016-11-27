@@ -14,7 +14,6 @@ public class SineGun : Weapon {
     //initialization
     new void Start () {
         base.Start();
-        desc = "Wave Gun";
         damage = 5;
         bulletSpeed = 12;
         timeBetweenShots = 0.7f;
@@ -65,5 +64,10 @@ public class SineGun : Weapon {
             if (bulletRefs[i] != null)
                 bulletRefs[i].direction = directionRefs[i].Rotate(Mathf.Sin(2*timeSinceFired/timeBetweenShots * 2*Mathf.PI) * Mathf.Rad2Deg);
         }
+    }
+
+    public override string getName()
+    {
+        return "Wave Gun";
     }
 }

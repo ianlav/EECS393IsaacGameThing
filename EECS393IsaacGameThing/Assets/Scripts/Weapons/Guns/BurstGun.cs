@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BurstGun : Weapon {
     
@@ -43,5 +44,10 @@ public class BurstGun : Weapon {
                 bulletsFired++;
             }
         }
+    }
+
+    public override string getName()
+    {
+        return "Burst Gun";
     }
 }

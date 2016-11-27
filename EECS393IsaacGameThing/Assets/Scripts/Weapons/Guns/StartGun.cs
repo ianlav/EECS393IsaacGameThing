@@ -25,4 +25,9 @@ public class StartGun : Weapon {
             }
         }
     }
+
+    public override string getName()
+    {
+        return "Pistol";
+    }
 }

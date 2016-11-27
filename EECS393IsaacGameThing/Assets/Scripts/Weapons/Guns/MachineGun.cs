@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MachineGun : Weapon {
 
@@ -7,7 +8,6 @@ public class MachineGun : Weapon {
     new void Start ()
     {
         base.Start();
-        desc = "Machine Gun";
         damage = 5;
         timeBetweenShots = 0.05f;
         numProjectiles = bullets.Length;
@@ -25,5 +25,10 @@ public class MachineGun : Weapon {
                 Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
             }
         }
+    }
+
+    public override string getName()
+    {
+        return "Machine Gun";
     }
 }

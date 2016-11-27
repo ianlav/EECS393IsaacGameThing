@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class SpreadGun : Weapon {
 
@@ -9,7 +10,6 @@ public class SpreadGun : Weapon {
     new void Start()
     {
         base.Start();
-        desc = "Spread Gun";
         spreadAngleDegrees = 60;
         numProjectiles = bullets.Length;
         timeBetweenShots = 0.2f;
@@ -39,7 +39,6 @@ public class SpreadGun : Weapon {
         if (timeSinceFired > timeBetweenShots) //controls the fire rate
         {
             timeSinceFired = 0;
-            print("hi");
 
             //create all bullets and rotate to appropriate spread angles
             for (int i=0; i < bullets.Length; i++)
@@ -49,5 +48,10 @@ public class SpreadGun : Weapon {
                 Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
             }
         }
+    }
+
+    public override string getName()
+    {
+        return "Tri Gun";
     }
 }

@@ -10,7 +10,6 @@ public abstract class Weapon : MonoBehaviour {
     public int damage;
     public int numProjectiles;
     public Bullet[] bullets;
-    protected string desc;
 
     protected float timeSinceFired;
     protected float timeBetweenShots;
@@ -35,10 +34,7 @@ public abstract class Weapon : MonoBehaviour {
         player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
     }
 
-    public string getName()
-    {
-        return desc;
-    }
+    public abstract string getName();
 
     protected virtual void Update()
     {
