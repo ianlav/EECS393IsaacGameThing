@@ -5,20 +5,17 @@ This game is for Unity 5.4.1
 ## UI
 - high score display
 - in game displays
-  - score
   - items
-  - health
   - buffs/debuffs/status condition
 
 ## Score calculations
 - ** some definition of score **
+  - running definition is just distance from the start (int cast of player's x value)
   - some score keeping system (public var or such)
 
 ## Enemies
 - **some AI**
   - melee AI
-  - ranged AI
-- health bar
 
 ## Player
 - sprite, animations
@@ -27,12 +24,12 @@ This game is for Unity 5.4.1
 - sprite(s)
 - variety (more weapon types)
 - more bullet types
+- Platform effects
 
 ## Items
 - ** item spawning **
   - consumable
   - immediate
-  - weapon
 - immediate 
   - effect that applies to player immediately
 - consumable
