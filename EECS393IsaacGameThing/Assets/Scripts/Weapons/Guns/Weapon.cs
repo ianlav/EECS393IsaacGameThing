@@ -30,8 +30,9 @@ public abstract class Weapon : MonoBehaviour {
     {
         gameObject.tag = "Weapon";
         gameObject.layer = LayerMask.NameToLayer("Weapon");
-        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1; //should keep gun above player
+        //gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1; //should keep gun above player
         player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
+        bulletOrigin = transform;
     }
 
     public abstract string getName();

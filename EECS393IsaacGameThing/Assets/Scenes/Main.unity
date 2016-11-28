@@ -802,7 +802,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871470730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9, y: -9.01, z: 0}
+  m_LocalPosition: {x: -6.9, y: -1, z: 0}
   m_LocalScale: {x: 1.3899317, y: 36.02137, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -953,6 +953,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b528ee9891060934b8e91a9c375cdf17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1904125886 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012839400618, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2020261048}
+--- !u!114 &1904125892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1904125886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4edecd359ac8748a70eb461c45c2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sine: {fileID: 0}
 --- !u!1 &1945255998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,6 +1100,12 @@ Prefab:
       propertyPath: weapons.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013851160782, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: items.Array.data[0]
+      value: 
+      objectReference: {fileID: 114000012054660870, guid: 3e83871232a49744e871e4b51be04796,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
   m_IsPrefabParent: 0

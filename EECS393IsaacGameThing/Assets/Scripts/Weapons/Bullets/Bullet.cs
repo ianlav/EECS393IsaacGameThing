@@ -8,7 +8,6 @@ public abstract class Bullet : MonoBehaviour {
     public float speed;
     public Vector2 direction;
     public float timeToExist;
-    public bool enemyBullet;
     public bool enemyMode;
     public string effect;
 
@@ -39,6 +38,11 @@ public abstract class Bullet : MonoBehaviour {
                 PlayerMovement player = (PlayerMovement)col.gameObject.GetComponent(typeof(PlayerMovement));
                 if(player != null)
                     hit(player);
+            }
+            else if(col.CompareTag("Bullet"))
+            {
+                Destroy(gameObject);
+                Destroy(col.gameObject);
             }
         }
         else {

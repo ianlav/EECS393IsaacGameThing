@@ -88,9 +88,8 @@ MonoBehaviour:
   damage: 10
   speed: 20
   direction: {x: 0, y: 0}
-  timeToExist: 1
-  enemyBullet: 1
-  enemyMode: 0
+  timeToExist: 4
+  enemyMode: 1
   effect: 
 --- !u!212 &212000011860793660
 SpriteRenderer:

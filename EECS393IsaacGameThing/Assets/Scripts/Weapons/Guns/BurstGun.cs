@@ -13,7 +13,7 @@ public class BurstGun : Weapon {
     {
         base.Start();
         damage = 5;
-        timeBetweenShots = 0.75f;
+        timeBetweenShots = 1.5f;
         timeBetweenBurstBullets = 0.05f;
         numProjectiles = bullets.Length;
     }

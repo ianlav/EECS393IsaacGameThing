@@ -31,6 +31,7 @@ public abstract class Enemy : CharacterModel {
 	public int damage;
 	public int timeBetweenBullets;
 	private int timeSinceLastBullet;
+    private PlayerMovement player;
 
 
 	public virtual void Start() {
@@ -42,6 +43,7 @@ public abstract class Enemy : CharacterModel {
 			bulletVector = new Vector2 (Mathf.Cos (bulletAngle * Mathf.PI/180f)/6.28f*bulletVelocity, 
 				(float)Mathf.Sin (bulletAngle * Mathf.PI/180f)/6.28f*bulletVelocity);
 		}
+        player = FindObjectOfType<PlayerMovement>();
 	}
 
 	protected void Update()
@@ -55,10 +57,9 @@ public abstract class Enemy : CharacterModel {
 		//Figure out how to trigger this less often to save precmoveTowardsPlayerAccelTowmoveRandomAccel + moveRandomAccel + movePatrolAccel > 0) {
 		Vector2 movementVector = rigidEnemy.velocity;
 		Vector2 enemyPos = this.transform.position;
-		Vector2 playerPos = GameObject.Find ("Player").transform.position;
 
-		if (Vector2.Distance (enemyPos, playerPos) < perceptionRange) {
-			rigidEnemy.velocity = MoveEnemy (movementVector, enemyPos, playerPos);
+		if (Vector2.Distance (enemyPos, player.transform.position) < perceptionRange) {
+			rigidEnemy.velocity = MoveEnemy (movementVector, enemyPos, player.transform.position);
 		}
 		FireBullet ();
 	}
@@ -142,8 +143,11 @@ public abstract class Enemy : CharacterModel {
 			if (timeSinceLastBullet >= timeBetweenBullets) {
 				timeSinceLastBullet = 0;
 				Bullet bul = Instantiate (bullets[0], transform.position, rigidEnemy.transform.rotation) as Bullet;
-				bul.speed = 10;
-				bul.direction = bulletVector;
+				bul.speed = 2;
+                if (shootsTowardsPlayer)
+                    bul.direction = getPlayerVector();
+                else
+                    bul.direction = bulletVector;
 				bul.damage = damage;
 				bul.enemyMode = true;
 			} else {
@@ -152,5 +156,10 @@ public abstract class Enemy : CharacterModel {
 		}
 
 	}
+
+    protected Vector2 getPlayerVector()
+    {
+        return player.transform.position - transform.position;
+    }
 
 } 

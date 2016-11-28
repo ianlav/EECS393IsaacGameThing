@@ -3,18 +3,33 @@ using System.Collections.Generic;
 using System;
 
 public class Merge : MonoBehaviour {
-    Dictionary<Type[], Type> table;
+    Dictionary<Type[], Weapon> table;
+    bool isInTestMode = true;
+    PlayerMovement player;
+
+    public SineGun sine;
 
     //populate merge list
     public void Start()
     {
-        table = new Dictionary<Type[], Type>();
+        player = FindObjectOfType<PlayerMovement>();
+        table = new Dictionary<Type[], Weapon>();
         //populate with merge rules
         //addMergeRule(new[]{ typeof(StartGun) }, typeof(SpreadGun)); //<- example
+        addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun) }, sine);
     }
 
-    public bool addMergeRule(Type[] ingredientTypes, Type mergedType)
+    void Update()
     {
+        isInTestMode = false; //if we have called update, we are in the actual game, not an editor test
+    }
+
+    public bool addMergeRule(Type[] ingredientTypes, Weapon mergedType)
+    {
+        if(mergedType == null)
+        {
+            return false;
+        }
         //make sure the table has been initialized
         if (table == null)
             Start();
@@ -23,10 +38,38 @@ public class Merge : MonoBehaviour {
             if (!ingredientTypes[i].IsSubclassOf(typeof(Weapon)))
                 return false;
         }
-        if (!mergedType.IsSubclassOf(typeof(Weapon)))
+        if (!mergedType.GetType().IsSubclassOf(typeof(Weapon)))
             return false;
         //add to merge table
         table.Add(ingredientTypes, mergedType);
+        return true;
+    }
+
+    public bool addMergeRule(Type[] ingredientTypes, Type mergedType)
+    {
+        //make sure the table has been initialized
+        if (table == null)
+            Start();
+        //check to make sure we only add Weapons to the merge table
+        for (int i = 0; i < ingredientTypes.Length; i++)
+        {
+            if (!ingredientTypes[i].IsSubclassOf(typeof(Weapon)))
+                return false;
+        }
+        if (!mergedType.IsSubclassOf(typeof(Weapon)))
+            return false;
+        //add to merge table
+        Weapon wep = null;
+        if (mergedType.IsSubclassOf(typeof(Weapon)))
+        {
+            wep = (new GameObject()).AddComponent(mergedType) as Weapon;
+        }
+        else
+        {
+            return false;
+        }
+
+        table.Add(ingredientTypes, wep);
         return true;
     }
 
@@ -45,7 +88,7 @@ public class Merge : MonoBehaviour {
         int keynum = 0;
         while (enumerator.MoveNext()) {
             keys = enumerator.Current.Key;
-            value = enumerator.Current.Value;
+            value = enumerator.Current.Value.GetType();
             keystring = "[";
             if (keys != null)
                 for (int i=0; i < keys.Length; i++) {
@@ -69,11 +112,10 @@ public class Merge : MonoBehaviour {
     }
 
     //get list of weapons after a possbile merge
-    public Weapon[] mergeIfPossible(Weapon[] weapons)
+    public Weapon[] mergeIfPossible(List<Weapon> listOut)
     {
         var enumerator = table.GetEnumerator();
-        List<Weapon> listIn = new List<Weapon>(weapons);
-        List<Weapon> listOut = new List<Weapon>(weapons);
+        List<Weapon> listIn = new List<Weapon>(listOut);
         List<Weapon> matches = new List<Weapon>();
         //this is really inefficient, O(table<> * tablekey[] * weapons[]) with N storage as well...
         while (enumerator.MoveNext()) {
@@ -88,7 +130,14 @@ public class Merge : MonoBehaviour {
                 }
             }
             if (matches.Count == ingredientTypes.Length) {
-                listOut.Add((Weapon)gameObject.AddComponent(enumerator.Current.Value));
+                if (isInTestMode)
+                {
+                    listOut.Add((Weapon)(new GameObject()).AddComponent(enumerator.Current.Value.GetType()));
+                }
+                else
+                {
+                    listOut.Add(Instantiate(enumerator.Current.Value, player.transform.position, Quaternion.identity, player.transform) as Weapon);
+                }
                 for (int i=0; i < matches.Count; i++)
                     listOut.Remove(matches[i]);
                 break;
@@ -97,5 +146,10 @@ public class Merge : MonoBehaviour {
                 matches.Clear();
         }
         return listOut.ToArray();
+    }
+
+     public Weapon[] mergeIfPossible(Weapon[] listOut)
+    {
+        return mergeIfPossible(new List<Weapon>(listOut));
     }
 }

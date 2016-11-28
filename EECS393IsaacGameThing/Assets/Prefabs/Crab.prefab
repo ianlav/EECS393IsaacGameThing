@@ -102,12 +102,12 @@ MonoBehaviour:
   isCoward: 0
   bullets:
   - {fileID: 114000011087422152, guid: e9872a289a89d674a8c1c47a95525216, type: 2}
-  shootsTowardsPlayer: 0
+  shootsTowardsPlayer: 1
   bulletAngle: 1
   bulletVelocity: 2
   bulletAngleVariation: 2
   damage: 10
-  timeBetweenBullets: 50
+  timeBetweenBullets: 150
 --- !u!212 &212000012187723292
 SpriteRenderer:
   m_ObjectHideFlags: 1
