@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : CharacterModel {
@@ -97,6 +95,21 @@ public class PlayerMovement : CharacterModel {
             contactDamageCounter = 100000;
             takeContactDamage(e);
         }
+		//if it runs into small heal, add 10 hp 
+		if (col.gameObject.CompareTag("SmallHeal")) { 
+			if (hp <= 90) { 
+				hp += 10; 
+			}
+			else { 
+				hp = 100; 
+			}
+		}
+		//if it runs into full heal, restore full hp 
+		if (col.gameObject.CompareTag("FullHeal")) { 
+			if (hp < 100) { 
+				hp = 100; 
+			}
+		}
     }
 
     void OnCollisionStay2D(Collision2D col)
