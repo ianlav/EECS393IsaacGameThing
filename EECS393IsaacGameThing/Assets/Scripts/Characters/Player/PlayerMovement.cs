@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic; 
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : CharacterModel {
