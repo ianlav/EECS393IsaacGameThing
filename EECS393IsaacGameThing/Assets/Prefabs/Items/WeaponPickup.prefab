@@ -23,7 +23,7 @@ GameObject:
   - 61: {fileID: 61000010950252734}
   - 114: {fileID: 114000012054660870}
   m_Layer: 0
-  m_Name: PlaceholderItem
+  m_Name: WeaponPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

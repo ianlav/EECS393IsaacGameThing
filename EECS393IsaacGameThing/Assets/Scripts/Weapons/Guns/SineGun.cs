@@ -14,9 +14,9 @@ public class SineGun : Weapon {
     //initialization
     new void Start () {
         base.Start();
-        damage = 5;
+        damage = 20;
         bulletSpeed = 12;
-        timeBetweenShots = 0.7f;
+        timeBetweenShots = 0.3f;
         bulletTimeToExist = 2;
         timeBetweenBulletPatternUpdates = 0.01f;
 	}

@@ -31,10 +31,7 @@ public class PlayerMovement : CharacterModel {
         if (Input.GetButton("Fire"))
         {
             //if the player has multiple weapons, fire them all
-            foreach (Weapon wep in weapons)
-            {
-                wep.fire();
-            }
+            StartCoroutine(fireWeapons(0.1f));
         }
 
         //just adds a vertical velocity
@@ -71,6 +68,15 @@ public class PlayerMovement : CharacterModel {
         if(transform.position.y < -50)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator fireWeapons(float waitTime)
+    {
+        foreach (Weapon wep in weapons)
+        {
+            wep.fire();
+            yield return new WaitForSeconds(waitTime);
         }
     }
 

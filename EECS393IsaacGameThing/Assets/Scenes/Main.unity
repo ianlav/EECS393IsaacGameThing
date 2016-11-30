@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a9d09f07b744fc5abfd796696ac7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updatesToUpgrade: 500
+  updatesToUpgrade: 20
   maxVelocity: 3
   acceleration: 1
   defense: 5
@@ -1039,6 +1039,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000013851160782, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: items.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 114000010105231926, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
         type: 2}
       propertyPath: weapons.Array.size
@@ -1105,6 +1110,18 @@ Prefab:
       propertyPath: items.Array.data[0]
       value: 
       objectReference: {fileID: 114000012054660870, guid: 3e83871232a49744e871e4b51be04796,
+        type: 2}
+    - target: {fileID: 114000013851160782, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: items.Array.data[1]
+      value: 
+      objectReference: {fileID: 114000010925663016, guid: 7bc5b2cfa938f0c4d9fe09a81dc04585,
+        type: 2}
+    - target: {fileID: 114000013851160782, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: items.Array.data[2]
+      value: 
+      objectReference: {fileID: 114000013122446086, guid: 4b0124315f3fb804b80cdaf5d32dbfe6,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}

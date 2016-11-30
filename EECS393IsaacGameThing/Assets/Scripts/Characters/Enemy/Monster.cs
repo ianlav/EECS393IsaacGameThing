@@ -10,11 +10,14 @@ public class Monster : MonoBehaviour {
 	public float acceleration; //Ability for monster to return to speed when hit. Increases.
 	public float defense; //Modifier for the amount that damage slows down monster. Increases.
 	private Rigidbody2D rigidMonster;
+    private PlayerMovement player;
+    private UIController ui;
 
 	void Start () {
 		rigidMonster = GetComponent<Rigidbody2D>();
         gameObject.tag = "Monster";
-        gameObject.layer = LayerMask.NameToLayer("Monster");
+        player = FindObjectOfType<PlayerMovement>();
+        ui = FindObjectOfType<UIController>();
     }
 
 	public void takeDamage(int damage){
@@ -23,7 +26,7 @@ public class Monster : MonoBehaviour {
 
 	void Update () {
 		if(rigidMonster.velocity.x<maxVelocity){
-			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, 0);
+			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, transform.position.y - player.transform.position.y);
 			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity,0);}
 		}
 		if (updateClock >= updatesToUpgrade) {
@@ -42,9 +45,12 @@ public class Monster : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Player") || col.CompareTag("Floor"))
-            Destroy(col.gameObject);
-		if (col.CompareTag ("Bullet"))
-			rigidMonster.velocity = new Vector2 (rigidMonster.velocity.x - 10 / (1 + defense), 0);
+        if (col.CompareTag("Bullet"))
+        {
+            Bullet bul = col.GetComponent<Bullet>();
+            rigidMonster.velocity = new Vector2(rigidMonster.velocity.x - bul.damage / (1 + defense), 0);
+            ui.thingTookDamage(col.transform.position, (int)(bul.damage / (1 + defense)));
+        }
+        Destroy(col.gameObject);
     }
 }
