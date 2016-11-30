@@ -84,6 +84,7 @@ MonoBehaviour:
   patrolDirectionIsLeft: 0
   flying: 1
   movementDetectsEdges: 0
+  isCoward: 0
   bullets: []
   shootsTowardsPlayer: 0
   bulletAngle: 12

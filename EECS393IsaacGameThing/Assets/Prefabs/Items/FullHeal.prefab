@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000013433514134}
   - 212: {fileID: 212000010693412096}
   - 61: {fileID: 61000010950252734}
+  - 114: {fileID: 114000013122446086}
   m_Layer: 0
   m_Name: FullHeal
   m_TagString: FullHeal
@@ -55,6 +56,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
+--- !u!114 &114000013122446086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010977283544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c821522af5253747b9a61114c98c830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010693412096
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -84,7 +96,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c850052fd9fbc914c8845c29118ed11b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9554381a2e01cc4094d2ae1017eac58, type: 3}
   m_Color: {r: 0.44117647, g: 1, b: 0.44117647, a: 1}
   m_FlipX: 0
   m_FlipY: 0
