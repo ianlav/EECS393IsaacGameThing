@@ -9,12 +9,25 @@ using System;
 
 public class SmallHeal : Item{
 
+    PlayerMovement player;
+
 	new void Start () {
         base.Start();
+        player = FindObjectOfType<PlayerMovement>();
 	}
 
 	new void Update () {
         base.Update();
 	}
+
+    protected override void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            player.hp += 10;
+            Destroy(gameObject);
+            ui.displayPopUpText("+10", player.transform.position);
+        }
+    }
 
 }

@@ -20,7 +20,7 @@ public class MachineGun : Weapon {
             timeSinceFired = 0;
             for (int i = 0; i < bullets.Length; i++)
             {
-                bullets[i].direction = aimVector;
+                bullets[i].direction = aimVector + new Vector2(UnityEngine.Random.Range(0, 0.5f), UnityEngine.Random.Range(0, 0.5f));
                 bullets[i].damage = damage;
                 Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
             }
