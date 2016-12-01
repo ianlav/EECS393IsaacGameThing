@@ -28,7 +28,6 @@ public class Platform : MonoBehaviour {
         {
             maker.makeRandomPlatformInRange();
             exitedTrigger = true;
-            //Destroy(gameObject, 3);
         }
     }
 

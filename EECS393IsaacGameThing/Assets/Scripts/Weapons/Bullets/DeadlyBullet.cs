@@ -6,7 +6,7 @@ public class DeadlyBullet : Bullet {
     new void Start()
     {
         base.Start();
-        damage = 100;
+        damage = 200;
         speed = 25;
     }
 
@@ -14,13 +14,15 @@ public class DeadlyBullet : Bullet {
     {
         enemy.takeDamage(100);
         Destroy(enemy.gameObject);
-        Destroy(gameObject);
     }
 
     public override void hit(PlayerMovement enemy)
     {
         enemy.takeDamage(100);
         Destroy(enemy.gameObject);
-        Destroy(gameObject);
+    }
+
+    public override void hit(Platform platform)
+    {
     }
 }

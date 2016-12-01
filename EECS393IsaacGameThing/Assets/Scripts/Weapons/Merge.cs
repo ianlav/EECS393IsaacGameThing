@@ -8,6 +8,7 @@ public class Merge : MonoBehaviour {
     PlayerMovement player;
 
     public SineGun sine;
+    public StartGun BFG;
 
     //populate merge list
     public void Start()
@@ -16,6 +17,7 @@ public class Merge : MonoBehaviour {
         table = new Dictionary<Type[], Weapon>();
         //populate with merge rules
         //addMergeRule(new[]{ typeof(StartGun) }, typeof(SpreadGun)); //<- example
+        addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun), typeof(SineGun), typeof(BurstGun), typeof(LaserGun), typeof(StartGun) }, BFG);
         addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun) }, sine);
     }
 

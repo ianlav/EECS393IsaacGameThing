@@ -61,6 +61,12 @@ public abstract class Bullet : MonoBehaviour {
         }
     }
 
+    public virtual void hit(Bullet bul)
+    {
+        Destroy(bul.gameObject);
+        Destroy(gameObject);
+    }
+
     public virtual void hit(PlayerMovement player)
     {
         player.takeDamage(damage);

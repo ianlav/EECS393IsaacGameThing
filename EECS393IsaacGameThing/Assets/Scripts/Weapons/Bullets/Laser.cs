@@ -21,4 +21,14 @@ public class Laser : Bullet {
     public override void hit(Platform platform)
     {
     }
+
+    public override void hit(Bullet bul)
+    {
+        Destroy(bul.gameObject);
+    }
+
+    public override void hit(Enemy enemy)
+    {
+        enemy.takeDamage(damage);
+    }
 }

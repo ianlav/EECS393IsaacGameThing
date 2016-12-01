@@ -41,7 +41,7 @@ public class Monster : MonoBehaviour {
 	void UpgradeMonster(){
         maxVelocity += 0.5f;
 		acceleration += 0.1f;
-		defense += 1f;
+		defense += 0.5f;
 	}
 
     void OnTriggerEnter2D(Collider2D col)
