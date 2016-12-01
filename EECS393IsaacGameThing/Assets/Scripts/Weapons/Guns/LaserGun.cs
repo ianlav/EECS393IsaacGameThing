@@ -13,8 +13,17 @@ public class LaserGun : Weapon {
 
     public override void fire()
     {
-        //not implemented
-        //should fire 1 long bullet that pierces
+        if (timeSinceFired > timeBetweenShots) //controls the fire rate
+        {
+            timeSinceFired = 0;
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                bullets[i].direction = aimVector;
+                bullets[i].damage = damage;
+                Bullet bul = Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation) as Bullet;
+                bul.transform.rotation = transform.rotation;
+            }
+        }
     }
 
     public override string getName()

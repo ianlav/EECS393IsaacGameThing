@@ -8,6 +8,8 @@ public class Platform : MonoBehaviour {
     public Transform leftSide, rightSide; //each platform needs these. They identify the left and right sides of the platform
 	public EnemyMaker enemyMaker;
 
+    bool exitedTrigger = false;
+
 	// Use this for initialization
 	void Start () {
         maker = FindObjectOfType<PlatformMaker>();
@@ -25,7 +27,14 @@ public class Platform : MonoBehaviour {
         if(col.CompareTag("LevelTrigger"))
         {
             maker.makeRandomPlatformInRange();
+            exitedTrigger = true;
             //Destroy(gameObject, 3);
         }
+    }
+
+    void OnDestroy()
+    {
+        if(!exitedTrigger)
+            maker.makeRandomPlatformInRange();
     }
 }

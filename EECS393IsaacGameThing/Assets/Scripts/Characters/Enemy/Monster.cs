@@ -26,9 +26,10 @@ public class Monster : MonoBehaviour {
 
 	void Update () {
 		if(rigidMonster.velocity.x<maxVelocity){
-			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, transform.position.y - player.transform.position.y);
-			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity,0);}
+			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, rigidMonster.velocity.y);
+			if(rigidMonster.velocity.x > maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity, rigidMonster.velocity.y);}
 		}
+        rigidMonster.velocity = new Vector2(rigidMonster.velocity.x, player.transform.position.y - transform.position.y); //keeps the monster on the same y plane
 		if (updateClock >= updatesToUpgrade) {
 			updateClock = 0;
 			UpgradeMonster ();
@@ -51,6 +52,7 @@ public class Monster : MonoBehaviour {
             rigidMonster.velocity = new Vector2(rigidMonster.velocity.x - bul.damage / (1 + defense), 0);
             ui.thingTookDamage(col.transform.position, (int)(bul.damage / (1 + defense)));
         }
-        Destroy(col.gameObject);
+        if(!col.CompareTag("LevelTrigger"))
+            Destroy(col.gameObject);
     }
 }
