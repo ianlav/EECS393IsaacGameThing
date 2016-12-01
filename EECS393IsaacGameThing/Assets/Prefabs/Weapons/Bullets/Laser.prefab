@@ -21,8 +21,8 @@ GameObject:
   - 4: {fileID: 4000013674926540}
   - 50: {fileID: 50000011562712432}
   - 212: {fileID: 212000011860793660}
-  - 61: {fileID: 61000010910476304}
   - 114: {fileID: 114000010450216480}
+  - 61: {fileID: 61000010842784110}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Bullet
@@ -37,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011232728628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.1416945, y: 0.5739704, z: 0}
-  m_LocalScale: {x: 5, y: 0.1, z: 0.7}
+  m_LocalPosition: {x: 7.460682, y: -1.3861806, z: 0}
+  m_LocalScale: {x: 10, y: 0.1, z: 0.7}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,7 +60,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61000010910476304
+--- !u!61 &61000010842784110
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -69,11 +69,11 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.0039134026, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9644103, y: 0.84178865}
+  m_Size: {x: 0.32, y: 0.32}
 --- !u!114 &114000010450216480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   speed: 0
-  direction: {x: 5.786667, y: -3.629984}
+  direction: {x: 3.5570717, y: 10.63512}
   timeToExist: 0
   enemyMode: 0
   effect: 
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 10a4fa8272ffa4886ad9c7c07bfaf99c, type: 3}
-  m_Color: {r: 0.8235294, g: 0.14532872, b: 0.14532872, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6b9ca87124ad9744cbb7c2c4d76eca74, type: 3}
+  m_Color: {r: 1, g: 0.6102941, b: 0.6102941, a: 1}
   m_FlipX: 0
   m_FlipY: 0
