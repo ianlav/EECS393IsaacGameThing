@@ -31,6 +31,11 @@ public class PlatformMaker : MonoBehaviour {
         makeRandomPlatformInRange();
     }
 
+    void Update()
+    {
+        transform.position = player.transform.position;
+    }
+
     public void makeRandomPlatformInRange()
     {
         Vector2 pos = model.getPositionInRange(maxDistX, minDistX, maxDistY, minDistY);

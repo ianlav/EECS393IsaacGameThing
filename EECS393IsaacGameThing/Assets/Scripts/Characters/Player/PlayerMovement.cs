@@ -92,7 +92,7 @@ public class PlayerMovement : CharacterModel {
 			print ("MONSTER COLLISION!");
             Destroy(gameObject);
         }
-        //if it runs into an enemy, destroy it
+        //if it runs into an enemy, take damage it
         if (col.gameObject.CompareTag("Enemy"))
         {
             print(col.collider.bounds.max.y + " " + col.contacts[0].point.y);
@@ -105,10 +105,31 @@ public class PlayerMovement : CharacterModel {
         }
     }
 
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            print("ENEMY COLLISION!");
+            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+            contactDamageCounter = 100000; //arbitrary number to ensure the first time an enemy touches the player, player takes damage
+            takeContactDamage(e);
+        }
+    }
+
     void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Enemy"))
         {
+            Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
+            takeContactDamage(e);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            print("ENEMY COLLISION! " + col.name);
             Enemy e = (Enemy)col.gameObject.GetComponent(typeof(Enemy));
             takeContactDamage(e);
         }
