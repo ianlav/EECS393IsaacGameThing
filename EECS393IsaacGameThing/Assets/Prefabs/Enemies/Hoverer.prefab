@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1000014109156188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.862488, y: -1.6662959, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,10 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590eea7005fda4530b8e3e0a9908fd77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 50
   cost: 10
   maxSpeed: 3
-  baseDamage: 15
+  baseDamage: 5
   maker: {fileID: 0}
   perceptionRange: 10
   moveRandomAccel: 0
