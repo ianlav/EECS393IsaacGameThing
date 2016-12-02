@@ -1379,9 +1379,11 @@ MonoBehaviour:
   enemyTypes:
   - {fileID: 114000013862358042, guid: 70747fe60afd7485192d3de368257cd5, type: 2}
   - {fileID: 114000013862358042, guid: 70747fe60afd7485192d3de368257cd5, type: 2}
+  - {fileID: 114000011651282758, guid: afe961417372b44148b64917d1b64a04, type: 2}
   - {fileID: 114000013862358042, guid: 70747fe60afd7485192d3de368257cd5, type: 2}
-  - {fileID: 114000013862358042, guid: 70747fe60afd7485192d3de368257cd5, type: 2}
-  - {fileID: 114000013862358042, guid: 70747fe60afd7485192d3de368257cd5, type: 2}
+  - {fileID: 114000010880368550, guid: b9df9b5a1c9ee4b5fb5e0fccf73e986c, type: 2}
+  - {fileID: 114000012453996436, guid: 0e9c8856971f04dd0aae060fbc855bab, type: 2}
+  - {fileID: 114000010891438658, guid: 1e19c8c1bdb104489b932952de67ffd8, type: 2}
   - {fileID: 114000011373213716, guid: f3661ad87df994e86a1e72dffea6d616, type: 2}
   extantEnemies: []
 --- !u!114 &1904125890
