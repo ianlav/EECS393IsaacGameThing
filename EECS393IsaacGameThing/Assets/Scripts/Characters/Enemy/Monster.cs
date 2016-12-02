@@ -49,8 +49,10 @@ public class Monster : MonoBehaviour {
         if (col.CompareTag("Bullet"))
         {
             Bullet bul = col.GetComponent<Bullet>();
-            rigidMonster.velocity = new Vector2(rigidMonster.velocity.x - bul.damage / (1 + defense), 0);
-            ui.thingTookDamage(col.transform.position, (int)(bul.damage / (1 + defense)));
+			if (!bul.enemyMode) {
+				rigidMonster.velocity = new Vector2 (rigidMonster.velocity.x - bul.damage / (1 + defense), 0);
+				ui.thingTookDamage (col.transform.position, (int)(bul.damage / (1 + defense)));
+			}
         }
         if(!col.CompareTag("LevelTrigger"))
             Destroy(col.gameObject);
