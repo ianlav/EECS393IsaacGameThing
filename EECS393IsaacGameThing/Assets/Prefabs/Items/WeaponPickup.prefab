@@ -70,8 +70,9 @@ MonoBehaviour:
   weps:
   - {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9, type: 2}
   - {fileID: 114000011041003830, guid: 5699abd4ba082d54c91ebe81d6c8c09f, type: 2}
-  - {fileID: 114000014165105272, guid: 60dd685ee2c575246acd873d38c690a9, type: 2}
   - {fileID: 114000014038007372, guid: 1c5940e049822e942a5ff3208c6ef653, type: 2}
+  - {fileID: 114000014165105272, guid: 60dd685ee2c575246acd873d38c690a9, type: 2}
+  - {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9, type: 2}
 --- !u!212 &212000010693412096
 SpriteRenderer:
   m_ObjectHideFlags: 1

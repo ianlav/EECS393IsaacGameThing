@@ -14,7 +14,6 @@ public class PersistentBullet : Bullet {
     //default enemy hit: damage enemy
     public override void hit(Enemy enemy)
     {
-        print("here");
         enemy.applyEffect(effect);
         enemy.takeDamage(damage);
     }

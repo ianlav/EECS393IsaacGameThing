@@ -17,8 +17,8 @@ public class Merge : MonoBehaviour {
         table = new Dictionary<Type[], Weapon>();
         //populate with merge rules
         //addMergeRule(new[]{ typeof(StartGun) }, typeof(SpreadGun)); //<- example
-        addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun), typeof(SineGun), typeof(BurstGun), typeof(LaserGun), typeof(StartGun) }, BFG);
-        addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun) }, sine);
+        print(addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun), typeof(SineGun), typeof(BurstGun), typeof(LaserGun), typeof(StartGun) }, BFG));
+        print(addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun) }, sine));
     }
 
     void Update()
@@ -117,10 +117,12 @@ public class Merge : MonoBehaviour {
     public Weapon[] mergeIfPossible(List<Weapon> listOut)
     {
         var enumerator = table.GetEnumerator();
-        List<Weapon> listIn = new List<Weapon>(listOut);
         List<Weapon> matches = new List<Weapon>();
         //this is really inefficient, O(table<> * tablekey[] * weapons[]) with N storage as well...
+        print("length: " + table.Count);
         while (enumerator.MoveNext()) {
+            List<Weapon> listIn = new List<Weapon>(listOut);
+            print("hi");
             Type[] ingredientTypes = (Type[])enumerator.Current.Key.Clone();
             for (int i=0; i < ingredientTypes.Length; i++) {
                 for (int w=0; w < listIn.Count; w++) {
@@ -131,7 +133,9 @@ public class Merge : MonoBehaviour {
                     }
                 }
             }
+            print("hiya");
             if (matches.Count == ingredientTypes.Length) {
+                print("here");
                 if (isInTestMode)
                 {
                     listOut.Add((Weapon)(new GameObject()).AddComponent(enumerator.Current.Value.GetType()));
@@ -146,6 +150,7 @@ public class Merge : MonoBehaviour {
             }
             else if (matches.Count > 0)
                 matches.Clear();
+            print("hey");
         }
         return listOut.ToArray();
     }
