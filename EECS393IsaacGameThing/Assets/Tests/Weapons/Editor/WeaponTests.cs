@@ -19,6 +19,12 @@ public class WeaponTests {
         listOut = merge.mergeIfPossible(listIn);
         Assert.AreEqual(listOut[0].GetType(), typeof(SpreadGun));
 
+        //test for 1->1 merging with alternate method
+        Assert.IsTrue(merge.addMergeRule(new[] { typeof(StartGun) }, gameObject.AddComponent<SpreadGun>()));
+        listIn = new Weapon[] { gameObject.AddComponent<StartGun>() };
+        listOut = merge.mergeIfPossible(listIn);
+        Assert.AreEqual(listOut[0].GetType(), typeof(SpreadGun));
+
         //test for 2->1 merging
         merge.clearMergeRules();
         Assert.IsTrue(merge.addMergeRule(new[]{ typeof(StartGun), typeof(SpreadGun) }, typeof(LaserGun)));

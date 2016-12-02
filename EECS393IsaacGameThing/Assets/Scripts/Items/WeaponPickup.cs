@@ -22,8 +22,23 @@ public class WeaponPickup : Item {
             Weapon made = Instantiate(wep, player.transform.position, Quaternion.identity, player.transform) as Weapon;
             ui.displayPopUpText(made.getName(), transform.position);
             player.weapons.Add(made);
-            merger.mergeIfPossible(player.weapons);
-            //print(wepArray);
+
+            string wepstring = "weapons start: {";
+            foreach (Weapon w in player.weapons)
+                wepstring += w.getName() + ",";
+            wepstring += "}";
+            print(wepstring);
+
+            merger.printTable();
+            
+            player.weapons = merger.mergeIfPossible(player.weapons);
+
+            wepstring = "weapons end: {";
+            foreach (Weapon w in player.weapons)
+                wepstring += w.getName() + ",";
+            wepstring += "}";
+            print(wepstring);
+
             Destroy(gameObject);
         }
     }

@@ -13,9 +13,9 @@ public class ScoringTest {
 	{
         Scoring.clearRecords();
         ReadOnlyCollection<Scoring.ScoreRecord> scores;
-        Scoring.ScoreRecord r1 = new Scoring.ScoreRecord("test 1", "9/21/2112", 1111.111);
-        Scoring.ScoreRecord r2 = new Scoring.ScoreRecord("test 2", "9/22/2112", 2222.222);
-        Scoring.ScoreRecord r3 = new Scoring.ScoreRecord("test 3", "9/23/2112", 3333.333);
+        Scoring.ScoreRecord r1 = new Scoring.ScoreRecord("test 1", "9/21/2112", 1111);
+        Scoring.ScoreRecord r2 = new Scoring.ScoreRecord("test 2", "9/22/2112", 2222);
+        Scoring.ScoreRecord r3 = new Scoring.ScoreRecord("test 3", "9/23/2112", 3333);
         Scoring.AddRecords(r1, r2, r3); //write r1..r3 to local score list
         //check if local variables are equal
         scores = Scoring.GetScores();

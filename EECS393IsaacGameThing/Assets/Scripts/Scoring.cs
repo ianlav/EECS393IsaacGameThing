@@ -13,8 +13,8 @@ public static class Scoring {
     public class ScoreRecord {
         public string name;
         public string date;
-        public double score;
-        public ScoreRecord(string name, string date, double score){
+        public int score;
+        public ScoreRecord(string name, string date, int score){
             this.name = name;
             this.date = date;
             this.score = score;
@@ -35,6 +35,10 @@ public static class Scoring {
         }
     }
 
+    public static void sortRecords(){
+        scoreList.Sort((a, b) => b.score.CompareTo(a.score)); //sort greatest -> least
+    }
+
     public static void clearRecords() {
         scoreList.Clear();
     }
@@ -43,7 +47,7 @@ public static class Scoring {
         scoreList.Add(record);
     }
 
-    public static void AddRecord(string name, string date, double score){
+    public static void AddRecord(string name, string date, int score){
         ScoreRecord r = new ScoreRecord(name, date, score);
         scoreList.Add(r);
     }
@@ -64,10 +68,11 @@ public static class Scoring {
                     tokens = savedScores[i].Split(new[] { DELIMITER }, StringSplitOptions.None);
                     if (tokens.Length == 3)
                     {
-                        AddRecord(tokens[0], tokens[1], double.Parse(tokens[2],
+                        AddRecord(tokens[0], tokens[1], (int)double.Parse(tokens[2],
                             System.Globalization.CultureInfo.InvariantCulture));
                     }
                 }
+                sortRecords();
                 return true;
             }
         } catch (Exception e){
@@ -80,6 +85,7 @@ public static class Scoring {
         try{
             //if (!File.Exists(FILEPATH))
             //    File.Create(FILEPATH);
+            sortRecords();
             string[] allLines = new string[scoreList.Count];
             for (int i= 0; i < scoreList.Count; i++)
             {

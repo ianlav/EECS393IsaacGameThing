@@ -13,6 +13,8 @@ public class ScoreController : MonoBehaviour {
 	void Start () {
 		scoreDisplay = GetComponent<Text>();
 		scoreDisplay.text = "Score: " + currentScore;
+        //load score records from file
+        Scoring.ReadScores();
 	}
 	
 	// Update is called once per frame
