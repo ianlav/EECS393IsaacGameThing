@@ -53,8 +53,8 @@ public class PlatformMaker : MonoBehaviour {
     void makePlatform(Platform plat, Vector2 pos)
     {
         Vector2 offsetPos = pos - (Vector2)plat.leftSide.position + (Vector2)plat.transform.position;//the set position, offset by the distance between the left side and center. Because localPosition wont give me that. Also offset up one unit so we dont spawn them in the platform
-        newestPlatform = Instantiate(plat, 
-            offsetPos
+        newestPlatform = Instantiate(plat,
+            offsetPos - new Vector2(0, 1)
             , Quaternion.identity) as Platform;
 		enemyMaker.makeRandomEnemy (plat, pos);
         itemMaker.maybeSpawnItem(offsetPos + new Vector2(0,1));
