@@ -22,6 +22,8 @@ GameObject:
   - 212: {fileID: 212000011537875446}
   - 61: {fileID: 61000012522931662}
   - 114: {fileID: 114000010146496276}
+  - 58: {fileID: 58000013192893858}
+  - 58: {fileID: 58000013587995992}
   m_Layer: 0
   m_Name: Icy Floor
   m_TagString: Platform
@@ -100,6 +102,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000010541615282}
   m_RootOrder: 0
+--- !u!58 &58000013192893858
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011731451382}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.15, y: -0.1}
+  serializedVersion: 2
+  m_Radius: 0.015311683
+--- !u!58 &58000013587995992
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011731451382}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.15, y: -0.1}
+  serializedVersion: 2
+  m_Radius: 0.015311683
 --- !u!61 &61000012522931662
 BoxCollider2D:
   m_ObjectHideFlags: 1
