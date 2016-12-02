@@ -56,6 +56,7 @@ public class PlatformMaker : MonoBehaviour {
         newestPlatform = Instantiate(plat,
             offsetPos - new Vector2(0, 1)
             , Quaternion.identity) as Platform;
+        player.curPlatY = offsetPos.y - 1;
 		enemyMaker.makeRandomEnemy (plat, pos);
         itemMaker.maybeSpawnItem(offsetPos + new Vector2(0,1));
     }

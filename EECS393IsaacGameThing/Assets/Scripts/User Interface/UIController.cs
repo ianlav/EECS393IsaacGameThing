@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Return))
+        if(Input.GetKey(KeyCode.Return) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             Time.timeScale = 1;
         }

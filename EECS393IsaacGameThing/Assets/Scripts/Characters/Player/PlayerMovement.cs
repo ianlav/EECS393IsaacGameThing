@@ -12,6 +12,7 @@ public class PlayerMovement : CharacterModel {
     public float jumpSpeed;
     public List<Weapon> weapons;
     public float contactDamageRate;
+    public float curPlatY = 0;
 
     private Rigidbody2D rigid;
     private bool isJumping = true;
@@ -65,7 +66,7 @@ public class PlayerMovement : CharacterModel {
 
         ScoreController.setCurrentScore(Mathf.Max((int)transform.position.x, ScoreController.getCurrentScore()));
 
-        if(transform.position.y < -50)
+        if(transform.position.y < curPlatY - 20)
         {
             Destroy(gameObject);
         }
