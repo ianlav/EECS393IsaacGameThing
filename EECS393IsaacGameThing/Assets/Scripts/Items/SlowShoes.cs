@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class SlowShoes : Item { 
 
+	PlayerMovement player; 
+
 	new void Start () {
         base.Start();
 	}
@@ -15,22 +17,22 @@ public class SlowShoes : Item {
         base.Update();
 	}
 	
-	void OnCollisionEnter2D(Collision2D col) {
+	protected override void OnTriggerEnter2D(Collider2D col) { 
 	
 		if (col.CompareTag("Player")) { 
-			private float endTime = Time.time + 10; 
-			private float slowHorizontalSpeed = PlayerMovement.horizontalSpeed*0.5; 
-			private float slowJumpSpeed = PlayerMovement.jumpSpeed*0.5; 
-			private float originalHorizontalSpeed = PlayerMovement.horizontalSpeed; 
-			private float originalJumpSpeed = PlayerMovement.jumpSpeed; 
+			float endTime = Time.time + 10; 
+			double slowHorizontalSpeed = (double)player.horizontalSpeed*0.5; 
+			double slowJumpSpeed = (double)player.jumpSpeed*0.5; 
+			float originalHorizontalSpeed = player.horizontalSpeed; 
+			float originalJumpSpeed = player.jumpSpeed; 
 			
 			if (Time.time <= endTime) { 
-				PlayerMovement.horizontalSpeed = slowHorizontalSpeed; 
-				PlayerMovement.jumpSpeed = slowJumpSpeed; 
+				player.horizontalSpeed = (float)slowHorizontalSpeed; 
+				player.jumpSpeed = (float)slowJumpSpeed; 
 			} 
 			
-			PlayerMovement.horizontalSpeed = originalHorizontalSpeed; 
-			PlayerMovement.jumpSpeed = originalJumpSpeed; 
+			player.horizontalSpeed = originalHorizontalSpeed; 
+			player.jumpSpeed = originalJumpSpeed; 
 		}
 	
 	}

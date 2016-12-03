@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic; 
 
 public class FastShoes : Item { 
+
+	PlayerMovement player;
 	
 	new void Start () {
         base.Start();
@@ -18,19 +20,19 @@ public class FastShoes : Item {
 	protected override void OnTriggerEnter2D(Collider2D col) { 
 		
 		if (col.CompareTag("Player")) { 
-			private float endTime = Time.time + 10; 
-			private float fastHorizontalSpeed = PlayerMovement.horizontalSpeed*1.5; 
-			private float fastJumpSpeed = PlayerMovement.jumpSpeed*1.5; 
-			private float originalHorizontalSpeed = PlayerMovement.horizontalSpeed; 
-			private float originalJumpSpeed = PlayerMovement.jumpSpeed; 
+			float endTime = Time.time + 10; 
+			double fastHorizontalSpeed = (double)player.horizontalSpeed*1.5; 
+			double fastJumpSpeed = (double)player.jumpSpeed*1.5; 
+			float originalHorizontalSpeed = player.horizontalSpeed; 
+			float originalJumpSpeed = player.jumpSpeed; 
 			
 			if (Time.time <= endTime) { 
-				PlayerMovement.horizontalSpeed = fastHorizontalSpeed; 
-				PlayerMovement.jumpSpeed = fastJumpSpeed; 
+				player.horizontalSpeed = (float)fastHorizontalSpeed; 
+				player.jumpSpeed = (float)fastJumpSpeed; 
 			} 
 			
-			PlayerMovement.horizontalSpeed = originalHorizontalSpeed; 
-			PlayerMovement.jumpSpeed = originalJumpSpeed; 
+			player.horizontalSpeed = originalHorizontalSpeed; 
+			player.jumpSpeed = originalJumpSpeed; 
 		}
 		
 	} 
