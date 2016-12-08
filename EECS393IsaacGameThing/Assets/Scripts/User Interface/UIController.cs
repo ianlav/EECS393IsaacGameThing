@@ -7,6 +7,11 @@ public class UIController : MonoBehaviour {
 
     public Text text;
 
+	void Awake()
+	{
+		Screen.SetResolution( 1024, 440, false );
+	}
+
     void Update()
     {
         if(Input.GetKey(KeyCode.Return) || Input.GetKeyDown(KeyCode.Mouse0))
