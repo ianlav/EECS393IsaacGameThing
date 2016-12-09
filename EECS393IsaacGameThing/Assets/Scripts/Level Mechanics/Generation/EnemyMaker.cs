@@ -6,7 +6,7 @@ using System.Linq;
 
 public class EnemyMaker : MonoBehaviour {
 
-	public static int maxEnemyCost = 10; //Total number of monster "points" available. Threat correlates to cost
+	public static int maxEnemyCost = 20; //Total number of monster "points" available. Threat correlates to cost
 	public static int currentEnemyCost = 0; //Total point worth of monsters currently spawned
 	public static int updateTime = 50; //Frames before maxEnemyCost goes up
 	public Enemy newestEnemy;

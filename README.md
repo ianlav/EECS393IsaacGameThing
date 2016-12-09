@@ -3,12 +3,13 @@
 
 
 ##What is it?
--A sidescrolling shooter with random level generation
--A wildly expandable platform with easy-to-build enemies, weapons, etc
--An experiment in modular design with an eye towards future expansion
--An attempt to bring the idea of mod-friendliness to a new genre
--A surprisingly fun and challenging infinite runner
--Our 393 final project!
+
+- A sidescrolling shooter with random level generation
+- A wildly expandable platform with easy-to-build enemies, weapons, etc
+- An experiment in modular design with an eye towards future expansion
+- An attempt to bring the idea of mod-friendliness to a new genre
+- A surprisingly fun and challenging infinite runner
+- Our 393 final project!
 
 ##Version Information
 You can find our version/github at https://github.com/ianlav/EECS393IsaacGameThing. 
@@ -33,15 +34,11 @@ the right as possible.
 There is no ultimate endgame, just get as far as you can and score as many points as possible.
 Some tips:
 
--Shoot at the big, angry monster on your left. It'll drive it backwards.
-
--Score is based on distance, not kills, so don't waste time killing enemies
-
--The monster on the left gets faster and stronger, make sure you're picking up new guns to fight it
-
--The normal monsters get tougher, too.
-
--Watch out for platform effects or enemy bullets with effects attached!
+- Shoot at the big, angry monster on your left. It'll drive it backwards.
+- Score is based on distance, not kills, so don't waste time killing enemies
+- The monster on the left gets faster and stronger, make sure you're picking up new guns to fight it
+- The normal monsters get tougher, too.
+- Watch out for platform effects or enemy bullets with effects attached!
 
 
 ##Planned Features
