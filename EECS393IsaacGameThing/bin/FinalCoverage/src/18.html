@@ -28,6 +28,7 @@ public class PlayerMovement : CharacterModel {
     private bool isJumping = true;
 	private CharacterModel character;
     private float contactDamageCounter = 0;
+	private int slowClock = 0; //Future idea: list of clocks so people can add more.
 
 	// Use this for initialization
 	new void Start () {
@@ -67,11 +68,17 @@ public class PlayerMovement : CharacterModel {
     void FixedUpdate()
     {
         //basic lateral movement. Linsearly interpolates the velocity between current and intended velocity.
+		float modifier = 0f;
+		if (slowClock&gt;0){
+			modifier -= 2f;
+			slowClock -= 1;
+		}
+
         if(Input.GetButton(&quot;MoveLeft&quot;))
         {
-            rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, -horizontalSpeed, horizontalAccel), rigid.velocity.y);
+            rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, -horizontalSpeed-modifier, horizontalAccel), rigid.velocity.y);
         } else if (Input.GetButton(&quot;MoveRight&quot;)) {
-            rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, horizontalSpeed, horizontalAccel), rigid.velocity.y);
+            rigid.velocity = new Vector2(Mathf.Lerp(rigid.velocity.x, horizontalSpeed+modifier, horizontalAccel), rigid.velocity.y);
         }
 
         ScoreController.setCurrentScore(Mathf.Max((int)transform.position.x, ScoreController.getCurrentScore()));
@@ -155,6 +162,12 @@ public class PlayerMovement : CharacterModel {
         }
         contactDamageCounter += Time.deltaTime;
     }
+
+	public void applyEffect(string effect){
+		if(effect.Equals(&quot;Slow&quot;)){
+			this.slowClock=100; //Slow player for 100 frames
+		}
+	}
 
     void OnDestroy()
     {
