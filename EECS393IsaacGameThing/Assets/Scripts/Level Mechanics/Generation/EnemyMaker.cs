@@ -6,11 +6,13 @@ using System.Linq;
 
 public class EnemyMaker : MonoBehaviour {
 
-	public static int maxEnemyCost = 10000; //Total number of monster "points" available. Threat correlates to cost
+	public static int maxEnemyCost = 10; //Total number of monster "points" available. Threat correlates to cost
 	public static int currentEnemyCost = 0; //Total point worth of monsters currently spawned
+	public static int updateTime = 50; //Frames before maxEnemyCost goes up
 	public Enemy newestEnemy;
 	public Enemy[] enemyTypes;
 	public List<Enemy> extantEnemies;
+	private float updateTimeCounter = 0f;
 
 	public void Start()
 	{	
@@ -23,6 +25,15 @@ public class EnemyMaker : MonoBehaviour {
 		for(int i = 0; i < enemyTypes.Length; i++) {
 			enemyTemplates[i]= (Enemy)Activator.CreateInstance(enemyTypes[i]);
 		}*/
+	}
+
+	public void Update()
+	{
+		updateTimeCounter += Time.deltaTime;
+		if (updateTimeCounter >= updateTime) {
+			maxEnemyCost += 1;
+			updateTimeCounter = 0;
+		}
 	}
 
 	public bool makeRandomEnemy(Platform plat, Vector2 pos)

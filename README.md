@@ -11,7 +11,7 @@
 -Our 393 final project!
 
 ##Version Information
-You can find our github at https://github.com/ianlav/EECS393IsaacGameThing. 
+You can find our version/github at https://github.com/ianlav/EECS393IsaacGameThing. 
 This game version was built in Unity 5.4.1 and developed especially for Windows, though it
 should run on other OS's as well.
 
@@ -72,5 +72,5 @@ Some tips:
 - consumable
   - effects that can be used by the player
 
-## Platforms
+### Platforms
 - multiple sizes

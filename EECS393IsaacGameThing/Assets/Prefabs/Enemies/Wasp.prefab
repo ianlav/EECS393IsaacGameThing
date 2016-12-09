@@ -86,11 +86,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 10
-  cost: 6
+  cost: 7
   maxSpeed: 3
   baseDamage: 15
   maker: {fileID: 0}
-  perceptionRange: 10
+  perceptionRange: 5
   moveRandomAccel: 0
   randomVelocityX: 0
   randomVelocityY: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   movementDetectsEdges: 0
   isCoward: 1
   bullets:
-  - {fileID: 114000011087422152, guid: e9872a289a89d674a8c1c47a95525216, type: 2}
+  - {fileID: 114000011406816390, guid: 7aaadd0b83b7b48db963951eb343cc87, type: 2}
   shootsTowardsPlayer: 1
   bulletAngle: 0
   bulletVelocity: 1
