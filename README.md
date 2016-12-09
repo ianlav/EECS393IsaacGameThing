@@ -32,11 +32,17 @@ the right as possible.
 ##How to Win
 There is no ultimate endgame, just get as far as you can and score as many points as possible.
 Some tips:
+
 -Shoot at the big, angry monster on your left. It'll drive it backwards.
+
 -Score is based on distance, not kills, so don't waste time killing enemies
+
 -The monster on the left gets faster and stronger, make sure you're picking up new guns to fight it
+
 -The normal monsters get tougher, too.
+
 -Watch out for platform effects or enemy bullets with effects attached!
+
 
 ##Planned Features
 
