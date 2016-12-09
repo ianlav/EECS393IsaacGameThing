@@ -23,7 +23,7 @@ GameObject:
   - 61: {fileID: 61000010950252734}
   - 114: {fileID: 114000013122446086}
   m_Layer: 0
-  m_Name: FullHeal
+  m_Name: FastShoes
   m_TagString: FullHeal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

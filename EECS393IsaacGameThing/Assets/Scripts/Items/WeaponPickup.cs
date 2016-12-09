@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WeaponPickup : Item {
 
@@ -28,10 +29,15 @@ public class WeaponPickup : Item {
                 wepstring += w.getName() + ",";
             wepstring += "}";
             print(wepstring);
-
             merger.printTable();
             
-            player.weapons = merger.mergeIfPossible(player.weapons);
+            List<Weapon> result = merger.mergeIfPossible(player.weapons);
+            if (result.Count != player.weapons.Count) {
+                Vector3 textPos = transform.position;
+                textPos.y -= 1f;
+                ui.displayPopUpText(merger.getLastMergeMessage(), textPos);
+            }
+            player.weapons = result;
 
             wepstring = "weapons end: {";
             foreach (Weapon w in player.weapons)

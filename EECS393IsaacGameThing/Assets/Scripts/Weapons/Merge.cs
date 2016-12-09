@@ -7,6 +7,11 @@ public class Merge : MonoBehaviour {
     public bool isInTestMode = true;
     PlayerMovement player;
 
+    //keep track of last merge
+    List<string> lastMergeIngredients = new List<string>();
+    string lastMergeResultant;
+
+    //templates for merging
     public BurstGun burstGun;
     public BurstSpreadGun burstSpreadGun;
     public LaserGun laserGun;
@@ -24,19 +29,29 @@ public class Merge : MonoBehaviour {
         player = FindObjectOfType<PlayerMovement>();
         table = new Dictionary<Type[], Weapon>();
         //populate with merge rules
-        //addMergeRule(new[]{ typeof(StartGun) }, typeof(SpreadGun)); //<- example
-        print(addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun), typeof(SineGun), typeof(BurstGun), typeof(LaserGun), typeof(StartGun) }, BFG));
-        //print(addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun) }, sine));
-        print(addMergeRule(new[] { typeof(MachineGun), typeof(SpreadGun) }, sineGun));
-
+        print(addMergeRule(new[] { typeof(MachineGun), typeof(LaserGun) }, sineGun));
         print(addMergeRule(new[] { typeof(SpreadGun), typeof(MachineGun) }, machineSpreadGun));
         print(addMergeRule(new[] { typeof(SpreadGun), typeof(BurstGun) }, burstSpreadGun));
         print(addMergeRule(new[] { typeof(SpreadGun), typeof(SpreadGun) }, sequentialSpreadGun));
+        print(addMergeRule(new[] { typeof(MachineSpreadGun), typeof(SineGun), typeof(BurstSpreadGun), typeof(SequentialSpreadGun) }, BFG));
     }
 
     void Update()
     {
         isInTestMode = false; //if we have called update, we are in the actual game, not an editor test
+    }
+
+    public string getLastMergeMessage()
+    {
+        string message = "Merged  ";
+        for (int i = 0; i < lastMergeIngredients.Count; i++)
+        {
+            message += lastMergeIngredients[i];
+            if (i < lastMergeIngredients.Count - 1)
+                message += ",";
+        }
+        message += "  to make  " + lastMergeResultant;
+        return message;
     }
 
     public bool addMergeRule(Type[] ingredientTypes, Weapon mergedWeapon)
@@ -129,6 +144,8 @@ public class Merge : MonoBehaviour {
     //get list of weapons after a possbile merge
     public List<Weapon> mergeIfPossible(List<Weapon> weapons)
     {
+        lastMergeIngredients.Clear(); //update the message string
+        lastMergeResultant = "";
         var enumerator = table.GetEnumerator();
         List<Weapon> matches = new List<Weapon>();
         List<Weapon> listOut = new List<Weapon>(weapons.ToArray());
@@ -141,7 +158,6 @@ public class Merge : MonoBehaviour {
                 for (int w=0; w < listIn.Count; w++) {
                     if (listIn[w] != null && listIn[w].GetType() == ingredientTypes[i]) {
                         matches.Add(listIn[w]);
-                        //print("match: " + listIn[w].GetType() + "  towards: " + enumerator.Current.Value.getName());
                         listIn[w] = null; //don't double-spend
                         break;
                     }
@@ -161,16 +177,14 @@ public class Merge : MonoBehaviour {
                         w = child.GetComponent<Weapon>();
                         if (w != null)
                         {
-                            //print("checking to destroy  " + w.getName() + " at " + c + "   trying for " + matches[i].getName());
                             if (w.getName() == matches[i].getName())
                             {
-                                //print("destroying child wep  " + w.getName() + " at " + c + " of " + playerWeaponTransforms.Count);
                                 //one of these, or maybe a combination of all of these, works to successfully destroy the weapon
                                 Destroy(w);
                                 Destroy(child.gameObject);
                                 Destroy(child.transform);
                                 Destroy(child);
-                                //don't remove all of them
+                                //don't remove all instances of each match
                                 playerChildTransforms.RemoveAt(c);
                                 break;
                             }
@@ -178,12 +192,16 @@ public class Merge : MonoBehaviour {
                     }
                     //remove the reference in the player's weapon list
                     listOut.RemoveAt(index);
+                    //update message string
+                    lastMergeIngredients.Add(matches[i].getName());
                 }
                 //add weapon to player's arsenal
                 if (isInTestMode)
                     listOut.Add((Weapon)(new GameObject()).AddComponent(enumerator.Current.Value.GetType()));
                 else
                     listOut.Add(Instantiate(enumerator.Current.Value, player.transform.position, Quaternion.identity, player.transform) as Weapon);
+                //update message string
+                lastMergeResultant = enumerator.Current.Value.getName();
                 break;
             }
             else if (matches.Count > 0)

@@ -83,8 +83,10 @@
     <Compile Include="Assets\Scripts\Characters\Player\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Extensions.cs" />
+    <Compile Include="Assets\Scripts\Items\FastShoes.cs" />
     <Compile Include="Assets\Scripts\Items\FullHeal.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
+    <Compile Include="Assets\Scripts\Items\SlowShoes.cs" />
     <Compile Include="Assets\Scripts\Items\SmallHeal.cs" />
     <Compile Include="Assets\Scripts\Items\WeaponPickup.cs" />
     <Compile Include="Assets\Scripts\Level Mechanics\Generation\EnemyMaker.cs" />

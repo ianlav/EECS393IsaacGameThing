@@ -56,10 +56,4 @@ public class WeaponTests {
         Assert.IsFalse(merge.addMergeRule(new[]{ typeof(StartGun), typeof(int) }, typeof(LaserGun)));
         Assert.IsFalse(merge.addMergeRule(new[]{ typeof(StartGun), typeof(LaserGun) }, typeof(long)));
     }
-
-    [Test]
-    public void WeaponsFireTest()
-    {
-        //somehow test that each weapon correctly fires
-    }
 }

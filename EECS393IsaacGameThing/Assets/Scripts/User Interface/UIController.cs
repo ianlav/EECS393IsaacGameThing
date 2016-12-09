@@ -34,13 +34,13 @@ public class UIController : MonoBehaviour {
         Destroy(t.gameObject, 1);
     }
 
-    public void displayPopUpText(string str, Vector3 pos)
+    public void displayPopUpText(string str, Vector3 pos, int fontSize = 20)
     {
         Text t = Instantiate(text, transform) as Text;
         t.text = str;
         t.transform.position = pos + new Vector3(0, 0.5f, 0);
         t.transform.localScale = new Vector3(1, 1, 1);
-        t.fontSize = 20;
+        t.fontSize = fontSize;
         t.color = Color.green;
         Time.timeScale = 0;
         Destroy(t.gameObject, 1);

@@ -1433,7 +1433,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4edecd359ac8748a70eb461c45c2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sine: {fileID: 114000013344291318, guid: c64a119fdf0fe73498ee1f45940710b7, type: 2}
+  isInTestMode: 1
+  burstGun: {fileID: 114000014038007372, guid: 1c5940e049822e942a5ff3208c6ef653, type: 2}
+  burstSpreadGun: {fileID: 114000012909496794, guid: 194ff2d73e2ed674099b52aebf65c08a,
+    type: 2}
+  laserGun: {fileID: 114000014165105272, guid: 60dd685ee2c575246acd873d38c690a9, type: 2}
+  machineGun: {fileID: 114000011041003830, guid: 5699abd4ba082d54c91ebe81d6c8c09f,
+    type: 2}
+  machineSpreadGun: {fileID: 114000011907790728, guid: 7a397de60b77ecf43b01446bbceedabe,
+    type: 2}
+  sequentialSpreadGun: {fileID: 114000010327515756, guid: cbe016526a939a747a9b61b7ce301d38,
+    type: 2}
+  sineGun: {fileID: 114000013344291318, guid: c64a119fdf0fe73498ee1f45940710b7, type: 2}
+  spreadGun: {fileID: 114000013536348304, guid: 46f035c556e6d7f46869791153e014d9,
+    type: 2}
+  startGun: {fileID: 114000011119301300, guid: 22ddc71f197758147805d08b58813ae4, type: 2}
   BFG: {fileID: 114000011119301300, guid: bd11bacb958b46742981ac617d0dd259, type: 2}
 --- !u!1 &1945255998
 GameObject:
