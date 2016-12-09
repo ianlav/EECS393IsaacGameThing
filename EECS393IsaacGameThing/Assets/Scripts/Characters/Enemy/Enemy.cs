@@ -50,7 +50,6 @@ public abstract class Enemy : CharacterModel {
 	{
 		if (hp <= 0)
 		{
-			EnemyMaker.currentEnemyCost -= cost;
 			Destroy(gameObject);
 		}
 
@@ -83,7 +82,6 @@ public abstract class Enemy : CharacterModel {
 	}
 
 	public void applyEffect(string effect){
-		print("Is a coward: "+isCoward);
 		if(effect.Equals("Fear")){
 			this.isCoward=true;
 		}
@@ -162,4 +160,7 @@ public abstract class Enemy : CharacterModel {
         return player.transform.position - transform.position;
     }
 
+	protected void onDestroy(){
+		EnemyMaker.currentEnemyCost -= cost;
+	}
 } 

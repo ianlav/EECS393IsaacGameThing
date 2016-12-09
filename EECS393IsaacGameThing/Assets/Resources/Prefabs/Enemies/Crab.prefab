@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 20
-  cost: 1
+  cost: 0
   maxSpeed: 2
   baseDamage: 10
   maker: {fileID: 0}
