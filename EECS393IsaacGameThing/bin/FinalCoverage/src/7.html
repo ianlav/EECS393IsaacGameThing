@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Characters\CharacterView.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+public class CharacterView : MonoBehaviour {
+
+    protected UIController ui;
+    protected CharacterModel model;
+
+    protected virtual void Start()
+    {
+        model = new CharacterModel();
+        ui = FindObjectOfType&lt;UIController&gt;();
+    }
+
+    public void takeDamage(int dam)
+    {
+        model.takeDamage(dam);
+        ui.thingTookDamage(transform.position, dam);
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,5,10,6,0],[11,9,11,38,0],[12,9,12,47,0],[13,5,13,6,0],[16,5,16,6,0],[17,9,17,31,0],[18,9,18,53,0],[19,5,19,6,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\BaseGuns\StartGun.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+using System;
+
+public class StartGun : Weapon {
+
+    public new void Start()
+    {
+        base.Start();
+        numProjectiles = bullets.Length;
+        timeBetweenShots = 0.4f;
+    }
+
+    public override string getName()
+    {
+        return &quot;Pistol&quot;;
+    }
+
+    //basic implementation. fires a straight line bullet towards the mouse
+    public override void fire()
+    {
+        if (timeSinceFired &gt; timeBetweenShots) //controls the fire rate
+        {
+            timeSinceFired = 0;
+            for (int i = 0; i &lt; bullets.Length; i++)
+            {
+                bullets[i].direction = aimVector;
+                bullets[i].damage = damage;
+                Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,5,8,6,0],[9,9,9,22,0],[10,9,10,41,0],[11,9,11,33,0],[12,5,12,6,0],[15,5,15,6,0],[16,9,16,25,0],[17,5,17,6,0],[21,5,21,6,0],[22,9,22,47,0],[23,9,23,10,0],[24,13,24,32,0],[25,18,25,27,0],[26,13,26,14,0],[27,17,27,50,0],[28,17,28,44,0],[29,17,29,101,0],[30,13,30,14,0],[25,49,25,52,0],[25,29,25,47,0],[31,9,31,10,0],[32,5,32,6,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Items\FastShoes.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+/* This item increases player&#39;s speed for 10 seconds */ 
+
+using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic; 
+
+public class FastShoes : Item { 
+
+	PlayerMovement player;
+	
+	new void Start () {
+        base.Start();
+	}
+
+	new void Update () {
+        base.Update();
+	}
+
+	protected override void OnTriggerEnter2D(Collider2D col) { 
+		
+		if (col.CompareTag(&quot;Player&quot;)) { 
+			float endTime = Time.time + 10; 
+			double fastHorizontalSpeed = (double)player.horizontalSpeed*1.5; 
+			double fastJumpSpeed = (double)player.jumpSpeed*1.5; 
+			float originalHorizontalSpeed = player.horizontalSpeed; 
+			float originalJumpSpeed = player.jumpSpeed; 
+			
+			if (Time.time &lt;= endTime) { 
+				player.horizontalSpeed = (float)fastHorizontalSpeed; 
+				player.jumpSpeed = (float)fastJumpSpeed; 
+			} 
+			
+			player.horizontalSpeed = originalHorizontalSpeed; 
+			player.jumpSpeed = originalJumpSpeed; 
+		}
+		
+	} 
+} 
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[12,20,12,21,0],[13,9,13,22,0],[14,2,14,3,0],[16,21,16,22,0],[17,9,17,23,0],[18,2,18,3,0],[20,59,20,60,0],[22,3,22,32,0],[22,33,22,34,0],[23,4,23,35,0],[24,4,24,68,0],[25,4,25,56,0],[26,4,26,59,0],[27,4,27,47,0],[29,4,29,29,0],[29,30,29,31,0],[30,5,30,57,0],[31,5,31,45,0],[32,4,32,5,0],[34,4,34,53,0],[35,4,35,41,0],[36,3,36,4,0],[38,2,38,3,0]]);
+    </script>
+  </body>
+</html>

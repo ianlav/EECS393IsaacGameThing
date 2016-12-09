@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Level Mechanics\Generation\Model\PlatformMakerModel.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+//holds the data and calculations for the platform maker
+public class PlatformMakerModel {
+
+    //these are the player&#39;s velocities for use in the kinematic algorithms
+    private float gravity, horizSpeed, vertSpeed;
+
+    public PlatformMakerModel(float grav, float horizontalSpeed, float vertSpeed)
+    {
+        this.gravity = grav;
+        this.horizSpeed = horizontalSpeed;
+        this.vertSpeed = vertSpeed;
+    }
+
+    //returns a coordinate that is within the player&#39;s jump range and between the given values
+    public Vector2 getPositionInRange(float maxX, float minX, float maxY, float minY)
+    {
+        float x = Random.Range(minX, maxX);
+        float y = Random.Range(minY, maxY);
+
+        //this is the x value of the highest point of the jump
+        float midPointX = vertSpeed * horizSpeed / gravity;
+
+        //if the spot is before and under the high point, we&#39;re good.
+        //Otherwise, check if its within the jump curve
+        while (!((x &lt; midPointX &amp;&amp; y &lt; getMaxYFromX(midPointX)) || y &lt; getMaxYFromX(x)))
+        {
+            y = Random.Range(minY, maxY);
+            x = Random.Range(minX, maxX);
+        }
+        return new Vector2(x, y);
+    }
+
+    //this generates the y from a given x using the players jump velocity, gravity, and move speed. Physics 1 in action
+    public float getMaxYFromX(float x)
+    {
+        //this is the position equation, with the player&#39;s running speed factored in for t
+        return (-0.5f * gravity * Mathf.Pow((x / horizSpeed), 2)) + (vertSpeed * x / horizSpeed);
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[19,5,19,6,0],[20,9,20,44,0],[21,9,21,44,0],[24,9,24,60,0],[29,9,29,10,0],[30,13,30,42,0],[31,13,31,42,0],[32,9,32,10,0],[28,9,28,89,0],[33,9,33,34,0],[34,5,34,6,0],[10,5,10,82,1],[11,5,11,6,1],[12,9,12,29,1],[13,9,13,43,1],[14,9,14,36,1],[15,5,15,6,1],[38,5,38,6,1],[40,9,40,98,1],[41,5,41,6,1]]);
+    </script>
+  </body>
+</html>

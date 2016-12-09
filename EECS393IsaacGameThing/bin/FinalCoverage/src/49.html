@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\Merge.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections.Generic;
+using System;
+
+public class Merge : MonoBehaviour {
+    Dictionary&lt;Type[], Weapon&gt; table;
+    public bool isInTestMode = true;
+    PlayerMovement player;
+
+    //keep track of last merge
+    List&lt;string&gt; lastMergeIngredients = new List&lt;string&gt;();
+    string lastMergeResultant;
+
+    //templates for merging
+    public BurstGun burstGun;
+    public BurstSpreadGun burstSpreadGun;
+    public LaserGun laserGun;
+    public MachineGun machineGun;
+    public MachineSpreadGun machineSpreadGun;
+    public SequentialSpreadGun sequentialSpreadGun;
+    public SineGun sineGun;
+    public SpreadGun spreadGun;
+    public StartGun startGun;
+    public StartGun BFG;
+
+    //populate merge list
+    public void Start()
+    {
+        player = FindObjectOfType&lt;PlayerMovement&gt;();
+        table = new Dictionary&lt;Type[], Weapon&gt;();
+        //populate with merge rules
+        print(addMergeRule(new[] { typeof(MachineGun), typeof(LaserGun) }, sineGun));
+        print(addMergeRule(new[] { typeof(SpreadGun), typeof(MachineGun) }, machineSpreadGun));
+        print(addMergeRule(new[] { typeof(SpreadGun), typeof(BurstGun) }, burstSpreadGun));
+        print(addMergeRule(new[] { typeof(SpreadGun), typeof(SpreadGun) }, sequentialSpreadGun));
+        print(addMergeRule(new[] { typeof(MachineSpreadGun), typeof(SineGun), typeof(BurstSpreadGun), typeof(SequentialSpreadGun) }, BFG));
+    }
+
+    void Update()
+    {
+        isInTestMode = false; //if we have called update, we are in the actual game, not an editor test
+    }
+
+    public string getLastMergeMessage()
+    {
+        string message = &quot;Merged  &quot;;
+        for (int i = 0; i &lt; lastMergeIngredients.Count; i++)
+        {
+            message += lastMergeIngredients[i];
+            if (i &lt; lastMergeIngredients.Count - 1)
+                message += &quot;,&quot;;
+        }
+        message += &quot;  to make  &quot; + lastMergeResultant;
+        return message;
+    }
+
+    public bool addMergeRule(Type[] ingredientTypes, Weapon mergedWeapon)
+    {
+        if(mergedWeapon == null)
+            return false;
+        //make sure the table has been initialized
+        if (table == null)
+            Start();
+        //check to make sure we only add Weapons to the merge table
+        for (int i=0; i &lt; ingredientTypes.Length; i++) {
+            if (!ingredientTypes[i].IsSubclassOf(typeof(Weapon)))
+                return false;
+        }
+        if (!mergedWeapon.GetType().IsSubclassOf(typeof(Weapon)))
+            return false;
+        //add to merge table
+        table.Add(ingredientTypes, mergedWeapon);
+        return true;
+    }
+
+    public bool addMergeRule(Type[] ingredientTypes, Type mergedType)
+    {
+        //make sure the table has been initialized
+        if (table == null)
+            Start();
+        //check to make sure we only add Weapons to the merge table
+        for (int i = 0; i &lt; ingredientTypes.Length; i++)
+        {
+            if (!ingredientTypes[i].IsSubclassOf(typeof(Weapon)))
+                return false;
+        }
+        if (!mergedType.IsSubclassOf(typeof(Weapon)))
+            return false;
+        //add to merge table
+        Weapon wep = null;
+        if (mergedType.IsSubclassOf(typeof(Weapon)))
+        {
+            if (isInTestMode)
+                wep = (new GameObject()).AddComponent(mergedType) as Weapon;
+            else
+                //wep = Instantiate((GameObject)Resources.Load(&quot;Prefabs/Weapons/Guns/&quot; + mergedType.ToString()));
+                return false;
+        }
+        else
+            return false;
+
+        table.Add(ingredientTypes, wep);
+        return true;
+    }
+
+    public void clearMergeRules()
+    {
+        table.Clear();
+    }
+
+    //new public static string ToString(this Dictionary&lt;Type[], Type&gt; table)
+    public string getTableString()
+    {
+        var enumerator = table.GetEnumerator();
+        Type[] keys;
+        Type value;
+        string keystring, tablestring = &quot;table: { &quot;;
+        int keynum = 0;
+        while (enumerator.MoveNext()) {
+            keys = enumerator.Current.Key;
+            value = enumerator.Current.Value.GetType();
+            keystring = &quot;[&quot;;
+            if (keys != null)
+                for (int i=0; i &lt; keys.Length; i++) {
+                    keystring += keys[i];
+                    if (i &lt; keys.Length - 1)
+                        keystring += &quot;,&quot;;
+                }
+            keystring += &quot;]&quot;;
+            tablestring += string.Format(&quot;({0}, {1}) &quot;, keystring, value);
+            keynum++;
+            //if (keynum % 2 == 0)
+            //    tablestring += &quot;\n&quot;;
+        }
+        tablestring += &quot; } len:&quot; + table.Count;
+        return tablestring;
+    }
+
+    public void printTable()
+    {
+        print(getTableString());
+    }
+
+    //get list of weapons after a possbile merge
+    public List&lt;Weapon&gt; mergeIfPossible(List&lt;Weapon&gt; weapons)
+    {
+        lastMergeIngredients.Clear(); //update the message string
+        lastMergeResultant = &quot;&quot;;
+        var enumerator = table.GetEnumerator();
+        List&lt;Weapon&gt; matches = new List&lt;Weapon&gt;();
+        List&lt;Weapon&gt; listOut = new List&lt;Weapon&gt;(weapons.ToArray());
+        List&lt;Transform&gt; playerChildTransforms = getPlayerChildTransforms();
+        //this is really inefficient, O(table&lt;&gt; * tablekey[] * weapons[]) with N storage as well...
+        while (enumerator.MoveNext()) {
+            List&lt;Weapon&gt; listIn = new List&lt;Weapon&gt;(listOut);
+            Type[] ingredientTypes = (Type[])enumerator.Current.Key.Clone();
+            for (int i=0; i &lt; ingredientTypes.Length; i++) {
+                for (int w=0; w &lt; listIn.Count; w++) {
+                    if (listIn[w] != null &amp;&amp; listIn[w].GetType() == ingredientTypes[i]) {
+                        matches.Add(listIn[w]);
+                        listIn[w] = null; //don&#39;t double-spend
+                        break;
+                    }
+                }
+            }
+            if (matches.Count == ingredientTypes.Length) {
+                //remove matched weapon from game
+                for (int i = 0; i &lt; matches.Count; i++)
+                {
+                    int index = listOut.IndexOf(matches[i]);
+                    //first, destroy the game object in-game
+                    Transform child;
+                    Weapon w;
+                    for(int c=0; c &lt; playerChildTransforms.Count; c++)
+                    {
+                        child = playerChildTransforms[c];
+                        w = child.GetComponent&lt;Weapon&gt;();
+                        if (w != null)
+                        {
+                            if (w.getName() == matches[i].getName())
+                            {
+                                //one of these, or maybe a combination of all of these, works to successfully destroy the weapon
+                                Destroy(w);
+                                Destroy(child.gameObject);
+                                Destroy(child.transform);
+                                Destroy(child);
+                                //don&#39;t remove all instances of each match
+                                playerChildTransforms.RemoveAt(c);
+                                break;
+                            }
+                        }
+                    }
+                    //remove the reference in the player&#39;s weapon list
+                    listOut.RemoveAt(index);
+                    //update message string
+                    lastMergeIngredients.Add(matches[i].getName());
+                }
+                //add weapon to player&#39;s arsenal
+                if (isInTestMode)
+                    listOut.Add((Weapon)(new GameObject()).AddComponent(enumerator.Current.Value.GetType()));
+                else
+                    listOut.Add(Instantiate(enumerator.Current.Value, player.transform.position, Quaternion.identity, player.transform) as Weapon);
+                //update message string
+                lastMergeResultant = enumerator.Current.Value.getName();
+                break;
+            }
+            else if (matches.Count &gt; 0)
+                matches.Clear();
+        }
+        return listOut;
+    }
+
+    public List&lt;Transform&gt; getPlayerChildTransforms()
+    {
+        List&lt;Transform&gt; transforms = new List&lt;Transform&gt;();
+        //int cc = player.transform.childCount;
+        int cc = player.weapons.Count;
+        while(player.transform.childCount != cc)
+        { /* wait for objects to be instantiated */ }
+        for (int c = 0; c &lt; cc; c++)
+        {
+            Transform child = player.transform.GetChild(c);
+            transforms.Add(child);
+        }
+        return transforms;
+    }
+
+    public Weapon[] mergeIfPossible(Weapon[] listOut)
+    {
+        return mergeIfPossible(new List&lt;Weapon&gt;(listOut)).ToArray();
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[28,5,28,6,0],[29,9,29,53,0],[30,9,30,50,0],[32,9,32,86,0],[33,9,33,96,0],[34,9,34,92,0],[35,9,35,98,0],[36,9,36,140,0],[37,5,37,6,0],[40,5,40,6,0],[41,9,41,30,0],[42,5,42,6,0],[45,5,45,6,0],[46,9,46,37,0],[47,14,47,23,0],[48,9,48,10,0],[49,13,49,48,0],[50,13,50,52,0],[51,17,51,32,0],[52,9,52,10,0],[47,57,47,60,0],[47,25,47,55,0],[53,9,53,55,0],[54,9,54,24,0],[55,5,55,6,0],[58,5,58,6,0],[59,9,59,33,0],[60,13,60,26,0],[62,9,62,27,0],[63,13,63,21,0],[65,14,65,21,0],[65,56,65,57,0],[66,13,66,66,0],[67,17,67,30,0],[68,9,68,10,0],[65,51,65,54,0],[65,23,65,49,0],[69,9,69,66,0],[70,13,70,26,0],[72,9,72,50,0],[73,9,73,21,0],[74,5,74,6,0],[77,5,77,6,0],[79,9,79,27,0],[80,13,80,21,0],[82,14,82,23,0],[83,9,83,10,0],[84,13,84,66,0],[85,17,85,30,0],[86,9,86,10,0],[82,53,82,56,0],[82,25,82,51,0],[87,9,87,54,0],[88,13,88,26,0],[90,9,90,27,0],[91,9,91,53,0],[92,9,92,10,0],[93,13,93,30,0],[94,17,94,77,0],[97,17,97,30,0],[98,9,98,10,0],[100,13,100,26,0],[102,9,102,41,0],[103,9,103,21,0],[104,5,104,6,0],[107,5,107,6,0],[108,9,108,23,0],[109,5,109,6,0],[113,5,113,6,0],[114,9,114,48,0],[117,27,117,52,0],[118,9,118,24,0],[119,39,119,40,0],[120,13,120,43,0],[121,13,121,56,0],[122,13,122,29,0],[123,13,123,30,0],[124,22,124,29,0],[124,53,124,54,0],[125,21,125,42,0],[126,21,126,45,0],[127,25,127,42,0],[128,17,128,18,0],[124,48,124,51,0],[124,31,124,46,0],[129,13,129,30,0],[130,13,130,75,0],[131,13,131,22,0],[134,9,134,10,0],[119,9,119,38,0],[135,9,135,48,0],[136,9,136,28,0],[137,5,137,6,0],[140,5,140,6,0],[141,9,141,33,0],[142,5,142,6,0],[146,5,146,6,0],[147,9,147,38,0],[148,9,148,33,0],[149,9,149,48,0],[150,9,150,51,0],[151,9,151,68,0],[152,9,152,76,0],[154,39,154,40,0],[155,13,155,61,0],[156,13,156,77,0],[157,18,157,25,0],[157,60,157,61,0],[158,22,158,29,0],[158,54,158,55,0],[159,21,159,88,0],[159,89,159,90,0],[160,25,160,48,0],[161,25,161,42,0],[162,25,162,31,0],[164,17,164,18,0],[158,49,158,52,0],[158,31,158,47,0],[165,13,165,14,0],[157,55,157,58,0],[157,27,157,53,0],[166,13,166,57,0],[166,58,166,59,0],[168,22,168,31,0],[169,17,169,18,0],[170,21,170,61,0],[174,25,174,32,0],[175,21,175,22,0],[176,25,176,58,0],[177,25,177,58,0],[178,25,178,39,0],[179,25,179,26,0],[180,29,180,69,0],[181,29,181,30,0],[183,33,183,44,0],[184,33,184,59,0],[185,33,185,58,0],[186,33,186,48,0],[188,33,188,67,0],[189,33,189,39,0],[191,25,191,26,0],[192,21,192,22,0],[174,67,174,70,0],[174,34,174,65,0],[194,21,194,45,0],[196,21,196,68,0],[197,17,197,18,0],[168,52,168,55,0],[168,33,168,50,0],[199,17,199,34,0],[200,21,200,110,0],[202,21,202,148,0],[204,17,204,73,0],[205,17,205,23,0],[207,18,207,40,0],[208,17,208,33,0],[209,9,209,10,0],[154,9,154,38,0],[210,9,210,24,0],[211,5,211,6,0],[214,5,214,6,0],[215,9,215,60,0],[217,9,217,39,0],[219,9,219,10,0],[219,53,219,54,0],[218,9,218,49,0],[220,14,220,23,0],[221,9,221,10,0],[222,13,222,60,0],[223,13,223,35,0],[224,9,224,10,0],[220,33,220,36,0],[220,25,220,31,0],[225,9,225,27,0],[226,5,226,6,0],[229,5,229,6,0],[230,9,230,69,0],[231,5,231,6,0],[7,5,7,37,0],[11,5,11,60,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\User Interface\HighScoreScreen.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections;
+
+public class HighScoreScreen : MonoBehaviour {
+
+    public Text highScores;
+    public int maxRecords = 10; //only show top N scores
+
+	// Use this for initialization
+	void Start () {
+        Scoring.ReadScores(); //load high scores from file
+        ReadOnlyCollection&lt;Scoring.ScoreRecord&gt; scores = Scoring.GetScores();
+        int max = maxRecords &gt; scores.Count ? scores.Count : maxRecords;
+        for (int i = 0; i &lt; max; i++)
+        {
+            print(scores[i].name);
+            highScores.text += string.Format(&quot;{0}  {1}  ({2})\n&quot;, 
+                scores[i].score.ToString().PadLeft(scores[i].date.Length), //centering added to padding
+                scores[i].name.PadRight(25), 
+                scores[i].date);
+        }
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[13,16,13,17,0],[14,9,14,30,0],[15,9,15,78,0],[16,9,16,73,0],[17,14,17,23,0],[18,9,18,10,0],[19,13,19,35,0],[20,13,23,33,0],[24,9,24,10,0],[17,34,17,37,0],[17,25,17,32,0],[25,5,25,6,0],[28,17,28,18,0],[30,2,30,3,0],[10,5,10,32,0]]);
+    </script>
+  </body>
+</html>

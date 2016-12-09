@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\BaseGuns\BurstGun.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+using System;
+
+public class BurstGun : Weapon {
+    
+    float timeBetweenBurstBullets; //separation between bullets in burst
+    float timeSinceLastBullet;
+    int bulletsFired;
+
+    //initialization
+    public new void Start()
+    {
+        base.Start();
+        damage = 5;
+        timeBetweenShots = 1f;
+        timeBetweenBurstBullets = 0.05f;
+        numProjectiles = bullets.Length;
+    }
+
+    public override string getName()
+    {
+        return &quot;Burst Gun&quot;;
+    }
+
+    public override void fire()
+    {
+        if (timeSinceFired &gt; timeBetweenShots) //controls the burst fire rate
+        {
+            bulletsFired = 0;
+            timeSinceFired = 0;
+            timeSinceLastBullet = 0;
+        }
+    }
+
+    new void Update()
+    {
+        base.Update();
+        //fire bursts
+        if (bulletsFired &lt; bullets.Length)
+        {
+            timeSinceLastBullet += Time.deltaTime;
+            if (timeSinceLastBullet &gt; timeBetweenBurstBullets)
+            {
+                bullets[bulletsFired].direction = aimVector;
+                bullets[bulletsFired].damage = damage;
+                Instantiate(bullets[bulletsFired], bulletOrigin.transform.position, player.transform.rotation);
+                timeSinceLastBullet = 0;
+                bulletsFired++;
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[13,5,13,6,0],[14,9,14,22,0],[15,9,15,20,0],[16,9,16,31,0],[17,9,17,41,0],[18,9,18,41,0],[19,5,19,6,0],[22,5,22,6,0],[23,9,23,28,0],[24,5,24,6,0],[27,5,27,6,0],[28,9,28,47,0],[29,9,29,10,0],[30,13,30,30,0],[31,13,31,32,0],[32,13,32,37,0],[33,9,33,10,0],[34,5,34,6,0],[37,5,37,6,0],[38,9,38,23,0],[40,9,40,43,0],[41,9,41,10,0],[42,13,42,51,0],[43,13,43,63,0],[44,13,44,14,0],[45,17,45,61,0],[46,17,46,55,0],[47,17,47,112,0],[48,17,48,41,0],[49,17,49,32,0],[50,13,50,14,0],[51,9,51,10,0],[52,5,52,6,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\Bullets\Laser.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+//using UnityEngine;
+//using System.Collections;
+//using System;
+
+public class Laser : Bullet {
+
+    new public void Start()
+    {
+        base.Start();
+        speed = 50;
+        damage = 25;
+    }
+
+    public override void hit(PlayerMovement player)
+    {
+        base.hit(player);
+    }
+
+
+    //default platform hit: just destroy bullet
+    public override void hit(Platform platform)
+    {
+    }
+
+    public override void hit(Bullet bul)
+    {
+        Destroy(bul.gameObject);
+    }
+
+    public override void hit(Enemy enemy)
+    {
+        enemy.takeDamage(damage);
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[8,5,8,6,0],[9,9,9,22,0],[10,9,10,20,0],[11,9,11,21,0],[12,5,12,6,0],[15,5,15,6,0],[16,9,16,26,0],[17,5,17,6,0],[22,5,22,6,0],[23,5,23,6,0],[26,5,26,6,0],[27,9,27,33,0],[28,5,28,6,0],[31,5,31,6,0],[32,9,32,34,0],[33,5,33,6,0]]);
+    </script>
+  </body>
+</html>

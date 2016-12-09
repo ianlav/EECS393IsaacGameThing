@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Items\SmallHeal.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+/* This item adds 10 hp to player on contact */ 
+
+using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic; 
+
+using System;
+
+public class SmallHeal : Item{
+
+    PlayerMovement player;
+
+	new void Start () {
+        base.Start();
+        player = FindObjectOfType&lt;PlayerMovement&gt;();
+	}
+
+	new void Update () {
+        base.Update();
+	}
+
+    protected override void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag(&quot;Player&quot;))
+        {
+            player.hp += 10;
+            Destroy(gameObject);
+            ui.displayPopUpText(&quot;+10&quot;, player.transform.position);
+        }
+    }
+
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,20,14,21,0],[15,9,15,22,0],[16,9,16,53,0],[17,2,17,3,0],[19,21,19,22,0],[20,9,20,23,0],[21,2,21,3,0],[24,5,24,6,0],[25,9,25,38,0],[26,9,26,10,0],[27,13,27,29,0],[28,13,28,33,0],[29,13,29,67,0],[30,9,30,10,0],[31,5,31,6,0]]);
+    </script>
+  </body>
+</html>

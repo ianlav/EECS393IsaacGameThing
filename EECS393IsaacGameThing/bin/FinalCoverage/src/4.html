@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Tests\Scoring\Editor\ScoringTest.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using UnityEditor;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System;
+
+public class ScoringTest {
+
+	[Test]
+    //test to make sure score read/write works
+	public void ScoreReadWriteTest()
+	{
+        Scoring.clearRecords();
+        ReadOnlyCollection&lt;Scoring.ScoreRecord&gt; scores;
+        Scoring.ScoreRecord r1 = new Scoring.ScoreRecord(&quot;test 1&quot;, &quot;9/21/2112&quot;, 1111);
+        Scoring.ScoreRecord r2 = new Scoring.ScoreRecord(&quot;test 2&quot;, &quot;9/22/2112&quot;, 2222);
+        Scoring.ScoreRecord r3 = new Scoring.ScoreRecord(&quot;test 3&quot;, &quot;9/23/2112&quot;, 3333);
+        Scoring.AddRecords(r1, r2, r3); //write r1..r3 to local score list
+        //check if local variables are equal
+        scores = Scoring.GetScores();
+        Assert.AreEqual(scores.Count, 3);
+        Assert.IsTrue(scores[0].Equals(r1));
+        Assert.IsTrue(scores[1].Equals(r2));
+        Assert.IsTrue(scores[2].Equals(r3));
+        Assert.IsTrue(Scoring.WriteScores()); //write r1..r3 to file
+        Scoring.clearRecords(); //clear local variables
+        Assert.IsTrue(Scoring.ReadScores()); //read records from file
+        //check if local variables are equal
+        scores = Scoring.GetScores(); 
+        Assert.AreEqual(scores.Count, 3);
+        Assert.IsTrue(scores[0].Equals(r1));
+        Assert.IsTrue(scores[1].Equals(r2));
+        Assert.IsTrue(scores[2].Equals(r3));
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[33,9,33,45,0],[34,9,34,45,0],[35,5,35,6,0],[13,2,13,3,1],[14,9,14,32,1],[16,9,16,87,1],[17,9,17,87,1],[18,9,18,87,1],[19,9,19,40,1],[21,9,21,38,1],[22,9,22,42,1],[23,9,23,45,1],[24,9,24,45,1],[25,9,25,45,1],[26,9,26,46,1],[27,9,27,32,1],[28,9,28,45,1],[30,9,30,38,1],[31,9,31,42,1],[32,9,32,45,1]]);
+    </script>
+  </body>
+</html>

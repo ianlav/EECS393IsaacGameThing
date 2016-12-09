@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Level Mechanics\Generation\ItemMaker.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+//Temporary item spawning for the demo
+public class ItemMaker : MonoBehaviour {
+
+    public int inverseItemSpawnRate;
+    public int lowRand, highRand;
+    public Item[] items;
+
+    private int numPlatformsSinceItem = 0;
+
+    public Item madePlatform()
+    {
+        numPlatformsSinceItem++;
+        if(numPlatformsSinceItem + (int)Random.Range(lowRand, highRand) &gt; inverseItemSpawnRate)
+        {
+            return items[(int)Random.Range(0, items.Length)];
+        }
+        return null;
+    }
+
+    public void maybeSpawnItem(Vector2 pos)
+    {
+        Item item = madePlatform();
+        if(item != null)
+        {
+            numPlatformsSinceItem = 0;
+            Instantiate(item, pos, Quaternion.identity);
+        }
+    }
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,5,14,6,0],[15,9,15,33,0],[16,9,16,96,0],[17,9,17,10,0],[18,13,18,62,0],[20,9,20,21,0],[21,5,21,6,0],[24,5,24,6,0],[25,9,25,36,0],[26,9,26,25,0],[27,9,27,10,0],[28,13,28,39,0],[29,13,29,57,0],[30,9,30,10,0],[31,5,31,6,0],[34,16,34,17,0],[36,2,36,3,0],[39,17,39,18,0],[41,2,41,3,0],[11,5,11,43,0]]);
+    </script>
+  </body>
+</html>

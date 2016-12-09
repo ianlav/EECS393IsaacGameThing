@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\User Interface\UIController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
+
+public class UIController : MonoBehaviour {
+
+    public Text text;
+
+	void Awake()
+	{
+		Screen.SetResolution( 1024, 440, false );
+	}
+
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.Return) || Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Time.timeScale = 1;
+        }
+    }
+	
+    public void ChangeScene (string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    public void thingTookDamage(Vector3 enemy, float dam)
+    {
+        Text t = Instantiate(text, transform) as Text;
+        t.text = dam.ToString();
+        t.transform.position = enemy + new Vector3(0, 0.5f, 0);
+        t.transform.localScale = new Vector3(1, 1, 1);
+        Destroy(t.gameObject, 1);
+    }
+
+    public void displayPopUpText(string str, Vector3 pos, int fontSize = 20)
+    {
+        Text t = Instantiate(text, transform) as Text;
+        t.text = str;
+        t.transform.position = pos + new Vector3(0, 0.5f, 0);
+        t.transform.localScale = new Vector3(1, 1, 1);
+        t.fontSize = fontSize;
+        t.color = Color.green;
+        Time.timeScale = 0;
+        Destroy(t.gameObject, 1);
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[11,2,11,3,0],[12,3,12,44,0],[13,2,13,3,0],[16,5,16,6,0],[17,9,17,77,0],[18,9,18,10,0],[19,13,19,32,0],[20,9,20,10,0],[21,5,21,6,0],[24,5,24,6,0],[25,9,25,65,0],[26,5,26,6,0],[29,5,29,6,0],[30,9,30,55,0],[31,9,31,33,0],[32,9,32,64,0],[33,9,33,55,0],[34,9,34,34,0],[35,5,35,6,0],[38,5,38,6,0],[39,9,39,55,0],[40,9,40,22,0],[41,9,41,62,0],[42,9,42,55,0],[43,9,43,31,0],[44,9,44,31,0],[45,9,45,28,0],[46,9,46,34,0],[47,5,47,6,0]]);
+    </script>
+  </body>
+</html>

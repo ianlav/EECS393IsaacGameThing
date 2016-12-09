@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\BaseGuns\Weapon.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+//an abstract parent class for all weapons
+public abstract class Weapon : MonoBehaviour {
+
+    public Transform bulletOrigin;
+    protected PlayerMovement player;
+    public Vector2 aimVector;
+    public int damage;
+    public int numProjectiles;
+    public Bullet[] bullets;
+
+    protected float timeSinceFired;
+    protected float timeBetweenShots;
+    protected float timeSinceBulletPattenUpdate;
+    protected float timeBetweenBulletPatternUpdates;
+
+    public abstract void fire();
+    public abstract string getName();
+
+    //gets the vector pointing from origin to the mouse
+    protected Vector2 getAimVector(Vector2 origin)
+    {
+        Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        return aimPos - origin; 
+    }
+
+    public virtual void Start()
+    {
+        gameObject.tag = &quot;Weapon&quot;;
+        gameObject.layer = LayerMask.NameToLayer(&quot;Weapon&quot;);
+        //gameObject.GetComponent&lt;SpriteRenderer&gt;().sortingOrder = 1; //should keep gun above player
+        player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
+        bulletOrigin = transform;
+    }
+
+    protected virtual void Update()
+    {
+        //increments the fire rate counter(s)
+        timeSinceFired += Time.deltaTime;
+        timeSinceBulletPattenUpdate += Time.deltaTime;
+        //grab aim vector so bullets know where to go
+        aimVector = getAimVector(bulletOrigin.position);
+        //rotate weapon to point at mouse
+        float angle = aimVector.Angle();
+        if (angle &gt; 90 || angle &lt; -90) //aiming backwards
+            transform.rotation = Quaternion.Euler(0, 180, 180 - aimVector.Angle());
+        else
+            transform.rotation = Quaternion.Euler(0, 0, aimVector.Angle());
+        //update bullet pattern
+        if (timeSinceBulletPattenUpdate &gt; timeBetweenBulletPatternUpdates)
+        {
+            updateBulletPattern();
+            timeSinceBulletPattenUpdate = 0;
+        }
+    }
+
+    protected virtual void updateBulletPattern()
+    {
+        //no pattern to shots by default
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[24,5,24,6,0],[25,9,25,86,0],[26,9,26,67,0],[27,9,27,32,0],[28,5,28,6,0],[31,5,31,6,0],[32,9,32,35,0],[33,9,33,60,0],[35,9,35,75,0],[36,9,36,34,0],[37,5,37,6,0],[40,5,40,6,0],[42,9,42,42,0],[43,9,43,55,0],[45,9,45,57,0],[47,9,47,41,0],[48,9,48,39,0],[49,13,49,84,0],[51,13,51,76,0],[53,9,53,75,0],[54,9,54,10,0],[55,13,55,35,0],[56,13,56,45,0],[57,9,57,10,0],[58,5,58,6,0],[61,5,61,6,0],[63,5,63,6,0]]);
+    </script>
+  </body>
+</html>

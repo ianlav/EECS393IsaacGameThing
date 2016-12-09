@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\User Interface\GameOverController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+using System;
+
+public class GameOverController : UIController {
+
+    public Toggle saveCheckbox;
+    public InputField characterName;
+    
+	//initialization
+	void Start ()
+    {
+        characterName = gameObject.GetComponentInChildren&lt;InputField&gt;();
+        if (ScoreController.currentName != null &amp;&amp; ScoreController.currentName != &quot;&quot;)
+            characterName.text = ScoreController.currentName;
+        saveCheckbox = gameObject.GetComponentInChildren&lt;Toggle&gt;();
+	}
+	
+	//update is called once per frame
+	void Update ()
+    {
+        if (characterName.text != ScoreController.currentName)
+            ScoreController.currentName = characterName.text;
+	}
+
+    //called when the scene is exited ?
+    void OnDestroy()
+    {
+        if (saveCheckbox.enabled) {
+            try {
+                if (ScoreController.currentName == null || ScoreController.currentName == &quot;&quot;)
+                    ScoreController.currentName = ((Text)characterName.placeholder).text;
+                ScoreController.saveCurrentScore();
+                print(&quot;GameOverController: saved score!&quot;);
+            } catch (Exception e) {
+                print(&quot;Error saving score (GameOverController)&quot;);
+                print(e.StackTrace);
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[13,5,13,6,0],[14,9,14,73,0],[15,9,15,86,0],[16,13,16,62,0],[17,9,17,68,0],[18,2,18,3,0],[22,5,22,6,0],[23,9,23,63,0],[24,13,24,62,0],[25,2,25,3,0],[29,5,29,6,0],[30,9,30,34,0],[30,35,30,36,0],[31,17,31,18,0],[32,17,32,94,0],[33,21,33,90,0],[34,17,34,52,0],[35,17,35,59,0],[36,13,36,14,0],[36,15,36,34,0],[36,35,36,36,0],[37,17,37,66,0],[38,17,38,37,0],[39,13,39,14,0],[40,9,40,10,0],[41,5,41,6,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Level Mechanics\Generation\PlatformMaker.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+public class PlatformMaker : MonoBehaviour {
+
+    public Platform newestPlatform;
+
+    public Platform[] platformOptions;
+    public PlayerMovement player;
+    public Rigidbody2D playerRigid;
+
+    public float minDistX, maxDistX;
+    public float minDistY, maxDistY;
+
+    private PlatformMakerModel model;
+	private EnemyMaker enemyMaker;
+    private ItemMaker itemMaker;
+
+    void Start()
+    {
+		
+        playerRigid = player.GetComponent&lt;Rigidbody2D&gt;();
+		enemyMaker = FindObjectOfType&lt;EnemyMaker&gt;();
+        itemMaker = FindObjectOfType&lt;ItemMaker&gt;();
+        model = new PlatformMakerModel(playerRigid.gravityScale * 9.81f, player.horizontalSpeed, player.jumpSpeed);
+
+        //we&#39;ll start with the initial platform, and make 4 more
+        makeRandomPlatformInRange();
+        makeRandomPlatformInRange();
+        makeRandomPlatformInRange();
+        makeRandomPlatformInRange();
+    }
+
+    void Update()
+    {
+        transform.position = player.transform.position;
+    }
+
+    public void makeRandomPlatformInRange()
+    {
+        Vector2 pos = model.getPositionInRange(maxDistX, minDistX, maxDistY, minDistY);
+
+        //make the platform, using the generated values offset from the right side of the platform
+        makeRandomPlatform(new Vector2(newestPlatform.rightSide.position.x + pos.x,  newestPlatform.rightSide.position.y + pos.y));
+    }
+
+    //selects a random platform from the list and places it
+	void makeRandomPlatform(Vector2 pos)
+    {
+        makePlatform(platformOptions[(int)Random.Range(0, platformOptions.Length)], pos);
+    }
+
+    void makePlatform(Platform plat, Vector2 pos)
+    {
+        Vector2 offsetPos = pos - (Vector2)plat.leftSide.position + (Vector2)plat.transform.position;//the set position, offset by the distance between the left side and center. Because localPosition wont give me that. Also offset up one unit so we dont spawn them in the platform
+        newestPlatform = Instantiate(plat,
+            offsetPos - new Vector2(0, 1)
+            , Quaternion.identity) as Platform;
+        player.curPlatY = offsetPos.y - 1;
+		enemyMaker.makeRandomEnemy (plat, pos);
+        itemMaker.maybeSpawnItem(offsetPos + new Vector2(0,1));
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,5,20,6,0],[22,9,22,58,0],[23,3,23,47,0],[24,9,24,51,0],[25,9,25,116,0],[28,9,28,37,0],[29,9,29,37,0],[30,9,30,37,0],[31,9,31,37,0],[32,5,32,6,0],[35,5,35,6,0],[36,9,36,56,0],[37,5,37,6,0],[40,5,40,6,0],[41,9,41,88,0],[44,9,44,132,0],[45,5,45,6,0],[49,5,49,6,0],[50,9,50,90,0],[51,5,51,6,0],[54,5,54,6,0],[55,9,55,102,0],[56,9,58,48,0],[59,9,59,43,0],[60,3,60,42,0],[61,9,61,64,0],[62,5,62,6,0]]);
+    </script>
+  </body>
+</html>

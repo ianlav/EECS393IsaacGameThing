@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\BaseGuns\SineGun.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+using System;
+using System.Collections.Generic;
+
+public class SineGun : Weapon {
+    
+    float bulletSpeed;
+    int bulletTimeToExist;
+    //references to modify bullets mid-flight
+    List&lt;Bullet&gt; bulletRefs = new List&lt;Bullet&gt;(); 
+    List&lt;Vector2&gt; directionRefs = new List&lt;Vector2&gt;();
+
+    //initialization
+    public new void Start () {
+        base.Start();
+        damage = 20;
+        bulletSpeed = 10;
+        timeBetweenShots = 0.3f;
+        bulletTimeToExist = 2;
+        timeBetweenBulletPatternUpdates = 0.01f;
+	}
+
+    public override string getName()
+    {
+        return &quot;Wave Gun&quot;;
+    }
+
+    //update is called once per frame
+    new void Update () {
+        base.Update();
+	}
+
+    public override void fire()
+    {
+        if (timeSinceFired &gt; timeBetweenShots) //controls the fire rate
+        {
+            timeSinceFired = 0;
+            for (int i = 0; i &lt; bullets.Length; i++)
+            {
+                bullets[i].direction = aimVector;
+                bullets[i].damage = damage;
+                bullets[i].speed = bulletSpeed;
+                bullets[i].timeToExist = bulletTimeToExist;
+                //insert references in first open slot (null = bullet was destroyed)
+                int index = bulletRefs.IndexOf(null);
+                if (index &gt; 0)
+                {
+                    bulletRefs.Insert(index, (Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation)
+                        as Bullet).GetComponent&lt;Bullet&gt;());
+                    directionRefs.Insert(index, aimVector);
+                }
+                else
+                {
+                    bulletRefs.Add((Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation)
+                        as Bullet).GetComponent&lt;Bullet&gt;());
+                    directionRefs.Add(aimVector);
+                    index = bulletRefs.Count - 1;
+                }
+            }
+        }
+    }
+
+    protected override void updateBulletPattern()
+    {
+        for (int i = 0; i &lt; bulletRefs.Count; i++)
+        {
+            //rotate the original direction vector as a function of time in a sine pattern
+            if (bulletRefs[i] != null)
+                bulletRefs[i].direction = directionRefs[i].Rotate(Mathf.Sin(2*timeSinceFired/timeBetweenShots * 2*Mathf.PI) * Mathf.Rad2Deg);
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[15,30,15,31,0],[16,9,16,22,0],[17,9,17,21,0],[18,9,18,26,0],[19,9,19,33,0],[20,9,20,31,0],[21,9,21,49,0],[22,2,22,3,0],[25,5,25,6,0],[26,9,26,27,0],[27,5,27,6,0],[30,24,30,25,0],[31,9,31,23,0],[32,2,32,3,0],[35,5,35,6,0],[36,9,36,47,0],[37,9,37,10,0],[38,13,38,32,0],[39,18,39,27,0],[40,13,40,14,0],[41,17,41,50,0],[42,17,42,44,0],[43,17,43,48,0],[44,17,44,60,0],[46,17,46,54,0],[47,17,47,31,0],[48,17,48,18,0],[49,21,50,60,0],[51,21,51,60,0],[52,17,52,18,0],[54,17,54,18,0],[55,21,56,60,0],[57,21,57,50,0],[58,21,58,50,0],[59,17,59,18,0],[60,13,60,14,0],[39,49,39,52,0],[39,29,39,47,0],[61,9,61,10,0],[62,5,62,6,0],[65,5,65,6,0],[66,14,66,23,0],[67,9,67,10,0],[69,13,69,39,0],[70,17,70,142,0],[71,9,71,10,0],[66,47,66,50,0],[66,25,66,45,0],[72,5,72,6,0],[11,5,11,50,0],[12,5,12,55,0]]);
+    </script>
+  </body>
+</html>

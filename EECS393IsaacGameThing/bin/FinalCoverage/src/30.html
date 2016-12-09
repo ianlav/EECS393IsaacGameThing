@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Level Mechanics\Generation\Platform.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+//a platform to be placed in the scene
+public class Platform : MonoBehaviour {
+
+    public PlatformMaker maker;
+    public Transform leftSide, rightSide; //each platform needs these. They identify the left and right sides of the platform
+	public EnemyMaker enemyMaker;
+
+    bool exitedTrigger = false;
+
+	// Use this for initialization
+	void Start () {
+        maker = FindObjectOfType&lt;PlatformMaker&gt;();
+        gameObject.tag = &quot;Platform&quot;;
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+    //when the platform leaves the player&#39;s trigger, we destroy it and make a new one
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if(col.CompareTag(&quot;LevelTrigger&quot;))
+        {
+            maker.makeRandomPlatformInRange();
+            exitedTrigger = true;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if(!exitedTrigger)
+            maker.makeRandomPlatformInRange();
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,16,14,17,0],[15,9,15,51,0],[16,9,16,37,0],[17,5,17,6,0],[20,17,20,18,0],[22,2,22,3,0],[26,5,26,6,0],[27,9,27,43,0],[28,9,28,10,0],[29,13,29,47,0],[30,13,30,34,0],[31,9,31,10,0],[32,5,32,6,0],[35,5,35,6,0],[36,9,36,27,0],[37,13,37,47,0],[38,5,38,6,0],[11,5,11,32,0]]);
+    </script>
+  </body>
+</html>

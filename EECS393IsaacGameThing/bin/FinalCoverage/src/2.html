@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Tests\Level Generation\Editor\PlatformMakerTest.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using UnityEditor;
+using NUnit.Framework;
+
+public class PlatformMakerTest {
+
+    //tests if the algorithm is able to calculate platform spawns correctly
+	[Test]
+	public void PlatformSpawnRangeTest()
+	{
+        //some default player values
+        float grav = 9.81f;
+        float horSpeed = 10;
+        float vertSpeed = 10;
+   
+        PlatformMakerModel model = new PlatformMakerModel(grav, horSpeed, vertSpeed);
+        Assert.AreEqual(model.getMaxYFromX(0), 0); //zero test
+        Assert.LessOrEqual(model.getMaxYFromX(5) - 3.77375f, 0.005f); //calculated from wolframalpha
+        Assert.LessOrEqual(model.getMaxYFromX(10) - 5.095f, 0.005f); //calculated from wolframalpha
+
+        //tests that the platform generation 10 times
+        for (int i = 0; i &lt; 10; i++)
+        {
+            Vector2 plat = model.getPositionInRange(0, 20, 0, 20);
+            float maxY = model.getMaxYFromX(plat.x);
+            float midPointX = vertSpeed * horSpeed / (grav);
+            if (!((plat.x &lt; midPointX &amp;&amp; plat.y &lt; model.getMaxYFromX(midPointX)) || plat.y &lt; maxY))
+            {
+                Assert.Fail();
+            }
+        }
+	}
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[25,13,25,53,0],[26,13,26,61,0],[27,13,27,100,0],[28,13,28,14,0],[29,17,29,31,0],[30,13,30,14,0],[31,9,31,10,0],[22,33,22,36,0],[32,2,32,3,0],[10,2,10,3,1],[12,9,12,28,1],[13,9,13,29,1],[14,9,14,30,1],[16,9,16,86,1],[17,9,17,51,1],[18,9,18,70,1],[19,9,19,69,1],[22,14,22,23,1],[23,9,23,10,1],[24,13,24,67,1],[22,25,22,31,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\MergedGuns\MachineSpreadGun.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+public class MachineSpreadGun : SpreadGun {
+
+    public new void Start()
+    {
+        base.Start();
+        spreadAngleDegrees = 60;
+        numProjectiles = bullets.Length;
+        timeBetweenShots = 0.4f;
+        bulletRotations = new float[numProjectiles];
+        //bulletOrigin = transform.Find(&quot;SpreadGun&quot;);
+        //player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
+        calculateSpread();
+    }
+
+    public override string getName()
+    {
+        return &quot;Machine Spread Gun&quot;;
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[7,5,7,6,0],[8,9,8,22,0],[9,9,9,33,0],[10,9,10,41,0],[11,9,11,33,0],[12,9,12,53,0],[15,9,15,27,0],[16,5,16,6,0],[19,5,19,6,0],[20,9,20,37,0],[21,5,21,6,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\BaseGuns\SpreadGun.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+using System;
+
+public class SpreadGun : Weapon {
+
+    protected float spreadAngleDegrees, spreadAngleIncrement;
+    protected float[] bulletRotations;
+
+    public new void Start()
+    {
+        base.Start();
+        spreadAngleDegrees = 60;
+        numProjectiles = bullets.Length;
+        timeBetweenShots = 0.2f;
+        bulletRotations = new float[numProjectiles];
+        calculateSpread();
+        timeSinceFired = 0;
+    }
+
+    public override string getName()
+    {
+        return &quot;Spread Gun&quot;;
+    }
+
+    //caching for spread angles, no reason to recalculate all the time
+    public void calculateSpread()
+    {
+        float spreadAngleIncrement = spreadAngleDegrees / (numProjectiles - 1);
+        for (int i = 0; i &lt; numProjectiles; i++)
+        {
+            bulletRotations[i] = -i * spreadAngleIncrement + spreadAngleDegrees / 2;
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    //fires a grouping of bullets towards the enemy in a specified spread pattern
+    public override void fire()
+    {
+        if (timeSinceFired &gt; timeBetweenShots) //controls the fire rate
+        {
+            timeSinceFired = 0;
+
+            //create all bullets and rotate to appropriate spread angles
+            for (int i=0; i &lt; bullets.Length; i++)
+            {
+                bullets[i].direction = aimVector.Rotate(bulletRotations[i]);
+                bullets[i].damage = damage;
+                Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[11,5,11,6,0],[12,9,12,22,0],[13,9,13,33,0],[14,9,14,41,0],[15,9,15,33,0],[16,9,16,53,0],[17,9,17,27,0],[18,9,18,28,0],[19,5,19,6,0],[22,5,22,6,0],[23,9,23,29,0],[24,5,24,6,0],[28,5,28,6,0],[29,9,29,80,0],[30,14,30,23,0],[31,9,31,10,0],[32,13,32,85,0],[33,9,33,10,0],[30,45,30,48,0],[30,25,30,43,0],[34,5,34,6,0],[37,5,37,6,0],[38,9,38,23,0],[39,5,39,6,0],[43,5,43,6,0],[44,9,44,47,0],[45,9,45,10,0],[46,13,46,32,0],[49,18,49,25,0],[50,13,50,14,0],[51,17,51,77,0],[52,17,52,44,0],[53,17,53,101,0],[54,13,54,14,0],[49,47,49,50,0],[49,27,49,45,0],[55,9,55,10,0],[56,5,56,6,0]]);
+    </script>
+  </body>
+</html>

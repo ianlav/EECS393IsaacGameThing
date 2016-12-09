@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Tests\Player\Editor\BasePlayerTest.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using UnityEditor;
+using NUnit.Framework;
+
+public class BasePlayerTest {
+
+    //simple test to check if the player can lose hp properly
+	[Test]
+	public void EditorTest()
+	{
+        CharacterModel mdl = new CharacterModel();
+        mdl.takeDamage(10);
+        Assert.AreEqual(90, mdl.hp);
+        mdl.takeDamage(100);
+        Assert.AreEqual(0, mdl.hp);
+	}
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[12,9,12,28,0],[13,9,13,37,0],[14,9,14,29,0],[15,9,15,36,0],[16,2,16,3,0],[10,2,10,3,1],[11,9,11,51,1]]);
+    </script>
+  </body>
+</html>

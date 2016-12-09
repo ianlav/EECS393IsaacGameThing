@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Weapons\MergedGuns\BurstSpreadGun.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+public class BurstSpreadGun : SpreadGun {
+
+    public int numSpreadsPerBurst = 3;
+
+    float timeBetweenSpreadBursts; //separation between spreads in burst
+    float timeSinceLastSpread;
+    int burstsFired;
+
+    //initialization
+    public new void Start()
+    {
+        base.Start();
+        damage = 5;
+        timeBetweenShots = 0.75f; //controls overall fire rate
+        timeBetweenSpreadBursts = 0.05f; //controls burst separation
+        spreadAngleDegrees = 60;
+        numProjectiles = bullets.Length;
+        bulletRotations = new float[numProjectiles];
+        calculateSpread();
+    }
+
+    public override string getName()
+    {
+        return &quot;Burst Spread Gun&quot;;
+    }
+
+    public override void fire()
+    {
+        if (timeSinceFired &gt; timeBetweenShots) //controls the burst fire rate
+        {
+            burstsFired = 0;
+            timeSinceFired = 0;
+            timeSinceLastSpread = 0;
+        }
+    }
+
+    //update is called once per frame
+    new void Update()
+    {
+        base.Update();
+        //fire bursts
+        if (burstsFired &lt; numSpreadsPerBurst)
+        {
+            timeSinceLastSpread += Time.deltaTime;
+            if (timeSinceLastSpread &gt; timeBetweenSpreadBursts)
+            {
+                for (int i = 0; i &lt; bullets.Length; i++)
+                {
+                    bullets[i].direction = aimVector.Rotate(bulletRotations[i]);
+                    bullets[i].damage = damage;
+                    Instantiate(bullets[i], bulletOrigin.transform.position, player.transform.rotation);
+                }
+                timeSinceLastSpread = 0;
+                burstsFired++;
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,5,14,6,0],[15,9,15,22,0],[16,9,16,20,0],[17,9,17,34,0],[18,9,18,41,0],[19,9,19,33,0],[20,9,20,41,0],[21,9,21,53,0],[22,9,22,27,0],[23,5,23,6,0],[26,5,26,6,0],[27,9,27,35,0],[28,5,28,6,0],[31,5,31,6,0],[32,9,32,47,0],[33,9,33,10,0],[34,13,34,29,0],[35,13,35,32,0],[36,13,36,37,0],[37,9,37,10,0],[38,5,38,6,0],[42,5,42,6,0],[43,9,43,23,0],[45,9,45,46,0],[46,9,46,10,0],[47,13,47,51,0],[48,13,48,63,0],[49,13,49,14,0],[50,22,50,31,0],[51,17,51,18,0],[52,21,52,81,0],[53,21,53,48,0],[54,21,54,105,0],[55,17,55,18,0],[50,53,50,56,0],[50,33,50,51,0],[56,17,56,41,0],[57,17,57,31,0],[58,13,58,14,0],[59,9,59,10,0],[60,5,60,6,0],[6,5,6,39,0]]);
+    </script>
+  </body>
+</html>

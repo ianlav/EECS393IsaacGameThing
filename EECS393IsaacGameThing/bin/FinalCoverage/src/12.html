@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\EECS393IsaacGameThing\EECS393IsaacGameThing\Assets\Scripts\Characters\Enemy\Monster.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using UnityEngine;
+using System.Collections;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class Monster : MonoBehaviour {
+
+	public float updatesToUpgrade;
+	private float updateClock;
+	public float maxVelocity; //Highest possible speed of monster. Increases as game progresses.
+	public float acceleration; //Ability for monster to return to speed when hit. Increases.
+	public float defense; //Modifier for the amount that damage slows down monster. Increases.
+	private Rigidbody2D rigidMonster;
+    private PlayerMovement player;
+    private UIController ui;
+
+	void Start () {
+		rigidMonster = GetComponent&lt;Rigidbody2D&gt;();
+        gameObject.tag = &quot;Monster&quot;;
+        player = FindObjectOfType&lt;PlayerMovement&gt;();
+        ui = FindObjectOfType&lt;UIController&gt;();
+    }
+
+	public void takeDamage(int damage){
+		maxVelocity -= damage/defense; //slow the monster when hit by projectile
+	}
+
+	void Update () {
+		if(rigidMonster.velocity.x&lt;maxVelocity){
+			rigidMonster.velocity = new Vector2(rigidMonster.velocity.x+acceleration, rigidMonster.velocity.y);
+			if(rigidMonster.velocity.x &gt; maxVelocity){rigidMonster.velocity=new Vector2(maxVelocity, rigidMonster.velocity.y);}
+		}
+        rigidMonster.velocity = new Vector2(rigidMonster.velocity.x, player.transform.position.y - transform.position.y); //keeps the monster on the same y plane
+		if (updateClock &gt;= updatesToUpgrade) {
+			updateClock = 0;
+			UpgradeMonster ();
+		} else {
+			updateClock += Time.deltaTime;
+		}
+	}
+
+	void UpgradeMonster(){
+        maxVelocity += 0.5f;
+		acceleration += 0.1f;
+		defense += 0.5f;
+	}
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag(&quot;Bullet&quot;))
+        {
+            Bullet bul = col.GetComponent&lt;Bullet&gt;();
+			if (!bul.enemyMode) {
+				rigidMonster.velocity = new Vector2 (rigidMonster.velocity.x - bul.damage / (1 + defense), 0);
+				ui.thingTookDamage (col.transform.position, (int)(bul.damage / (1 + defense)));
+			}
+        }
+        if(!col.CompareTag(&quot;LevelTrigger&quot;))
+            Destroy(col.gameObject);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,16,16,17,0],[17,3,17,46,0],[18,9,18,36,0],[19,9,19,53,0],[20,9,20,47,0],[21,5,21,6,0],[23,36,23,37,0],[24,3,24,33,0],[25,2,25,3,0],[27,17,27,18,0],[28,3,28,42,0],[28,42,28,43,0],[29,4,29,103,0],[30,4,30,45,0],[30,45,30,46,0],[30,46,30,118,0],[30,118,30,119,0],[31,3,31,4,0],[32,9,32,122,0],[33,3,33,39,0],[33,40,33,41,0],[34,4,34,20,0],[35,4,35,22,0],[36,3,36,4,0],[36,10,36,11,0],[37,4,37,34,0],[38,3,38,4,0],[39,2,39,3,0],[41,23,41,24,0],[42,9,42,29,0],[43,3,43,24,0],[44,3,44,19,0],[45,2,45,3,0],[48,5,48,6,0],[49,9,49,38,0],[50,9,50,10,0],[51,13,51,53,0],[52,4,52,23,0],[52,24,52,25,0],[53,5,53,99,0],[54,5,54,84,0],[55,4,55,5,0],[56,9,56,10,0],[57,9,57,44,0],[58,13,58,37,0],[59,5,59,6,0]]);
+    </script>
+  </body>
+</html>
