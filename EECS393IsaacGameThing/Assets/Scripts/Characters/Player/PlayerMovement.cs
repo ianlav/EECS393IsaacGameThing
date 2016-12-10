@@ -60,7 +60,7 @@ public class PlayerMovement : CharacterModel {
         //basic lateral movement. Linsearly interpolates the velocity between current and intended velocity.
 		float modifier = 0f;
 		if (slowClock>0){
-			modifier -= 2f;
+			modifier -= 1f;
 			slowClock -= 1;
 		}
 
