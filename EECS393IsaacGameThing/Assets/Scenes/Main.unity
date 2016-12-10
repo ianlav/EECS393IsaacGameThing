@@ -302,7 +302,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010705983742, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 4000010705983742, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -357,7 +357,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e0455737b96298d4482fa0fa535474e9,
+      objectReference: {fileID: 21300000, guid: 040f447a51fa9bd479814b9e356f1268,
         type: 3}
     - target: {fileID: 4000010705983742, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
       propertyPath: m_LocalScale.x
@@ -383,10 +383,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012693200618, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.37
+      value: -0.243
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000010587698736, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61000012890321198, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
+    - {fileID: 58000010587698736, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4e2431fdd0514ef4f968e81b6bdc7bb9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &268492673
@@ -900,9 +906,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.05, y: -0.23}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
-  m_Radius: 0.24419391
+  m_Radius: 0.3
 --- !u!1 &1488854650
 GameObject:
   m_ObjectHideFlags: 0
