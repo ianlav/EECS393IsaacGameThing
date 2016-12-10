@@ -17,9 +17,9 @@ This game version was built in Unity 5.4.1 and developed especially for Windows,
 should run on other OS's as well.
 
 ##Installation
-This project comes prepackaged with built versions. Just double-click the .exe (or equivalent) to launch!
-Find these in the "Builds" folder. If you would like to view the source code in the editor, you 
-will need to download Unity. If you'd like to view the source code otherwise, any IDE should do.
+This project was sent with built versions. Just double-click the .exe (or equivalent) to launch!
+If you would like to view the source code in the editor, you  will need to download Unity. 
+If you'd like to view the source code otherwise, any IDE should do.
 
 ##Building
 If you would like to build the project for yourself, you will need Unity. After loading the
