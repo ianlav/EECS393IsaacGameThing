@@ -18,8 +18,13 @@ should run on other OS's as well.
 
 ##Installation
 This project comes prepackaged with built versions. Just double-click the .exe (or equivalent) to launch!
-If you would like to view the source code in the editor, you will need to download Unity.
-If you'd like to view the source code otherwise, any IDE should do.
+Find these in the "Builds" folder. If you would like to view the source code in the editor, you 
+will need to download Unity. If you'd like to view the source code otherwise, any IDE should do.
+
+##Building
+If you would like to build the project for yourself, you will need Unity. After loading the
+project in the editor, go to File->Build & Run and select your OS. Once it opens, pick any
+resolution and graphics setting. 
 
 ##Licensing
 Please see the included license file
